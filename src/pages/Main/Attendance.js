@@ -179,6 +179,7 @@ const Button = styled.button`
   cursor: pointer;
 
   :hover {
+    background: rgba(32, 79, 178, 0.45);
     transform: translateY(-7px);
   }
 `;
