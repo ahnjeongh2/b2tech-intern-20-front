@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function RequestButton() {
+function RequestButton({ value }) {
   return (
     <>
-      <Button>휴가 • 근무제 신청</Button>
+      <Button>{value}</Button>
     </>
   );
 }
