@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
+import DatePicker, { setDefaultLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
-import 'react-datepicker/dist/react-datepicker.css';
+import '../Request/datepicker.css';
 setDefaultLocale('ko', ko);
 
-export default function DatePickerComponent() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState('');
-
-  const HandleDateInput = ({ value, onClick }) => (
-    <button className="handleDateInputBtn" onClick={onClick}>
-      {value}
-    </button>
-  );
+export default function DatePickerComponent({ GetDate }) {
+  const [date, setDate] = useState(new Date());
 
   return (
-    <DatePicker
-      selected={startDate}
-      onChange={date => setStartDate(date)}
-      customInput={<HandleDateInput />}
-      dateFormat="yyyy-MM-dd"
-    />
+    <>
+      <DatePicker
+        selected={date}
+        onChange={(date, e) => {
+          setDate(date);
+          GetDate(date, e);
+        }}
+        // customInput={<ExampleCustomInput />}
+        dateFormat="yyyy-MM-dd"
+      />
+    </>
   );
 }

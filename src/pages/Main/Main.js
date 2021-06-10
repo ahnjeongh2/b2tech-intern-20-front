@@ -6,7 +6,7 @@ function Main() {
   return (
     <>
       <Request />
-      <Attendance />
+      {/* <Attendance /> */}
     </>
   );
 }
