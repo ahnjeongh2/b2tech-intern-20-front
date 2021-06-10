@@ -1,7 +1,12 @@
 import React from 'react';
+import Attendance from './Attendance';
 
 function Main() {
-  return <>안녕하세요!</>;
+  return (
+    <>
+      <Attendance />
+    </>
+  );
 }
 
 export default Main;
