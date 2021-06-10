@@ -1,7 +1,12 @@
 import React from 'react';
+import Request from './Request/Request';
 
 function Main() {
-  return <>안녕하세요!</>;
+  return (
+    <>
+      <Request />
+    </>
+  );
 }
 
 export default Main;
