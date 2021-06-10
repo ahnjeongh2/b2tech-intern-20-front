@@ -1,8 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { debounce } from 'lodash';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Variable';
 
 function Attendance() {
+  const [employeeData, setEmployeeData] = useState('');
+  const [employeeNumber, setEmployeeNumber] = useState('');
+  const [popup, setPopup] = useState(false);
+  const history = useHistory();
+  const noticeBtn = useRef();
+
+  useEffect(() => {
+    document.addEventListener('click', clickOutside);
+    return () => document.removeEventListener('click', clickOutside);
+  }, []);
+
+  const goToPage = () => {
+    // fetch('', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     employeeNumber: employeeNumber,
+    //   }),
+    // })
+    // .then(response => response.json())
+    // .then(employeedata => {
+    //   setEmployeeData(employeedata.results);
+    // });
+    // .then(result => {
+    //   result.access_token &&
+    //     localStorage.setItem('access_token', result.access_token);
+    // if (result.message === 'SUCCESS') {
+    history.push(`/permissions`);
+    //   } else {
+    //     alert('사번을 확인해주세요.');
+    //   }
+    // });
+  };
+
+  const getEmployeeNumber = debounce(e => {
+    setEmployeeNumber(e.target.value);
+  }, 1000);
+
+  const enterKey = e => {
+    if (e.key === 'Enter') {
+      goToPage();
+    }
+  };
+
+  const clickOutside = e => {
+    if (!noticeBtn.current.contains(e.target)) {
+      setPopup(false);
+    }
+  };
+
+  const popupNotice = () => {
+    setPopup(true);
+  };
+
   return (
     <Main>
       <Title>근태 프로그램</Title>
@@ -10,7 +65,13 @@ function Attendance() {
         <Contents>
           <RecordInfo>
             <NoticeLabel>사번:</NoticeLabel>
-            <Input type="text" placeholder="사번을 입력하세요" />
+            <Input
+              type="text"
+              placeholder="사번을 입력하세요"
+              onChange={getEmployeeNumber}
+              onKeyUp={enterKey}
+              autoFocus
+            />
           </RecordInfo>
           <RecordInfo>
             <NoticeText>이름:</NoticeText>
@@ -24,12 +85,14 @@ function Attendance() {
             <NoticeText>퇴근:</NoticeText>
             <span>2021-04-05 19:00</span>
           </Record>
-          <Notice>관리자에게 문의주세요. aaa@aaa.com</Notice>
-          <NoticeBtn>?</NoticeBtn>
+          {popup ? <Notice>관리자에게 문의주세요. aaa@aaa.com</Notice> : null}
+          <NoticeBtn ref={noticeBtn} onClick={popupNotice}>
+            ?
+          </NoticeBtn>
         </Contents>
         <Buttons>
           <Button>신청</Button>
-          <Button>등록</Button>
+          <Button onClick={goToPage}>등록</Button>
         </Buttons>
       </MainSection>
     </Main>
@@ -100,6 +163,7 @@ const RecordInfo = styled(Record.withComponent('p'))`
 
 const Input = styled.input`
   width: 250px;
+  font-size: 16px;
   border-bottom: 1px solid gray;
 
   @media ${({ theme }) => theme.mobile} {
