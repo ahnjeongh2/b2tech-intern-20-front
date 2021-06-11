@@ -1,31 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DatePickerComponent from './Datepicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 
-// import { DateRange } from 'react-date-range';
-// import { addDays } from 'date-fns';
-// import 'react-date-range/dist/styles.css';
-// import 'react-date-range/dist/theme/default.css';
-
 export default function Request() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   const [periodData, setPeriodData] = useState('');
-
-  useEffect(() => {
-    console.log(startDate, endDate);
-  }, [startDate, endDate]);
-
-  // const [date, setDate] = useState([
-  //   {
-  //     startDate: new Date(),
-  //     endDate: addDays(new Date(), 0),
-  //     key: 'selection',
-  //   },
-  // ]);
-
-  const handlePeriod = () => {
+  const handlePeriod = (startDate, endDate) => {
+    console.log(`startDate: ${startDate}, endDate: ${endDate}`);
     // fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -51,14 +32,6 @@ export default function Request() {
     // );
   };
 
-  const GetDate = (date, e) => {
-    console.log(date, e);
-    setStartDate(date);
-    // if (e.target.name === 'start') {
-    //   setStartDate(date);
-    // }
-  };
-
   return (
     <Main>
       <GlassBg>
@@ -69,25 +42,7 @@ export default function Request() {
         <ButtonsInfo>
           <Button>휴가</Button>
           <Button>근무제</Button>
-          <DatePickerComponent
-            data-value="1"
-            GetDate={GetDate}
-            // onChange={date => setStartDate(date)}
-          />
-          {/* <DateRange
-        editableDateInputs={true}
-        onChange={item => setDate([item.selection])}
-        moveRangeOnFirstSelection={false}
-        ranges={date}
-        months={2}
-        direction="horizontal"
-      /> */}
-          -
-          <DatePickerComponent
-            GetDate={GetDate}
-            // onChange={date => setEndDate(date)}
-          />
-          <Button onClick={handlePeriod}>조회</Button>
+          <DatePickerComponent handlePeriod={handlePeriod} />
         </ButtonsInfo>
         <article>내용</article>
       </GlassBg>
