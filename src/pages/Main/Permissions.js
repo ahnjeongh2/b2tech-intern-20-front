@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Variable';
 
 function Attendance() {
+  const [password, setPassword] = useState('');
+
+  const getPassword = () => {
+    const result = prompt('주민번호 뒤 7자리를 입력하세요');
+    setPassword(result);
+  };
+
   return (
     <Main>
       <Title>근태 프로그램</Title>
       <MainSection>
         <Contents></Contents>
         <Buttons>
-          <Button>admin</Button>
-          <Button>my page</Button>
+          <Button onClick={getPassword}>admin</Button>
+          <Button onClick={getPassword}>my page</Button>
         </Buttons>
       </MainSection>
     </Main>

@@ -130,6 +130,7 @@ const MainSection = styled.section`
   @media ${({ theme }) => theme.mobile} {
     width: 90%;
     margin: 0 auto;
+    font-size: 14px;
   }
 `;
 
@@ -137,12 +138,16 @@ const Contents = styled.div`
   width: 85%;
   margin: 20px auto;
   padding: 20px 40px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+
+  @media ${({ theme }) => theme.mobile} {
+    padding: 10px;
+  }
 `;
 
 const Record = styled.p`
@@ -167,7 +172,7 @@ const Input = styled.input`
   border-bottom: 1px solid gray;
 
   @media ${({ theme }) => theme.mobile} {
-    width: 200px;
+    width: 180px;
   }
 `;
 
@@ -175,6 +180,10 @@ const NoticeText = styled.span`
   padding-right: 40px;
   color: #585757;
   font-weight: 600;
+
+  @media ${({ theme }) => theme.mobile} {
+    padding-right: 20px;
+  }
 `;
 
 const NoticeLabel = styled(NoticeText.withComponent('label'))`
@@ -218,6 +227,11 @@ const NoticeBtn = styled.button`
   :hover {
     transform: translateY(-5px);
   }
+
+  @media ${({ theme }) => theme.mobile} {
+    right: 10px;
+    bottom: 10px;
+  }
 `;
 
 const Buttons = styled.div`
@@ -243,7 +257,12 @@ const Button = styled.button`
   cursor: pointer;
 
   :hover {
-    background: rgba(32, 79, 178, 0.45);
-    transform: translateY(-7px);
+    opacity: 0.6;
+    transform: translateY(-5px);
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 180px;
+    height: 40px;
   }
 `;
