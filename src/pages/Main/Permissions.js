@@ -29,7 +29,8 @@ export default Attendance;
 const Main = styled.div`
   height: 100vh;
   background: no-repeat center / cover
-    url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMGJlYWNofGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60');
+    url('https://products.ls.graphics/mesh-gradients/images/11.-Fuchsia_1.jpg');
+  /* url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMGJlYWNofGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'); */
   font-size: 16px;
   overflow: hidden;
 `;

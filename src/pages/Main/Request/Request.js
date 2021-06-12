@@ -51,12 +51,12 @@ export default function Request() {
           <span>사번: 12345678</span>
           <span>김유림 님</span>
         </UserInfo>
-        <PickerInfo>
+        {/* <PickerInfo>
           <DatePickerComponent
             handlePeriod={handlePeriod}
             requestBtn={requestBtn}
           />
-        </PickerInfo>
+        </PickerInfo> */}
         <Tabs>
           <TabList>
             {CATEGORY_ARR.map(name => {
@@ -84,7 +84,7 @@ const CATEGORY_ARR = ['휴가', '근무제'];
 const Main = styled.section`
   height: 100vh;
   background: no-repeat center / cover
-    url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMGJlYWNofGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60');
+    url('https://res.cloudinary.com/practicaldev/image/fetch/s--RNNNA7AE--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://user-images.githubusercontent.com/69592270/101304060-72ff5b00-380d-11eb-8c58-a3172d791c9c.png');
   font-size: 16px;
   overflow: hidden;
 `;

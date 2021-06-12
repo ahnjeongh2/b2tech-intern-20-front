@@ -26,7 +26,7 @@
 }
 
 .react-tabs__tab--selected {
-  background: linear-gradient(315deg, #cfdae0, #f6ffff);
+  /* background: linear-gradient(315deg, #cfdae0, #f6ffff); */
   color: black;
   font-weight: 600;
   border-radius: 5px 5px 0 0;

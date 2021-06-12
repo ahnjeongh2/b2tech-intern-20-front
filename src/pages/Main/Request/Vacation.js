@@ -40,7 +40,7 @@ export default function Vacation() {
             </InfoPicker>
           </Info>
           <Info>
-            <VacationInfo>휴가 사유</VacationInfo>
+            <VacationInfo>기안 본문</VacationInfo>
             <Input />
           </Info>
         </GlassBg>
