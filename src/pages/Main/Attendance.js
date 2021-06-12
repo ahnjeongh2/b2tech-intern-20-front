@@ -104,7 +104,7 @@ export default Attendance;
 const Main = styled.div`
   height: 100vh;
   background: no-repeat center / cover
-    url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMGJlYWNofGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60');
+    url('https://products.ls.graphics/mesh-gradients/images/09.-Light-Sky-Blue.jpg');
   font-size: 16px;
   overflow: hidden;
 `;
@@ -120,7 +120,7 @@ const MainSection = styled.section`
   width: 600px;
   height: 350px;
   margin: auto;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);

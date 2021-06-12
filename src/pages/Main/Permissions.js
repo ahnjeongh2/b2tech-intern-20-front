@@ -29,7 +29,8 @@ export default Attendance;
 const Main = styled.div`
   height: 100vh;
   background: no-repeat center / cover
-    url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMGJlYWNofGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60');
+    url('https://products.ls.graphics/mesh-gradients/images/11.-Fuchsia_1.jpg');
+  /* url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHN1bnNldCUyMGJlYWNofGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60'); */
   font-size: 16px;
   overflow: hidden;
 `;
@@ -45,7 +46,7 @@ const MainSection = styled.section`
   width: 600px;
   height: 350px;
   margin: auto;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -74,7 +75,7 @@ const Button = styled.button`
   width: 200px;
   height: 100px;
   margin: 20px;
-  background: rgba(255, 255, 255, 0.45);
+  background: linear-gradient(315deg, #cfdae0, #f6ffff);
   font-size: 16px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -90,7 +91,7 @@ const Button = styled.button`
   :hover {
     background-color: rgba(32, 79, 178, 0.6);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    color: #fff;
+    font-weight: 800;
     transform: translateY(-7px);
   }
 `;
