@@ -4,7 +4,7 @@ import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
 import styled from 'styled-components';
 import './react-tabs.css';
-import { flexSet } from '../../../styles/Variable';
+import { flexSet, BtnSet } from '../../../styles/Variable';
 
 export default function Request() {
   const [periodData, setPeriodData] = useState('');
@@ -115,11 +115,6 @@ const UserInfo = styled(GlassBg.withComponent('p'))`
   height: 40px;
 `;
 
-const PickerInfo = styled.div`
-  ${flexSet('flex-end', 'center')}
-  width: 95%;
-`;
-
 const ButtonInfo = styled.div`
   ${flexSet('flex-end', 'center')}
   width: 94%;
@@ -127,20 +122,7 @@ const ButtonInfo = styled.div`
 `;
 
 const Button = styled.button`
-  width: 80px;
-  height: 40px;
-  margin: 5px;
-  background: linear-gradient(315deg, #cfdae0, #f6ffff);
-  font-size: 14px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
+  ${BtnSet('80', '40')}
 
   :hover {
     background-color: rgba(32, 79, 178, 0.6);

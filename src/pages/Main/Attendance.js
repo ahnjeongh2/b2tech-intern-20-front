@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexSet } from '../../styles/Variable';
+import { flexSet, BtnSet } from '../../styles/Variable';
 
 function Attendance() {
   const [employeeData, setEmployeeData] = useState('');
@@ -16,20 +16,6 @@ function Attendance() {
     document.addEventListener('click', clickOutside);
     return () => document.removeEventListener('click', clickOutside);
   }, []);
-
-
-  const goToPage = () => {
-
-    const result = prompt('주민번호 뒤 7자리를 입력하세요');
-    setPassword(result);
-
-    // const result = prompt('주민번호 뒤 7자리를 입력하세요');
-    // setPassword(result);
-
-    const result = prompt('주민번호 뒤 7자리를 입력하세요');
-    setPassword(result);
-
-    history.push(`/mypage`);
 
   const goToPage = e => {
     e.stopPropagation();
@@ -130,7 +116,7 @@ function Attendance() {
           </NoticeBtn>
         </Contents>
         <Buttons>
-          <Button onClick={goToPage}>패이지 이동</Button>
+          <Button onClick={goToPage}>페이지 이동</Button>
           <Button onClick={IsRegistered}>출•퇴근 등록</Button>
         </Buttons>
       </MainSection>
@@ -279,20 +265,7 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
-  width: 200px;
-  height: 50px;
-  margin: 20px;
-  background: linear-gradient(315deg, #cfdae0, #f6ffff);
-  font-size: 16px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
+  ${BtnSet('200', '50', '20')}
 
   :hover {
     opacity: 0.6;

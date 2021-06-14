@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { flexSet } from '../../styles/Variable';
+import { flexSet, BtnSet } from '../../styles/Variable';
 
 function Attendance() {
   const [password, setPassword] = useState('');
@@ -72,21 +72,7 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
-  width: 200px;
-  height: 100px;
-  margin: 20px;
-  background: linear-gradient(315deg, #cfdae0, #f6ffff);
-  font-size: 16px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
+  ${BtnSet('200', '50', '20')}
 
   :hover {
     background-color: rgba(32, 79, 178, 0.6);
