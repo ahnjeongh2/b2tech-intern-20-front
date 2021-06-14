@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { debounce } from 'lodash';
+// import { debounce } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexSet, BtnSet } from '../../styles/Variable';
@@ -63,9 +63,9 @@ function Attendance() {
     // });
   };
 
-  const getEmployeeNumber = debounce(e => {
-    setEmployeeNumber(e.target.value);
-  }, 1000);
+  // const getEmployeeNumber = debounce(e => {
+  //   setEmployeeNumber(e.target.value);
+  // }, 1000);
 
   const enterKey = e => {
     if (e.key === 'Enter') {
@@ -93,7 +93,7 @@ function Attendance() {
             <Input
               type="text"
               placeholder="사번을 입력하세요"
-              onChange={getEmployeeNumber}
+              // onChange={getEmployeeNumber}
               onKeyUp={enterKey}
               autoFocus
             />

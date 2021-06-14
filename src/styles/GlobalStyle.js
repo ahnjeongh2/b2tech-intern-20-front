@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-const GlobalStyles = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
     ${reset}
 
     @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap');
@@ -30,4 +30,4 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default GlobalStyles;
+export default GlobalStyle;
