@@ -21,6 +21,7 @@ const theme = {
   placeholderGrey: '#bdbdbd',
   fontLightBlue: '#8faad0',
   fontWhite: '#ffffff',
+
   // 반응형
   mobile: `(max-width: ${size.mobile})`,
   tablet: `(max-width: ${size.tablet})`,
