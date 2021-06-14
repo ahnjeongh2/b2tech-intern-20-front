@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
-import './datepicker.css';
+import '../Request/datepicker.css';
 registerLocale('ko', ko);
 
 export default function DatePickerComponent() {
