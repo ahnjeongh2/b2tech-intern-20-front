@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function Modal({ open, close, title, content }) {
+export default function Modal({ open, closeModal, title, content }) {
   return (
-    <Modalpopup className={open ? 'openModal modal' : 'modal'}>
+    <Modalpopup className={open ? 'openModal' : 'modal'}>
       {open && (
         <Section>
           <Header>
             {title}
-            <Button className="close" onClick={close}>
+            <Button className="close" onClick={closeModal}>
               <i className="fas fa-times"></i>
             </Button>
           </Header>
@@ -29,11 +29,21 @@ const Modalpopup = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 2;
 
-  .openModal {
-    width: 100%;
+  &.openModal {
     display: flex;
+    width: 100%;
     align-items: center;
     animation: modalBgShow 0.3s;
+
+    @keyframes modalBgShow {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
   }
 `;
 
