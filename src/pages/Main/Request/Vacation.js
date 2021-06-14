@@ -1,9 +1,24 @@
-import React from 'react';
-import DatePickerComponent from './Datepicker';
+import React, { useState, useEffect } from 'react';
+import DatePickerComponent from '../../../components/DatePicker/Datepicker';
+import Modal from '../../../components/Modal/Modal';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 
 export default function Vacation() {
+  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    console.log(modal);
+  }, modal);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(true);
+  };
+
   return (
     <>
       <section>
@@ -23,7 +38,14 @@ export default function Vacation() {
             <VacationInfo>휴가 구분</VacationInfo>
             <InfoPicker>
               <p>
-                <input type="radio" name="" /> 연차
+                <input type="radio" name="" checked={openModal} /> 연차
+                <Modal
+                  open={modal}
+                  close={closeModal}
+                  title="휴가를 선택하세요."
+                  content={`<input type="radio" name="" /> 연차
+                  <input type="radio" name="" /> 반차`}
+                />
               </p>
               <p>
                 <input type="radio" name="" /> 공가

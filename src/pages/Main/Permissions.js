@@ -16,8 +16,8 @@ function Attendance() {
       <MainSection>
         <Contents></Contents>
         <Buttons>
-          <Button onClick={getPassword}>admin</Button>
-          <Button onClick={getPassword}>my page</Button>
+          <Button onClick={getPassword}>홈페이지</Button>
+          <Button onClick={getPassword}>근태등록</Button>
         </Buttons>
       </MainSection>
     </Main>

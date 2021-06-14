@@ -17,23 +17,49 @@ function Attendance() {
     return () => document.removeEventListener('click', clickOutside);
   }, []);
 
+
   const goToPage = () => {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     const result = prompt('주민번호 뒤 7자리를 입력하세요');
     setPassword(result);
-=======
+
     // const result = prompt('주민번호 뒤 7자리를 입력하세요');
     // setPassword(result);
->>>>>>> feature/attendance
-=======
+
     const result = prompt('주민번호 뒤 7자리를 입력하세요');
     setPassword(result);
->>>>>>> origin/feature/vacation
+
     history.push(`/mypage`);
+
+  const goToPage = e => {
+    e.stopPropagation();
+    alert('준비중입니다.');
+    // const resultNumber = prompt('사번을 입력해주세요.');
+    // setEmployeeNumber(resultNumber);
+    // const resultPassword = prompt(
+    //   '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
+    // );
+    // setPassword(resultPassword);
+    // fetch('', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     employeeNumber: employeeNumber,
+    //     password: password,
+    //   }),
+    // })
+    // .then(response => response.json())
+    // .then(result => {
+    //   result.access_token &&
+    //     localStorage.setItem('access_token', result.access_token);
+    // if (!result.message === 'SUCCESS') {
+    //     alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+    //   }
+    // });
+    // history.push(`/mypage`);
   };
 
-  const IsRegistered = () => {
+  const IsRegistered = e => {
+    e.stopPropagation();
     // fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -45,10 +71,7 @@ function Attendance() {
     //   setEmployeeData(employeedata.results);
     // });
     // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    // if (result.message === 'SUCCESS') {
-    //   } else {
+    // if (!result.message === 'SUCCESS') {
     //     alert('사번을 확인해주세요.');
     //   }
     // });
@@ -101,7 +124,7 @@ function Attendance() {
             <NoticeText>퇴근:</NoticeText>
             <span>2021-04-05 19:00</span>
           </Record>
-          {popup ? <Notice>관리자에게 문의주세요. aaa@aaa.com</Notice> : null}
+          {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
           <NoticeBtn ref={noticeBtn} onClick={popupNotice}>
             ?
           </NoticeBtn>
