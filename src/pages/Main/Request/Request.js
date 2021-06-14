@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DatePickerComponent from './Datepicker';
+import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
@@ -10,7 +10,6 @@ import { flexSet } from '../../../styles/Variable';
 export default function Request() {
   const [periodData, setPeriodData] = useState('');
   const currentId = '1';
-  const requestBtn = true;
 
   // const clickHandler = id => {
   //   setCurrentId(id);
@@ -51,12 +50,6 @@ export default function Request() {
           <span>사번: 12345678</span>
           <span>김유림 님</span>
         </UserInfo>
-        {/* <PickerInfo>
-          <DatePickerComponent
-            handlePeriod={handlePeriod}
-            requestBtn={requestBtn}
-          />
-        </PickerInfo> */}
         <Tabs>
           <TabList>
             {CATEGORY_ARR.map(name => {
