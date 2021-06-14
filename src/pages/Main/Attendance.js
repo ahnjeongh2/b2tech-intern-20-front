@@ -7,6 +7,7 @@ import { flexSet } from '../../styles/Variable';
 function Attendance() {
   const [employeeData, setEmployeeData] = useState('');
   const [employeeNumber, setEmployeeNumber] = useState('');
+  const [password, setPassword] = useState('');
   const [popup, setPopup] = useState(false);
   const history = useHistory();
   const noticeBtn = useRef();
@@ -17,6 +18,12 @@ function Attendance() {
   }, []);
 
   const goToPage = () => {
+    // const result = prompt('주민번호 뒤 7자리를 입력하세요');
+    // setPassword(result);
+    history.push(`/mypage`);
+  };
+
+  const IsRegistered = () => {
     // fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -31,7 +38,6 @@ function Attendance() {
     //   result.access_token &&
     //     localStorage.setItem('access_token', result.access_token);
     // if (result.message === 'SUCCESS') {
-    history.push(`/permissions`);
     //   } else {
     //     alert('사번을 확인해주세요.');
     //   }
@@ -44,7 +50,7 @@ function Attendance() {
 
   const enterKey = e => {
     if (e.key === 'Enter') {
-      goToPage();
+      IsRegistered();
     }
   };
 
@@ -91,8 +97,8 @@ function Attendance() {
           </NoticeBtn>
         </Contents>
         <Buttons>
-          <Button>신청</Button>
-          <Button onClick={goToPage}>등록</Button>
+          <Button onClick={goToPage}>패이지 이동</Button>
+          <Button onClick={IsRegistered}>출•퇴근 등록</Button>
         </Buttons>
       </MainSection>
     </Main>
@@ -244,7 +250,7 @@ const Button = styled.button`
   height: 50px;
   margin: 20px;
   background: linear-gradient(315deg, #cfdae0, #f6ffff);
-  font-size: 14px;
+  font-size: 16px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
