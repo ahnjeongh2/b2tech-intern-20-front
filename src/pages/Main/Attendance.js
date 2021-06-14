@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexSet } from '../../styles/Variable';
+import { flexSet, BtnSet } from '../../styles/Variable';
 
 function Attendance() {
   const [employeeData, setEmployeeData] = useState('');
   const [employeeNumber, setEmployeeNumber] = useState('');
+  const [password, setPassword] = useState('');
   const [popup, setPopup] = useState(false);
   const history = useHistory();
   const noticeBtn = useRef();
@@ -16,7 +17,35 @@ function Attendance() {
     return () => document.removeEventListener('click', clickOutside);
   }, []);
 
-  const goToPage = () => {
+  const goToPage = e => {
+    e.stopPropagation();
+    alert('준비중입니다.');
+    // const resultNumber = prompt('사번을 입력해주세요.');
+    // setEmployeeNumber(resultNumber);
+    // const resultPassword = prompt(
+    //   '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
+    // );
+    // setPassword(resultPassword);
+    // fetch('', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     employeeNumber: employeeNumber,
+    //     password: password,
+    //   }),
+    // })
+    // .then(response => response.json())
+    // .then(result => {
+    //   result.access_token &&
+    //     localStorage.setItem('access_token', result.access_token);
+    // if (!result.message === 'SUCCESS') {
+    //     alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+    //   }
+    // });
+    // history.push(`/mypage`);
+  };
+
+  const IsRegistered = e => {
+    e.stopPropagation();
     // fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -28,11 +57,7 @@ function Attendance() {
     //   setEmployeeData(employeedata.results);
     // });
     // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    // if (result.message === 'SUCCESS') {
-    history.push(`/permissions`);
-    //   } else {
+    // if (!result.message === 'SUCCESS') {
     //     alert('사번을 확인해주세요.');
     //   }
     // });
@@ -44,7 +69,7 @@ function Attendance() {
 
   const enterKey = e => {
     if (e.key === 'Enter') {
-      goToPage();
+      IsRegistered();
     }
   };
 
@@ -85,14 +110,14 @@ function Attendance() {
             <NoticeText>퇴근:</NoticeText>
             <span>2021-04-05 19:00</span>
           </Record>
-          {popup ? <Notice>관리자에게 문의주세요. aaa@aaa.com</Notice> : null}
+          {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
           <NoticeBtn ref={noticeBtn} onClick={popupNotice}>
             ?
           </NoticeBtn>
         </Contents>
         <Buttons>
-          <Button>신청</Button>
-          <Button onClick={goToPage}>등록</Button>
+          <Button onClick={goToPage}>페이지 이동</Button>
+          <Button onClick={IsRegistered}>출•퇴근 등록</Button>
         </Buttons>
       </MainSection>
     </Main>
@@ -240,20 +265,7 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.button`
-  width: 200px;
-  height: 50px;
-  margin: 20px;
-  background: linear-gradient(315deg, #cfdae0, #f6ffff);
-  font-size: 14px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
+  ${BtnSet('200', '50', '20')}
 
   :hover {
     opacity: 0.6;
