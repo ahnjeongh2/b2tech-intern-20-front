@@ -104,7 +104,8 @@ export default Attendance;
 const Main = styled.div`
   height: 100vh;
   background: no-repeat center / cover
-    url('https://products.ls.graphics/mesh-gradients/images/09.-Light-Sky-Blue.jpg');
+    url('https://products.ls.graphics/mesh-gradients/images/11.-Fuchsia_1.jpg');
+  /* url('https://products.ls.graphics/mesh-gradients/images/09.-Light-Sky-Blue.jpg'); */
   font-size: 16px;
   overflow: hidden;
 `;
@@ -242,15 +243,13 @@ const Button = styled.button`
   width: 200px;
   height: 50px;
   margin: 20px;
-  background: rgba(32, 79, 178, 0.8);
-  color: #fff;
-  font-size: 16px;
+  background: linear-gradient(315deg, #cfdae0, #f6ffff);
+  font-size: 14px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  text-transform: uppercase;
   letter-spacing: 2.5px;
   font-weight: 500;
   transition: all 0.3s ease 0s;
