@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
