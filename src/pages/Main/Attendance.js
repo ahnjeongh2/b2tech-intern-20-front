@@ -18,8 +18,13 @@ function Attendance() {
   }, []);
 
   const goToPage = () => {
+<<<<<<< HEAD
     const result = prompt('주민번호 뒤 7자리를 입력하세요');
     setPassword(result);
+=======
+    // const result = prompt('주민번호 뒤 7자리를 입력하세요');
+    // setPassword(result);
+>>>>>>> feature/attendance
     history.push(`/mypage`);
   };
 
