@@ -17,7 +17,7 @@ function MyPage() {
         </UpperSection>
         <ButtonSection>
           <Link to="/request">
-            <RequestButton />
+            <RequestButton value="휴가•근무제 신청" />
           </Link>
         </ButtonSection>
       </Article>

@@ -4,6 +4,8 @@ import Main from './pages/Main/Main';
 // import Permissions from './pages/Main/Permissions';
 import MyPage from './pages/MyPage/MyPage';
 import Request from './pages/Main/Request/Request';
+import Default from './pages/Admin/Default/Default';
+import Commute from './pages/Admin/Commute/Commute';
 
 class Routes extends React.Component {
   render() {
@@ -14,6 +16,8 @@ class Routes extends React.Component {
           {/* <Route exact path="/permissions" component={Permissions} /> */}
           <Route exact path="/mypage" component={MyPage} />
           <Route exact path="/request" component={Request} />
+          <Route exact path="/admin" component={Default} />
+          <Route exact path="/admin/commute" component={Commute} />
         </Switch>
       </Router>
     );
