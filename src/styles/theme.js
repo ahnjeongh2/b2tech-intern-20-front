@@ -8,6 +8,7 @@ const size = {
 const theme = {
   mainBlue: '#00c7f5',
   backgroundGrey: '#f5f5f5',
+  backgroundNavy: '#1f2d4d',
   // border color
   borderLine: '#ededed',
   inputGray: '#dbdbdb',
@@ -18,6 +19,8 @@ const theme = {
   fontFilterGray: '#757575',
   fontGray: '#757575',
   placeholderGrey: '#bdbdbd',
+  fontLightBlue: '#8faad0',
+  fontWhite: '#ffffff',
   // 반응형
   mobile: `(max-width: ${size.mobile})`,
   tablet: `(max-width: ${size.tablet})`,
