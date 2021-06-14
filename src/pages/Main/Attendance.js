@@ -19,12 +19,17 @@ function Attendance() {
 
   const goToPage = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const result = prompt('주민번호 뒤 7자리를 입력하세요');
     setPassword(result);
 =======
     // const result = prompt('주민번호 뒤 7자리를 입력하세요');
     // setPassword(result);
 >>>>>>> feature/attendance
+=======
+    const result = prompt('주민번호 뒤 7자리를 입력하세요');
+    setPassword(result);
+>>>>>>> origin/feature/vacation
     history.push(`/mypage`);
   };
 
