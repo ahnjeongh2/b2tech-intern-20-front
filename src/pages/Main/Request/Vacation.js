@@ -4,6 +4,63 @@ import Modal from '../../../components/Modal/Modal';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 
+const GlassBg = styled.div`
+  width: 90%;
+  margin: 10px auto;
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 90%;
+    margin: 0 auto;
+  }
+`;
+
+const Info = styled.div`
+  ${flexSet('flex-end', 'center')}
+  width: 94%;
+  margin: 10px;
+`;
+
+const InfoPicker = styled.div`
+  ${flexSet('space-around', 'center')}
+  width: 375px;
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 90%;
+    font-size: 0.6rem;
+  }
+`;
+
+const VacationInfo = styled(GlassBg.withComponent('p'))`
+  ${flexSet('center', 'center')}
+  width: 145px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 80px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+`;
+
+const Input = styled(GlassBg.withComponent('input'))`
+  width: 345px;
+  height: 40px;
+  font-size: 0.8rem;
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 140px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+`;
+
 export default function Vacation() {
   const [modal, setModal] = useState(false);
 
@@ -66,60 +123,3 @@ export default function Vacation() {
     </>
   );
 }
-
-const GlassBg = styled.div`
-  width: 90%;
-  margin: 10px auto;
-  background: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 90%;
-    margin: 0 auto;
-  }
-`;
-
-const Info = styled.div`
-  ${flexSet('flex-end', 'center')}
-  width: 94%;
-  margin: 10px;
-`;
-
-const InfoPicker = styled.div`
-  ${flexSet('space-around', 'center')}
-  width: 375px;
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 90%;
-    font-size: 12px;
-  }
-`;
-
-const VacationInfo = styled(GlassBg.withComponent('p'))`
-  ${flexSet('center', 'center')}
-  width: 145px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 80px;
-    height: 30px;
-    font-size: 12px;
-  }
-`;
-
-const Input = styled(GlassBg.withComponent('input'))`
-  width: 345px;
-  height: 40px;
-  font-size: 14px;
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 140px;
-    height: 30px;
-    font-size: 12px;
-  }
-`;

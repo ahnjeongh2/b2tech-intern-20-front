@@ -1,12 +1,10 @@
 import React from 'react';
 import Attendance from './Attendance';
 
-function Main() {
+export default function Main() {
   return (
     <>
       <Attendance />
     </>
   );
 }
-
-export default Main;

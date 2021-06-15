@@ -1,151 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { flexSet, BtnSet } from '../../styles/Variable';
-
-function Attendance() {
-  const [employeeData, setEmployeeData] = useState('');
-  const [employeeNumber, setEmployeeNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [popup, setPopup] = useState(false);
-  const history = useHistory();
-  const noticeBtn = useRef();
-
-  useEffect(() => {
-    document.addEventListener('click', clickOutside);
-    return () => document.removeEventListener('click', clickOutside);
-  }, []);
-
-  const goToPage = e => {
-    e.stopPropagation();
-    alert('준비중입니다.');
-    // const resultNumber = prompt('사번을 입력해주세요.');
-    // setEmployeeNumber(resultNumber);
-    // const resultPassword = prompt(
-    //   '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
-    // );
-    // setPassword(resultPassword);
-    // fetch('', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     employeeNumber: employeeNumber,
-    //     password: password,
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    // if (!result.message === 'SUCCESS') {
-    //     alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
-    //   }
-    // });
-    // history.push(`/mypage`);
-  };
-
-  const IsRegistered = e => {
-    e.stopPropagation();
-    // fetch('', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     employeeNumber: employeeNumber,
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(employeedata => {
-    //   setEmployeeData(employeedata.results);
-    // });
-    // .then(result => {
-    // if (!result.message === 'SUCCESS') {
-    //     alert('사번을 확인해주세요.');
-    //   }
-    // });
-  };
-
-  // const getEmployeeNumber = debounce(e => {
-  //   setEmployeeNumber(e.target.value);
-  // }, 1000);
-
-  const enterKey = e => {
-    if (e.key === 'Enter') {
-      IsRegistered();
-    }
-  };
-
-  const clickOutside = e => {
-    if (!noticeBtn.current.contains(e.target)) {
-      setPopup(false);
-    }
-  };
-
-  const popupNotice = () => {
-    setPopup(true);
-  };
-
-  return (
-    <Main>
-      <Title>근태 프로그램</Title>
-      <MainSection>
-        <Contents>
-          <RecordInfo>
-            <NoticeLabel>사번:</NoticeLabel>
-            <Input
-              type="text"
-              placeholder="사번을 입력하세요"
-              // onChange={getEmployeeNumber}
-              onKeyUp={enterKey}
-              autoFocus
-            />
-          </RecordInfo>
-          <RecordInfo>
-            <NoticeText>이름:</NoticeText>
-            <span>김유림</span>
-          </RecordInfo>
-          <Record>
-            <NoticeText>출근:</NoticeText>
-            <span>2021-04-05 09:30</span>
-          </Record>
-          <Record>
-            <NoticeText>퇴근:</NoticeText>
-            <span>2021-04-05 19:00</span>
-          </Record>
-          {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
-          <NoticeBtn ref={noticeBtn} onClick={popupNotice}>
-            ?
-          </NoticeBtn>
-        </Contents>
-        <Buttons>
-          <Button onClick={goToPage}>페이지 이동</Button>
-          <Button onClick={IsRegistered}>출•퇴근 등록</Button>
-        </Buttons>
-      </MainSection>
-    </Main>
-  );
-}
-
-export default Attendance;
+import { flexSet } from '../../styles/Variable';
+import RequestButton from '../../components/RequestButton';
 
 const Main = styled.div`
   height: 100vh;
   background: no-repeat center / cover
     url('https://products.ls.graphics/mesh-gradients/images/11.-Fuchsia_1.jpg');
-  /* url('https://products.ls.graphics/mesh-gradients/images/09.-Light-Sky-Blue.jpg'); */
-  font-size: 16px;
+  font-size: 1.1rem;
   overflow: hidden;
 `;
 
 const Title = styled.h1`
-  padding: 50px 0;
+  padding: 60px 0;
   color: #fff;
-  font-size: 36px;
+  font-size: 2.5rem;
   text-align: center;
 `;
 
 const MainSection = styled.section`
   width: 600px;
-  height: 350px;
   margin: auto;
+  padding: 20px 0;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -156,7 +34,7 @@ const MainSection = styled.section`
   @media ${({ theme }) => theme.mobile} {
     width: 90%;
     margin: 0 auto;
-    font-size: 14px;
+    font-size: 0.8rem;
   }
 `;
 
@@ -194,7 +72,7 @@ const RecordInfo = styled(Record.withComponent('p'))`
 
 const Input = styled.input`
   width: 250px;
-  font-size: 16px;
+  font-size: 1rem;
   border-bottom: 1px solid gray;
 
   @media ${({ theme }) => theme.mobile} {
@@ -205,7 +83,7 @@ const Input = styled.input`
 const NoticeText = styled.span`
   padding-right: 40px;
   color: #585757;
-  font-weight: 600;
+  font-weight: bold;
 
   @media ${({ theme }) => theme.mobile} {
     padding-right: 20px;
@@ -214,7 +92,7 @@ const NoticeText = styled.span`
 
 const NoticeLabel = styled(NoticeText.withComponent('label'))`
   color: black;
-  font-weight: 800;
+  font-weight: bold;
 `;
 
 const Notice = styled.div`
@@ -243,7 +121,7 @@ const NoticeBtn = styled.button`
   height: 20px;
   background: orange;
   color: #fff;
-  font-weight: 600;
+  font-weight: bold;
   line-height: 1.8;
   border-radius: 50%;
   text-transform: uppercase;
@@ -264,16 +142,127 @@ const Buttons = styled.div`
   ${flexSet('center', 'flax-start')}
 `;
 
-const Button = styled.button`
-  ${BtnSet('200', '50', '20')}
+export default function Attendance() {
+  const [employeeData, setEmployeeData] = useState('');
+  const [employeeNumber, setEmployeeNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const [popup, setPopup] = useState(false);
+  const history = useHistory();
+  const noticeBtn = useRef();
 
-  :hover {
-    opacity: 0.6;
-    transform: translateY(-5px);
-  }
+  useEffect(() => {
+    document.addEventListener('click', clickOutside);
+    return () => document.removeEventListener('click', clickOutside);
+  }, []);
 
-  @media ${({ theme }) => theme.mobile} {
-    width: 180px;
-    height: 40px;
-  }
-`;
+  const goToPage = e => {
+    e.stopPropagation();
+    alert('준비중입니다.');
+    // const resultNumber = prompt('사번을 입력해주세요.');
+    // setEmployeeNumber(resultNumber);
+    // const resultPassword = prompt(
+    //   '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
+    // );
+    // setPassword(resultPassword);
+    // fetch('', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     employee_number: employeeNumber,
+    //     registration_number: password,
+    //   }),
+    // })
+    // .then(response => response.json())
+    // .then(result => {
+    //   result.access_token &&
+    //     localStorage.setItem('access_token', result.access_token);
+    // if (!result.message === 'SUCCESS') {
+    //     alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+    //   }
+    // });
+    // history.push(`/mypage`);
+  };
+
+  const IsRegistered = e => {
+    e.stopPropagation();
+    // fetch('')
+    // .then(response => response.json())
+    // .then(employeedata => {
+    //   setEmployeeData(employeedata.results);
+    // });
+    // .then(result => {
+    // if (!result.message === 'SUCCESS') {
+    //     alert('사번을 확인해주세요.');
+    //   }
+    // });
+  };
+
+  const getEmployeeNumber = debounce(e => {
+    setEmployeeNumber(e.target.value);
+  }, 1000);
+
+  // const onChangeInput = () => {
+  // const empNum = getEmployeeNumber();
+  // console.log(empNum);
+  // fetch(`/users?employee_number={employeeNumber}`)
+  // .then(response => response.json())
+  // .then(userdata => {
+  //   setEmployeeData(userdata.results);
+  // });
+  // };
+
+  const enterKey = e => {
+    if (e.key === 'Enter') {
+      IsRegistered();
+    }
+  };
+
+  const clickOutside = e => {
+    if (!noticeBtn.current.contains(e.target)) {
+      setPopup(false);
+    }
+  };
+
+  const popupNotice = () => {
+    setPopup(true);
+  };
+
+  return (
+    <Main>
+      <Title>근태 프로그램</Title>
+      <MainSection>
+        <Contents>
+          <RecordInfo>
+            <NoticeLabel>사번:</NoticeLabel>
+            <Input
+              type="text"
+              placeholder="사번을 입력하세요"
+              onChange={getEmployeeNumber}
+              onKeyUp={enterKey}
+              autoFocus
+            />
+          </RecordInfo>
+          <RecordInfo>
+            <NoticeText>이름:</NoticeText>
+            <span>김유림</span>
+          </RecordInfo>
+          <Record>
+            <NoticeText>출근:</NoticeText>
+            <span>2021-04-05 09:30</span>
+          </Record>
+          <Record>
+            <NoticeText>퇴근:</NoticeText>
+            <span>2021-04-05 19:00</span>
+          </Record>
+          {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
+          <NoticeBtn ref={noticeBtn} onClick={popupNotice}>
+            ?
+          </NoticeBtn>
+        </Contents>
+        <Buttons>
+          <RequestButton value="페이지 이동" onClick={goToPage} width="200" />
+          <RequestButton value="출•퇴근 등록" onClick={IsRegistered} />
+        </Buttons>
+      </MainSection>
+    </Main>
+  );
+}
