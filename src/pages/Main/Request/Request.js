@@ -4,7 +4,62 @@ import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
 import styled from 'styled-components';
 import './react-tabs.css';
-import { flexSet, BtnSet } from '../../../styles/Variable';
+import { flexSet } from '../../../styles/Variable';
+import RequestButton from '../../../components/RequestButton';
+
+const MAPPING_OBJ = {
+  1: <Vacation />,
+  2: <WorkingSystem />,
+};
+
+const CATEGORY_ARR = ['휴가', '근무제'];
+
+const Main = styled.section`
+  height: 100vh;
+  background: no-repeat center / cover
+    url('https://res.cloudinary.com/practicaldev/image/fetch/s--RNNNA7AE--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://user-images.githubusercontent.com/69592270/101304060-72ff5b00-380d-11eb-8c58-a3172d791c9c.png');
+  font-size: 1.1rem;
+  overflow: hidden;
+`;
+
+const Title = styled.h1`
+  padding: 50px 0;
+  color: #fff;
+  font-size: 2.5rem;
+  text-align: center;
+
+  @media ${({ theme }) => theme.mobile} {
+    padding: 50px 0 20px;
+  }
+`;
+
+const GlassBg = styled.div`
+  width: 650px;
+  margin: 10px auto;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 90%;
+    margin: 0 auto;
+  }
+`;
+
+const UserInfo = styled(GlassBg.withComponent('p'))`
+  ${flexSet('space-around', 'center')}
+  width: 90%;
+  height: 40px;
+`;
+
+const ButtonInfo = styled.div`
+  ${flexSet('flex-end', 'center')}
+  width: 94%;
+  margin: 10px;
+`;
 
 export default function Request() {
   const [periodData, setPeriodData] = useState('');
@@ -56,8 +111,8 @@ export default function Request() {
             })}
           </TabList>
           <ButtonInfo>
-            <Button>등록</Button>
-            <Button>My page</Button>
+            <RequestButton value="등록" />
+            <RequestButton value="My page" />
           </ButtonInfo>
           <TabPanel>{MAPPING_OBJ[currentId]}</TabPanel>
         </Tabs>
@@ -65,74 +120,3 @@ export default function Request() {
     </Main>
   );
 }
-
-const MAPPING_OBJ = {
-  1: <Vacation />,
-  2: <WorkingSystem />,
-};
-
-const CATEGORY_ARR = ['휴가', '근무제'];
-
-const Main = styled.section`
-  height: 100vh;
-  background: no-repeat center / cover
-    url('https://res.cloudinary.com/practicaldev/image/fetch/s--RNNNA7AE--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://user-images.githubusercontent.com/69592270/101304060-72ff5b00-380d-11eb-8c58-a3172d791c9c.png');
-  font-size: 16px;
-  overflow: hidden;
-`;
-
-const Title = styled.h1`
-  padding: 50px 0;
-  color: #fff;
-  font-size: 36px;
-  text-align: center;
-
-  @media ${({ theme }) => theme.mobile} {
-    padding: 50px 0 20px;
-    font-size: 24px;
-  }
-`;
-
-const GlassBg = styled.div`
-  width: 650px;
-  margin: 10px auto;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 90%;
-    margin: 0 auto;
-  }
-`;
-
-const UserInfo = styled(GlassBg.withComponent('p'))`
-  ${flexSet('space-around', 'center')}
-  width: 90%;
-  height: 40px;
-`;
-
-const ButtonInfo = styled.div`
-  ${flexSet('flex-end', 'center')}
-  width: 94%;
-  margin: 10px;
-`;
-
-const Button = styled.button`
-  ${BtnSet('80', '40')}
-
-  :hover {
-    background-color: rgba(32, 79, 178, 0.6);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    font-weight: 800;
-    transform: translateY(-5px);
-  }
-
-  @media ${({ theme }) => theme.mobile} {
-    height: 30px;
-    font-size: 12px;
-  }
-`;

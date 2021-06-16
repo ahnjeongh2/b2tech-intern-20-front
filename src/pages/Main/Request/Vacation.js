@@ -1,75 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
-import Modal from '../../../components/Modal/Modal';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
-
-export default function Vacation() {
-  const [modal, setModal] = useState(false);
-
-  useEffect(() => {
-    console.log(modal);
-  }, modal);
-
-  const openModal = () => {
-    setModal(true);
-  };
-
-  const closeModal = () => {
-    setModal(true);
-  };
-
-  return (
-    <>
-      <section>
-        <Info>
-          <VacationInfo>
-            발생:&nbsp;<span>20.0</span>
-          </VacationInfo>
-          <VacationInfo>
-            사용:&nbsp;<span>9.5</span>
-          </VacationInfo>
-          <VacationInfo>
-            잔여:&nbsp;<span>10.5</span>
-          </VacationInfo>
-        </Info>
-        <GlassBg>
-          <Info>
-            <VacationInfo>휴가 구분</VacationInfo>
-            <InfoPicker>
-              <p>
-                <input type="radio" name="" checked={openModal} /> 연차
-                <Modal
-                  open={modal}
-                  close={closeModal}
-                  title="휴가를 선택하세요."
-                  content={`<input type="radio" name="" /> 연차
-                  <input type="radio" name="" /> 반차`}
-                />
-              </p>
-              <p>
-                <input type="radio" name="" /> 공가
-              </p>
-              <p>
-                <input type="radio" name="" /> 경조
-              </p>
-            </InfoPicker>
-          </Info>
-          <Info>
-            <VacationInfo>휴가 일자</VacationInfo>
-            <InfoPicker>
-              <DatePickerComponent />
-            </InfoPicker>
-          </Info>
-          <Info>
-            <VacationInfo>기안 본문</VacationInfo>
-            <Input />
-          </Info>
-        </GlassBg>
-      </section>
-    </>
-  );
-}
 
 const GlassBg = styled.div`
   width: 90%;
@@ -93,14 +25,40 @@ const Info = styled.div`
   margin: 10px;
 `;
 
-const InfoPicker = styled.div`
+const InfoPicker = styled.form`
   ${flexSet('space-around', 'center')}
   width: 375px;
 
   @media ${({ theme }) => theme.mobile} {
     width: 90%;
-    font-size: 12px;
+    font-size: 0.6rem;
   }
+`;
+
+const FilterBar = styled.ul`
+  ${flexSet('space-around', 'center')}
+  width: 345px;
+  padding: 5px 0;
+`;
+
+const VacationName = styled.li`
+  margin: 10px 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+
+  &:hover {
+    background: rgba(222, 239, 255, 0.6);
+  }
+`;
+
+const DropBar = styled.ul`
+  position: absolute;
+  top: 52px;
+  width: 150px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 1em 0.1px lightgray;
+  z-index: 1;
 `;
 
 const VacationInfo = styled(GlassBg.withComponent('p'))`
@@ -112,18 +70,87 @@ const VacationInfo = styled(GlassBg.withComponent('p'))`
   @media ${({ theme }) => theme.mobile} {
     width: 80px;
     height: 30px;
-    font-size: 12px;
+    font-size: 0.7rem;
   }
 `;
 
 const Input = styled(GlassBg.withComponent('input'))`
   width: 345px;
   height: 40px;
-  font-size: 14px;
+  font-size: 0.8rem;
 
   @media ${({ theme }) => theme.mobile} {
     width: 140px;
     height: 30px;
-    font-size: 12px;
+    font-size: 0.7rem;
   }
 `;
+
+export default function Vacation() {
+  const [over, setOver] = useState(false);
+
+  return (
+    <>
+      <section>
+        <Info>
+          <VacationInfo>
+            발생:&nbsp;<span>20.0</span>
+          </VacationInfo>
+          <VacationInfo>
+            사용:&nbsp;<span>9.5</span>
+          </VacationInfo>
+          <VacationInfo>
+            잔여:&nbsp;<span>10.5</span>
+          </VacationInfo>
+        </Info>
+        <GlassBg>
+          <Info>
+            <VacationInfo>휴가 구분</VacationInfo>
+            <InfoPicker>
+              <FilterBar>
+                <li onMouseLeave={() => setOver(false)}>
+                  <input
+                    type="radio"
+                    name="vacation"
+                    onClick={() => setOver(true)}
+                  />
+                  연차
+                  {over && (
+                    <DropBar onMouseLeave={() => setOver(false)}>
+                      <VacationName>
+                        <input type="radio" name="vacation" value="연차" />
+                        연차(8H)
+                      </VacationName>
+                      <VacationName>
+                        <input type="radio" name="vacation" value="반차" />
+                        반차(4H)
+                      </VacationName>
+                    </DropBar>
+                  )}
+                </li>
+                <li>
+                  <input type="radio" name="vacation" value="공가" />
+                  공가
+                </li>
+                <li>
+                  <input type="radio" name="vacation" value="경조" />
+                  경조
+                </li>
+              </FilterBar>
+            </InfoPicker>
+          </Info>
+          <Info>
+            <VacationInfo>휴가 일자</VacationInfo>
+            <InfoPicker>
+              <DatePickerComponent />
+            </InfoPicker>
+          </Info>
+          <Info>
+            <VacationInfo>기안 본문</VacationInfo>
+            <Input />
+          </Info>
+        </GlassBg>
+      </section>
+    </>
+  );
+}
