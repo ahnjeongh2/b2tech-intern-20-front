@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
-import Modal from '../../../components/Modal/Modal';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 
@@ -26,7 +25,7 @@ const Info = styled.div`
   margin: 10px;
 `;
 
-const InfoPicker = styled.div`
+const InfoPicker = styled.form`
   ${flexSet('space-around', 'center')}
   width: 375px;
 
@@ -34,6 +33,32 @@ const InfoPicker = styled.div`
     width: 90%;
     font-size: 0.6rem;
   }
+`;
+
+const FilterBar = styled.ul`
+  ${flexSet('space-around', 'center')}
+  width: 345px;
+  padding: 5px 0;
+`;
+
+const VacationName = styled.li`
+  margin: 10px 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+
+  &:hover {
+    background: rgba(222, 239, 255, 0.6);
+  }
+`;
+
+const DropBar = styled.ul`
+  position: absolute;
+  top: 52px;
+  width: 150px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 1em 0.1px lightgray;
+  z-index: 1;
 `;
 
 const VacationInfo = styled(GlassBg.withComponent('p'))`
@@ -62,15 +87,7 @@ const Input = styled(GlassBg.withComponent('input'))`
 `;
 
 export default function Vacation() {
-  const [modal, setModal] = useState(false);
-
-  const openModal = () => {
-    setModal(true);
-  };
-
-  const closeModal = () => {
-    setModal(false);
-  };
+  const [over, setOver] = useState(false);
 
   return (
     <>
@@ -90,15 +107,36 @@ export default function Vacation() {
           <Info>
             <VacationInfo>휴가 구분</VacationInfo>
             <InfoPicker>
-              <p>
-                <input type="radio" name="" onClick={openModal} /> 연차
-              </p>
-              <p>
-                <input type="radio" name="" /> 공가
-              </p>
-              <p>
-                <input type="radio" name="" /> 경조
-              </p>
+              <FilterBar>
+                <li onMouseLeave={() => setOver(false)}>
+                  <input
+                    type="radio"
+                    name="vacation"
+                    onClick={() => setOver(true)}
+                  />
+                  연차
+                  {over && (
+                    <DropBar onMouseLeave={() => setOver(false)}>
+                      <VacationName>
+                        <input type="radio" name="vacation" value="연차" />
+                        연차(8H)
+                      </VacationName>
+                      <VacationName>
+                        <input type="radio" name="vacation" value="반차" />
+                        반차(4H)
+                      </VacationName>
+                    </DropBar>
+                  )}
+                </li>
+                <li>
+                  <input type="radio" name="vacation" value="공가" />
+                  공가
+                </li>
+                <li>
+                  <input type="radio" name="vacation" value="경조" />
+                  경조
+                </li>
+              </FilterBar>
             </InfoPicker>
           </Info>
           <Info>
@@ -113,13 +151,6 @@ export default function Vacation() {
           </Info>
         </GlassBg>
       </section>
-      <Modal
-        open={modal}
-        closeModal={closeModal}
-        title="휴가를 선택하세요."
-        content={`${(<input type="radio" name="" />)} 연차
-                  ${(<input type="radio" name="" />)} 반차`}
-      />
     </>
   );
 }

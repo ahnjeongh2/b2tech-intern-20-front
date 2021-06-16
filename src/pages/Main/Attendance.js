@@ -82,7 +82,6 @@ const Input = styled.input`
 
 const NoticeText = styled.span`
   padding-right: 40px;
-  color: #585757;
   font-weight: bold;
 
   @media ${({ theme }) => theme.mobile} {
@@ -144,11 +143,12 @@ const Buttons = styled.div`
 
 export default function Attendance() {
   const [employeeData, setEmployeeData] = useState('');
-  const [employeeNumber, setEmployeeNumber] = useState('');
   const [password, setPassword] = useState('');
   const [popup, setPopup] = useState(false);
   const history = useHistory();
   const noticeBtn = useRef();
+  const input = useRef();
+  const date = 0;
 
   useEffect(() => {
     document.addEventListener('click', clickOutside);
@@ -182,33 +182,33 @@ export default function Attendance() {
     // history.push(`/mypage`);
   };
 
-  const IsRegistered = e => {
-    e.stopPropagation();
-    // fetch('')
-    // .then(response => response.json())
-    // .then(employeedata => {
-    //   setEmployeeData(employeedata.results);
-    // });
-    // .then(result => {
-    // if (!result.message === 'SUCCESS') {
-    //     alert('사번을 확인해주세요.');
-    //   }
-    // });
+  const fetchData = () => {
+    const employeeNumber = e.target.value;
+    const today = `${new Date().getFullYear()}-${
+      new Date().getMonth() + 1
+    }-${new Date().getDate()}`;
+    fetch(
+      `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&date=${today}`
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.schedules.length) {
+          setEmployeeData(data.schedules[date]);
+        } else {
+          alert('사번을 확인해주세요.');
+        }
+      });
   };
 
-  const getEmployeeNumber = debounce(e => {
-    setEmployeeNumber(e.target.value);
+  const getEmployeeData = debounce(e => {
+    fetchData();
   }, 1000);
 
-  // const onChangeInput = () => {
-  // const empNum = getEmployeeNumber();
-  // console.log(empNum);
-  // fetch(`/users?employee_number={employeeNumber}`)
-  // .then(response => response.json())
-  // .then(userdata => {
-  //   setEmployeeData(userdata.results);
-  // });
-  // };
+  const IsRegistered = () => {
+    // e.stopPropagation();
+    // fetchData();
+    input.current.value = '';
+  };
 
   const enterKey = e => {
     if (e.key === 'Enter') {
@@ -236,22 +236,23 @@ export default function Attendance() {
             <Input
               type="text"
               placeholder="사번을 입력하세요"
-              onChange={getEmployeeNumber}
+              onChange={e => getEmployeeData(e)}
               onKeyUp={enterKey}
               autoFocus
+              ref={input}
             />
           </RecordInfo>
           <RecordInfo>
             <NoticeText>이름:</NoticeText>
-            <span>김유림</span>
+            <span>{employeeData.name}</span>
           </RecordInfo>
           <Record>
             <NoticeText>출근:</NoticeText>
-            <span>2021-04-05 09:30</span>
+            <span>{employeeData.created_at}</span>
           </Record>
           <Record>
             <NoticeText>퇴근:</NoticeText>
-            <span>2021-04-05 19:00</span>
+            <span>{employeeData.updated_at}</span>
           </Record>
           {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
           <NoticeBtn ref={noticeBtn} onClick={popupNotice}>
@@ -259,7 +260,7 @@ export default function Attendance() {
           </NoticeBtn>
         </Contents>
         <Buttons>
-          <RequestButton value="페이지 이동" onClick={goToPage} width="200" />
+          <RequestButton value="페이지 이동" onClick={goToPage} />
           <RequestButton value="출•퇴근 등록" onClick={IsRegistered} />
         </Buttons>
       </MainSection>

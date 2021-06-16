@@ -48,7 +48,7 @@ const Buttons = styled.div`
   ${flexSet('center', 'flax-start')}
 `;
 
-export default function permissions() {
+export default function Permissions() {
   const [password, setPassword] = useState('');
 
   const getPassword = () => {

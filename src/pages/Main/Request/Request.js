@@ -4,7 +4,7 @@ import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
 import styled from 'styled-components';
 import './react-tabs.css';
-import { flexSet, BtnSet } from '../../../styles/Variable';
+import { flexSet } from '../../../styles/Variable';
 import RequestButton from '../../../components/RequestButton';
 
 const MAPPING_OBJ = {
