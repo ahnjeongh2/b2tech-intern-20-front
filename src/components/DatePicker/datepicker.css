@@ -290,6 +290,7 @@
 
 .react-datepicker__month-container {
   float: left;
+  z-index: 2;
 }
 
 .react-datepicker__year {

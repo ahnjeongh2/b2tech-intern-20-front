@@ -158,6 +158,7 @@ export default function Attendance() {
   const goToPage = e => {
     e.stopPropagation();
     alert('준비중입니다.');
+    // const employeeNumber = input.current.value;
     // const resultNumber = prompt('사번을 입력해주세요.');
     // setEmployeeNumber(resultNumber);
     // const resultPassword = prompt(
@@ -182,13 +183,15 @@ export default function Attendance() {
     // history.push(`/mypage`);
   };
 
-  const fetchData = () => {
+  const fetchData = () => {};
+
+  const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;
-    const today = `${new Date().getFullYear()}-${
-      new Date().getMonth() + 1
-    }-${new Date().getDate()}`;
+    // const today = `${new Date().getFullYear()}-${
+    //   new Date().getMonth() + 1
+    // }-${new Date().getDate()}`;
     fetch(
-      `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&date=${today}`
+      `http://13.125.76.153:8000/schedules/today?employee_number=${employeeNumber}`
     )
       .then(response => response.json())
       .then(data => {
@@ -198,15 +201,14 @@ export default function Attendance() {
           alert('사번을 확인해주세요.');
         }
       });
-  };
-
-  const getEmployeeData = debounce(() => {
-    fetchData();
   }, 1000);
 
   const IsRegistered = () => {
-    // e.stopPropagation();
-    // fetchData();
+    const employeeNumber = input.current.value;
+    fetch(`http://13.125.76.153:8000/users/${employeeNumber}/schedules`, {
+      method: 'POST',
+    });
+    getEmployeeData();
     input.current.value = '';
   };
 
@@ -236,7 +238,7 @@ export default function Attendance() {
             <Input
               type="text"
               placeholder="사번을 입력하세요"
-              onChange={e => getEmployeeData(e)}
+              onChange={getEmployeeData}
               onKeyUp={enterKey}
               autoFocus
               ref={input}
@@ -248,11 +250,18 @@ export default function Attendance() {
           </RecordInfo>
           <Record>
             <NoticeText>출근:</NoticeText>
-            <span>{employeeData.created_at}</span>
+            <span>
+              {/* {Date.parse('2021-06-15T16:33:11')} */}
+              {employeeData.created_at &&
+                employeeData.created_at.replace('T', ' ')}
+            </span>
           </Record>
           <Record>
             <NoticeText>퇴근:</NoticeText>
-            <span>{employeeData.updated_at}</span>
+            <span>
+              {employeeData.updated_at &&
+                employeeData.updated_at.replace('T', ' ')}
+            </span>
           </Record>
           {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
           <NoticeBtn ref={noticeBtn} onClick={popupNotice}>

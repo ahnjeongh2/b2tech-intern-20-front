@@ -18,10 +18,12 @@ const Button = styled.button`
   }
 `;
 
-export default function RequestButton({ value, onClick }) {
+export default function RequestButton({ type, value, onClick }) {
   return (
     <>
-      <Button onClick={onClick}>{value}</Button>
+      <Button type={type} onClick={onClick}>
+        {value}
+      </Button>
     </>
   );
 }
