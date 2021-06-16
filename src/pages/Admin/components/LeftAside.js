@@ -91,7 +91,7 @@ function LeftAsideAdmin() {
 const LeftAsideMenu = styled.aside`
   position: relative;
   width: 160px;
-  height: inherit;
+  height: 100vh;
   color: ${({ theme }) => theme.fontLightBlue};
   background-color: ${({ theme }) => theme.backgroundNavy};
   font-size: 12px;

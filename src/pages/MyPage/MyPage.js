@@ -1,17 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LeftAsideMyPage from './LeftAsideMyPage';
 import RequestButton from '../../components/RequestButton';
 
 function MyPage() {
+  // useEffect(() => {
+  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
+  //   fetch(
+  //     `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&name=${name}`
+  //   )
+  //     .then(response => response.json())
+  //     .then(data => console.log('결과: ', data));
+
+  //   // .then(result => {
+  //   //   if (result.MESSAGE === 'SUCCESS') {
+  //   //     localStorage.getItem('token', result.token);
+  //   //   } else {
+  //   //     alert('아이디나 비밀번호를 확인해주세요');
+  //   //   }
+  //   // });
+  // }, []);
+
+  // initializeUserInfo = () => {
+  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
+  //   fetch(GET_AUTHORIZATION_API, {
+  //     method: ‘GET’,
+  //     headers: {
+  //       AUTHORIZATION: loggedInfo,
+  //     },
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data.message === ‘SUCCESS’) {
+  //         this.setState({
+  //           userName: data.user_info.user_name,
+  //         });
+  //       } else {
+  //         this.setState({
+  //           userName: ‘고객’,
+  //         });
+  //       }
+  //     });
+  // };
+
   return (
     <Main>
       <LeftAsideMyPage />
       <Article>
         <UpperSection>
           <UserInfo>
-            <EmployeeNumber>사번: 12345678</EmployeeNumber>
+            <EmployeeNumber>사번: 1111111</EmployeeNumber>
             <EmployeeName>홍길동 님</EmployeeName>
           </UserInfo>
         </UpperSection>

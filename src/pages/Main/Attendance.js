@@ -175,14 +175,14 @@ export default function Attendance() {
     //     registration_number: password,
     //   }),
     // })
-    // .then(response => response.json())
-    // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    // if (!result.message === 'SUCCESS') {
-    //     alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
-    //   }
-    // });
+    //   .then(response => response.json())
+    //   .then(result => {
+    //     result.access_token &&
+    //       localStorage.setItem('access_token', result.access_token);
+    //     if (!result.message === 'SUCCESS') {
+    //       alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
+    //     }
+    //   });
     // history.push(`/mypage`);
   };
 

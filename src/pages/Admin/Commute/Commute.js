@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import LeftAside from '../components/LeftAside';
 import UpperSection from '../components/UpperSection';
 import TableContentsCommute from '../Commute/TableContentsCommute';
+import Search from '../../../components/Search';
 
 function Commute() {
   return (
@@ -10,6 +11,7 @@ function Commute() {
       <LeftAside />
       <Article>
         <UpperSection />
+        <Search />
         <TableWrapper>
           <TableContentsCommute />
         </TableWrapper>
