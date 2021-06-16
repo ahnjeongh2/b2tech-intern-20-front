@@ -183,7 +183,7 @@ export default function Attendance() {
   };
 
   const fetchData = () => {
-    const employeeNumber = e.target.value;
+    const employeeNumber = input.current.value;
     const today = `${new Date().getFullYear()}-${
       new Date().getMonth() + 1
     }-${new Date().getDate()}`;
@@ -200,7 +200,7 @@ export default function Attendance() {
       });
   };
 
-  const getEmployeeData = debounce(e => {
+  const getEmployeeData = debounce(() => {
     fetchData();
   }, 1000);
 
