@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
+import RequestButton from '../../../components/RequestButton';
 
 const GlassBg = styled.div`
   width: 90%;
@@ -19,13 +20,19 @@ const GlassBg = styled.div`
   }
 `;
 
+const ButtonInfo = styled.div`
+  position: absolute;
+  top: 75px;
+  right: 22px;
+`;
+
 const Info = styled.div`
   ${flexSet('flex-end', 'center')}
   width: 94%;
   margin: 10px;
 `;
 
-const InfoPicker = styled.form`
+const InfoPicker = styled.div`
   ${flexSet('space-around', 'center')}
   width: 375px;
 
@@ -86,12 +93,53 @@ const Input = styled(GlassBg.withComponent('input'))`
   }
 `;
 
+const VACATION_ARR = ['연차', '반차', '공가', '경조'];
+
 export default function Vacation() {
   const [over, setOver] = useState(false);
+  const [periodData, setPeriodData] = useState({});
+  const [vacationValue, setVacationValue] = useState('');
+
+  const handlePeriod = (startDate, endDate) => {
+    if (startDate <= endDate) {
+      setPeriodData({ startDate: startDate, endDate: endDate });
+    }
+  };
+
+  const vacationRequest = () => {
+    if (vacationValue) {
+      handlePeriod();
+      alert(
+        `${periodData.startDate}~${periodData.endDate}기간에 ${vacationValue.el}가 신청되었습니다.`
+      );
+    } else {
+      alert('휴가 종류를 선택해주세요.');
+    }
+
+    // fetch('', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     startDate: startDate,
+    //     endDate: endDate,
+    //   }),
+    // })
+    // .then(response => response.json())
+    // .then(eperioddata => {
+    //   setPeriodData(perioddata.results);
+    // });
+    // .then(result => {
+    //   result.access_token &&
+    //     localStorage.setItem('access_token', result.access_token);
+    //})
+  };
 
   return (
     <>
       <section>
+        <ButtonInfo>
+          <RequestButton value="My page" />
+          <RequestButton value="등록" onClick={vacationRequest} />
+        </ButtonInfo>
         <Info>
           <VacationInfo>
             발생:&nbsp;<span>20.0</span>
@@ -108,41 +156,54 @@ export default function Vacation() {
             <VacationInfo>휴가 구분</VacationInfo>
             <InfoPicker>
               <FilterBar>
-                <li onMouseLeave={() => setOver(false)}>
+                {/* <li onMouseLeave={() => setOver(false)}>
                   <input
                     type="radio"
                     name="vacation"
+                    value="연차"
                     onClick={() => setOver(true)}
                   />
                   연차
                   {over && (
                     <DropBar onMouseLeave={() => setOver(false)}>
                       <VacationName>
-                        <input type="radio" name="vacation" value="연차" />
+                        <input
+                          type="radio"
+                          name="vacation"
+                          onChange={() => setVacationValue('연차')}
+                        />
                         연차(8H)
                       </VacationName>
                       <VacationName>
-                        <input type="radio" name="vacation" value="반차" />
+                        <input
+                          type="radio"
+                          name="vacation"
+                          onChange={() => setVacationValue('반차')}
+                        />
                         반차(4H)
                       </VacationName>
                     </DropBar>
                   )}
-                </li>
-                <li>
-                  <input type="radio" name="vacation" value="공가" />
-                  공가
-                </li>
-                <li>
-                  <input type="radio" name="vacation" value="경조" />
-                  경조
-                </li>
+                </li> */}
+                {VACATION_ARR.map((el, idx) => {
+                  return (
+                    <li key={idx}>
+                      <input
+                        type="radio"
+                        name="vacation"
+                        onChange={() => setVacationValue({ el })}
+                      />
+                      {el}
+                    </li>
+                  );
+                })}
               </FilterBar>
             </InfoPicker>
           </Info>
           <Info>
             <VacationInfo>휴가 일자</VacationInfo>
             <InfoPicker>
-              <DatePickerComponent />
+              <DatePickerComponent handlePeriod={handlePeriod} />
             </InfoPicker>
           </Info>
           <Info>

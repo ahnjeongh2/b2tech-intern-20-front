@@ -5,7 +5,6 @@ import WorkingSystem from './WorkingSystem';
 import styled from 'styled-components';
 import './react-tabs.css';
 import { flexSet } from '../../../styles/Variable';
-import RequestButton from '../../../components/RequestButton';
 
 const MAPPING_OBJ = {
   1: <Vacation />,
@@ -25,17 +24,19 @@ const Main = styled.section`
 const Title = styled.h1`
   padding: 50px 0;
   color: #fff;
-  font-size: 2.5rem;
+  font-size: 2rem;
   text-align: center;
 
   @media ${({ theme }) => theme.mobile} {
     padding: 50px 0 20px;
+    font-size: 24px;
   }
 `;
 
 const GlassBg = styled.div`
   width: 650px;
   margin: 10px auto;
+  padding: 20px 0;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -53,48 +54,11 @@ const UserInfo = styled(GlassBg.withComponent('p'))`
   ${flexSet('space-around', 'center')}
   width: 90%;
   height: 40px;
-`;
-
-const ButtonInfo = styled.div`
-  ${flexSet('flex-end', 'center')}
-  width: 94%;
-  margin: 10px;
+  margin-bottom: 40px;
 `;
 
 export default function Request() {
-  const [periodData, setPeriodData] = useState('');
   const currentId = '1';
-
-  // const clickHandler = id => {
-  //   setCurrentId(id);
-  // };
-
-  const handlePeriod = (startDate, endDate) => {
-    console.log(`startDate: ${startDate}, endDate: ${endDate}`);
-    // fetch('', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     startDate: startDate,
-    //     endDate: endDate,
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(eperioddata => {
-    //   setPeriodData(perioddata.results);
-    // });
-    // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    // if (!result.message === 'SUCCESS') {
-    //    alert('조회기간을 다시 확인해주세요.');
-    //   }
-    // });};
-    // const ExampleCustomInput = ({ value, onClick }) => (
-    //   <button className="example-custom-input" onClick={onClick}>
-    //     {value}
-    //   </button>
-    // );
-  };
 
   return (
     <Main>
@@ -110,10 +74,6 @@ export default function Request() {
               return <Tab>{name}</Tab>;
             })}
           </TabList>
-          <ButtonInfo>
-            <RequestButton value="등록" />
-            <RequestButton value="My page" />
-          </ButtonInfo>
           <TabPanel>{MAPPING_OBJ[currentId]}</TabPanel>
         </Tabs>
       </GlassBg>

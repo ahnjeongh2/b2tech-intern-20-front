@@ -5,7 +5,7 @@
 .react-tabs__tab-list {
   width: 89%;
   border-bottom: 1px solid #fff;
-  margin: 0 auto 10px;
+  margin: 20px auto 10px;
   padding: 0;
 }
 
@@ -15,7 +15,6 @@
   border-bottom: none;
   bottom: -1px;
   position: relative;
-  list-style: none;
   padding: 6px 12px;
   cursor: pointer;
   width: 100px;
@@ -26,8 +25,7 @@
 }
 
 .react-tabs__tab--selected {
-  /* background: linear-gradient(315deg, #cfdae0, #f6ffff); */
-  color: black;
+  border-bottom: 5px solid rgba(255, 255, 255, 1);
   font-weight: 600;
   border-radius: 5px 5px 0 0;
 }
