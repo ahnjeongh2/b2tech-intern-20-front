@@ -7,8 +7,7 @@ import RequestButton from '../../components/RequestButton';
 
 const Main = styled.div`
   height: 100vh;
-  background: no-repeat center / cover
-    url('https://products.ls.graphics/mesh-gradients/images/11.-Fuchsia_1.jpg');
+  background: no-repeat center / cover url('/images/attendance.jpg');
   font-size: 1.1rem;
   overflow: hidden;
 `;

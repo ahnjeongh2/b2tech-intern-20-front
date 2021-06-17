@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
@@ -21,13 +22,10 @@ const GlassBg = styled.div`
 `;
 
 const ButtonInfo = styled.div`
-  position: absolute;
-  top: 75px;
-  right: 22px;
+  text-align: center;
+  margin-top: 20px;
 
   @media ${({ theme }) => theme.mobile} {
-    top: 60px;
-    right: 10px;
   }
 `;
 
@@ -105,10 +103,11 @@ const Input = styled(GlassBg.withComponent('input'))`
 
 const VACATION_ARR = ['연차', '반차', '공가', '경조'];
 
-export default function Vacation() {
+export default function Vacation({ userInfo }) {
   const [over, setOver] = useState(false);
   const [periodData, setPeriodData] = useState({});
-  const [vacationValue, setVacationValue] = useState('');
+  const [vacationType, setVacationType] = useState('');
+  const history = useHistory();
 
   const handlePeriod = (startDate, endDate) => {
     if (startDate <= endDate) {
@@ -116,49 +115,58 @@ export default function Vacation() {
     }
   };
 
+  const goToMyPage = () => {
+    history.push(`/mypage`);
+  };
+
+  // const handleVacationInput = e => {
+  //   console.log(e.target.value);
+  // };
+
   const vacationRequest = () => {
-    if (vacationValue) {
+    if (vacationType) {
       handlePeriod();
       alert(
-        `${periodData.startDate}~${periodData.endDate}기간에 ${vacationValue.el}가 신청되었습니다.`
+        `${periodData.startDate}~${periodData.endDate}기간에 ${vacationType.el}가 신청되었습니다.`
       );
     } else {
       alert('휴가 종류를 선택해주세요.');
     }
 
+    const accessToken = localStorage.getItem('AUTHORIZATION');
     // fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify({
-    //     startDate: startDate,
-    //     endDate: endDate,
+    //     AUTHORIZATION: accessToken;
+    //     type: vacationType,
+    //     start_at: periodData.startDate,
+    //     end_at: periodData.endDate,
     //   }),
     // })
     // .then(response => response.json())
-    // .then(eperioddata => {
-    //   setPeriodData(perioddata.results);
+    // .then(data => {
+    //
     // });
-    // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    //})
   };
 
   return (
     <>
       <section>
-        <ButtonInfo>
-          <RequestButton value="My page" />
-          <RequestButton value="등록" onClick={vacationRequest} />
-        </ButtonInfo>
         <Info>
           <VacationInfo>
-            발생:&nbsp;<span>20.0</span>
+            {/* 발생:&nbsp;<span>20.0</span> */}
+            발생:&nbsp;<span>{userInfo.leave}</span>
           </VacationInfo>
           <VacationInfo>
-            사용:&nbsp;<span>9.5</span>
+            {/* 사용:&nbsp;<span>9.5</span> */}
+            사용:&nbsp;
+            <span>
+              {Number(userInfo.leave) - Number(userInfo.rest_vacation)}
+            </span>
           </VacationInfo>
           <VacationInfo>
-            잔여:&nbsp;<span>10.5</span>
+            {/* 잔여:&nbsp;<span>10.5</span> */}
+            잔여:&nbsp;<span>{userInfo.rest_vacation}</span>
           </VacationInfo>
         </Info>
         <GlassBg>
@@ -201,7 +209,7 @@ export default function Vacation() {
                       <input
                         type="radio"
                         name="vacation"
-                        onChange={() => setVacationValue({ el })}
+                        onChange={() => setVacationType({ el })}
                       />
                       {el}
                     </li>
@@ -216,11 +224,15 @@ export default function Vacation() {
               <DatePickerComponent handlePeriod={handlePeriod} />
             </InfoPicker>
           </Info>
-          <Info>
+          {/* <Info>
             <VacationInfo>기안 본문</VacationInfo>
-            <Input />
-          </Info>
+            <Input onChange={e => handleVacationInput(e)} />
+          </Info> */}
         </GlassBg>
+        <ButtonInfo>
+          <RequestButton value="My page" onClick={goToMyPage} />
+          <RequestButton value="등록" onClick={vacationRequest} />
+        </ButtonInfo>
       </section>
     </>
   );
