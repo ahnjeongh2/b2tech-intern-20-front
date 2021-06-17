@@ -24,6 +24,11 @@ const ButtonInfo = styled.div`
   position: absolute;
   top: 75px;
   right: 22px;
+
+  @media ${({ theme }) => theme.mobile} {
+    top: 60px;
+    right: 10px;
+  }
 `;
 
 const Info = styled.div`
@@ -37,7 +42,6 @@ const InfoPicker = styled.div`
   width: 375px;
 
   @media ${({ theme }) => theme.mobile} {
-    width: 90%;
     font-size: 0.6rem;
   }
 `;
@@ -46,6 +50,10 @@ const FilterBar = styled.ul`
   ${flexSet('space-around', 'center')}
   width: 345px;
   padding: 5px 0;
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 90%;
+  }
 `;
 
 const VacationName = styled.li`
@@ -69,15 +77,17 @@ const DropBar = styled.ul`
 `;
 
 const VacationInfo = styled(GlassBg.withComponent('p'))`
-  ${flexSet('center', 'center')}
   width: 145px;
   height: 40px;
   background: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  line-height: 2.4;
 
   @media ${({ theme }) => theme.mobile} {
-    width: 80px;
+    width: 90px;
     height: 30px;
     font-size: 0.7rem;
+    line-height: 2.6;
   }
 `;
 
@@ -87,7 +97,7 @@ const Input = styled(GlassBg.withComponent('input'))`
   font-size: 0.8rem;
 
   @media ${({ theme }) => theme.mobile} {
-    width: 140px;
+    width: 180px;
     height: 30px;
     font-size: 0.7rem;
   }
