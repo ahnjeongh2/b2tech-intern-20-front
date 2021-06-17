@@ -22,10 +22,14 @@ const GlassBg = styled.div`
 `;
 
 const ButtonInfo = styled.div`
+  position: absolute;
+  left: 33%;
+  bottom: 14px;
   text-align: center;
   margin-top: 20px;
 
   @media ${({ theme }) => theme.mobile} {
+    left: 17%;
   }
 `;
 
@@ -48,6 +52,12 @@ const FilterBar = styled.ul`
   ${flexSet('space-around', 'center')}
   width: 345px;
   padding: 5px 0;
+
+  li {
+    input {
+      margin: 8px;
+    }
+  }
 
   @media ${({ theme }) => theme.mobile} {
     width: 90%;
@@ -101,6 +111,10 @@ const Input = styled(GlassBg.withComponent('input'))`
   }
 `;
 
+const Bottom = styled.div`
+  height: 80px;
+`;
+
 const VACATION_ARR = ['연차', '반차', '공가', '경조'];
 
 export default function Vacation({ userInfo }) {
@@ -151,30 +165,31 @@ export default function Vacation({ userInfo }) {
 
   return (
     <>
-      <section>
+      <Info>
+        <ButtonInfo>
+          <RequestButton value="My page" onClick={goToMyPage} />
+          <RequestButton value="등록" onClick={vacationRequest} />
+        </ButtonInfo>
+        <VacationInfo>
+          {/* 발생:&nbsp;<span>20.0</span> */}
+          발생:&nbsp;<span>{userInfo.leave}</span>
+        </VacationInfo>
+        <VacationInfo>
+          {/* 사용:&nbsp;<span>9.5</span> */}
+          사용:&nbsp;
+          <span>{Number(userInfo.leave) - Number(userInfo.rest_vacation)}</span>
+        </VacationInfo>
+        <VacationInfo>
+          {/* 잔여:&nbsp;<span>10.5</span> */}
+          잔여:&nbsp;<span>{userInfo.rest_vacation}</span>
+        </VacationInfo>
+      </Info>
+      <GlassBg>
         <Info>
-          <VacationInfo>
-            {/* 발생:&nbsp;<span>20.0</span> */}
-            발생:&nbsp;<span>{userInfo.leave}</span>
-          </VacationInfo>
-          <VacationInfo>
-            {/* 사용:&nbsp;<span>9.5</span> */}
-            사용:&nbsp;
-            <span>
-              {Number(userInfo.leave) - Number(userInfo.rest_vacation)}
-            </span>
-          </VacationInfo>
-          <VacationInfo>
-            {/* 잔여:&nbsp;<span>10.5</span> */}
-            잔여:&nbsp;<span>{userInfo.rest_vacation}</span>
-          </VacationInfo>
-        </Info>
-        <GlassBg>
-          <Info>
-            <VacationInfo>휴가 구분</VacationInfo>
-            <InfoPicker>
-              <FilterBar>
-                {/* <li onMouseLeave={() => setOver(false)}>
+          <VacationInfo>휴가 구분</VacationInfo>
+          <InfoPicker>
+            <FilterBar>
+              {/* <li onMouseLeave={() => setOver(false)}>
                   <input
                     type="radio"
                     name="vacation"
@@ -203,37 +218,33 @@ export default function Vacation({ userInfo }) {
                     </DropBar>
                   )}
                 </li> */}
-                {VACATION_ARR.map((el, idx) => {
-                  return (
-                    <li key={idx}>
-                      <input
-                        type="radio"
-                        name="vacation"
-                        onChange={() => setVacationType({ el })}
-                      />
-                      {el}
-                    </li>
-                  );
-                })}
-              </FilterBar>
-            </InfoPicker>
-          </Info>
-          <Info>
-            <VacationInfo>휴가 일자</VacationInfo>
-            <InfoPicker>
-              <DatePickerComponent handlePeriod={handlePeriod} />
-            </InfoPicker>
-          </Info>
-          {/* <Info>
+              {VACATION_ARR.map((el, idx) => {
+                return (
+                  <li key={idx}>
+                    <input
+                      type="radio"
+                      name="vacation"
+                      onChange={() => setVacationType({ el })}
+                    />
+                    {el}
+                  </li>
+                );
+              })}
+            </FilterBar>
+          </InfoPicker>
+        </Info>
+        <Info>
+          <VacationInfo>휴가 일자</VacationInfo>
+          <InfoPicker>
+            <DatePickerComponent handlePeriod={handlePeriod} />
+          </InfoPicker>
+        </Info>
+        {/* <Info>
             <VacationInfo>기안 본문</VacationInfo>
             <Input onChange={e => handleVacationInput(e)} />
           </Info> */}
-        </GlassBg>
-        <ButtonInfo>
-          <RequestButton value="My page" onClick={goToMyPage} />
-          <RequestButton value="등록" onClick={vacationRequest} />
-        </ButtonInfo>
-      </section>
+      </GlassBg>
+      <Bottom></Bottom>
     </>
   );
 }

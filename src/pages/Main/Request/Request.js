@@ -48,7 +48,6 @@ const UserInfo = styled(GlassBg.withComponent('p'))`
   ${flexSet('space-around', 'center')}
   width: 90%;
   height: 40px;
-  margin-bottom: 40px;
 
   @media ${({ theme }) => theme.mobile} {
     font-size: 0.8rem;
@@ -97,7 +96,11 @@ export default function Request() {
         <Tabs>
           <TabList>
             {CATEGORY_ARR.map((name, idx) => {
-              return <Tab onClick={() => clickHandler(idx + 1)}>{name}</Tab>;
+              return (
+                <Tab key={idx} onClick={() => clickHandler(idx + 1)}>
+                  {name}
+                </Tab>
+              );
             })}
           </TabList>
           {MAPPING_OBJ[currentId]}
