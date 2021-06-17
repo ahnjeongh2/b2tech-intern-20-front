@@ -18,6 +18,11 @@ const Title = styled.h1`
   color: #fff;
   font-size: 2.5rem;
   text-align: center;
+
+  @media ${({ theme }) => theme.mobile} {
+    padding: 50px 0 20px;
+    font-size: 1.4rem;
+  }
 `;
 
 const MainSection = styled.section`
@@ -157,14 +162,13 @@ export default function Attendance() {
 
   const goToPage = e => {
     e.stopPropagation();
-    alert('준비중입니다.');
-    // const employeeNumber = input.current.value;
-    // const resultNumber = prompt('사번을 입력해주세요.');
-    // setEmployeeNumber(resultNumber);
-    // const resultPassword = prompt(
-    //   '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
-    // );
-    // setPassword(resultPassword);
+    // alert('준비중입니다.');
+    const employeeNumber = input.current.value;
+    const resultNumber = prompt('사번을 입력해주세요.');
+    const resultPassword = prompt(
+      '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
+    );
+    setPassword(resultPassword);
     // fetch('', {
     //   method: 'POST',
     //   body: JSON.stringify({
@@ -187,20 +191,18 @@ export default function Attendance() {
 
   const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;
-    // const today = `${new Date().getFullYear()}-${
-    //   new Date().getMonth() + 1
-    // }-${new Date().getDate()}`;
     fetch(
       `http://13.125.76.153:8000/schedules/today?employee_number=${employeeNumber}`
-    )
-      .then(response => response.json())
-      .then(data => {
-        if (data.schedules.length) {
-          setEmployeeData(data.schedules[date]);
-        } else {
-          alert('사번을 확인해주세요.');
-        }
-      });
+    ).then(response => {
+      if (response.status === 200) {
+        return response.json().then(data => {
+          setEmployeeData(data);
+        });
+      }
+      if (response.status === 404) {
+        alert('사번을 다시 확인해주세요');
+      }
+    });
   }, 1000);
 
   const IsRegistered = () => {
@@ -209,7 +211,6 @@ export default function Attendance() {
       method: 'POST',
     });
     getEmployeeData();
-    input.current.value = '';
   };
 
   const enterKey = e => {

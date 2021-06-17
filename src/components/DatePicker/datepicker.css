@@ -911,3 +911,20 @@
 .react-datepicker__portal .react-datepicker-time__header {
   font-size: 1.44rem;
 }
+
+@media screen and (max-width: 600px) {
+  .react-datepicker__input-container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 30px;
+    margin: auto;
+  }
+
+  .react-datepicker__input-container input {
+    width: 80%;
+    text-align: center;
+    line-height: 1.4;
+    font-size: 0.7rem;
+  }
+}

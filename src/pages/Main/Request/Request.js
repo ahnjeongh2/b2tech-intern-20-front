@@ -29,7 +29,7 @@ const Title = styled.h1`
 
   @media ${({ theme }) => theme.mobile} {
     padding: 50px 0 20px;
-    font-size: 24px;
+    font-size: 1.4rem;
   }
 `;
 
@@ -55,6 +55,10 @@ const UserInfo = styled(GlassBg.withComponent('p'))`
   width: 90%;
   height: 40px;
   margin-bottom: 40px;
+
+  @media ${({ theme }) => theme.mobile} {
+    font-size: 0.8rem;
+  }
 `;
 
 export default function Request() {
