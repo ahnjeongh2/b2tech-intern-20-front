@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
@@ -6,17 +6,11 @@ import styled from 'styled-components';
 import './react-tabs.css';
 import { flexSet } from '../../../styles/Variable';
 
-const MAPPING_OBJ = {
-  1: <Vacation />,
-  2: <WorkingSystem />,
-};
-
 const CATEGORY_ARR = ['휴가', '근무제'];
 
 const Main = styled.section`
   height: 100vh;
-  background: no-repeat center / cover
-    url('https://res.cloudinary.com/practicaldev/image/fetch/s--RNNNA7AE--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://user-images.githubusercontent.com/69592270/101304060-72ff5b00-380d-11eb-8c58-a3172d791c9c.png');
+  background: no-repeat center / cover url('/images/request.jpeg');
   font-size: 1.1rem;
   overflow: hidden;
 `;
@@ -62,23 +56,51 @@ const UserInfo = styled(GlassBg.withComponent('p'))`
 `;
 
 export default function Request() {
-  const currentId = '1';
+  const [userInfo, setUserInfo] = useState('');
+  const [currentId, setCurrentId] = useState('1');
+
+  const clickHandler = id => {
+    setCurrentId(id);
+  };
+
+  const initializeUserInfo = () => {
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    // fetch('', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     AUTHORIZATION: accessToken,
+    //   },
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     setUserInfo(data);
+    //   });
+  };
+
+  useEffect(() => {
+    initializeUserInfo();
+  }, []);
+
+  const MAPPING_OBJ = {
+    1: <Vacation userInfo={userInfo} />,
+    2: <WorkingSystem />,
+  };
 
   return (
     <Main>
       <Title>휴가 • 근무제 신청</Title>
       <GlassBg>
         <UserInfo>
-          <span>사번: 12345678</span>
-          <span>김유림 님</span>
+          <span>{`사번: ${userInfo && userInfo.employeeNumber}`}</span>
+          <span>{`${userInfo && userInfo.name} 님`}</span>
         </UserInfo>
         <Tabs>
           <TabList>
-            {CATEGORY_ARR.map(name => {
-              return <Tab>{name}</Tab>;
+            {CATEGORY_ARR.map((name, idx) => {
+              return <Tab onClick={() => clickHandler(idx + 1)}>{name}</Tab>;
             })}
           </TabList>
-          <TabPanel>{MAPPING_OBJ[currentId]}</TabPanel>
+          {MAPPING_OBJ[currentId]}
         </Tabs>
       </GlassBg>
     </Main>
