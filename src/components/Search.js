@@ -2,31 +2,6 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import useSearchButton from '../components/useSearchButton';
 
-function Search() {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useSearchButton(dropdownRef, false);
-  const handleDropDownSearchBox = () => setIsActive(!isActive);
-  // const initSearchInput = e => {
-  //   e.target.value = '';
-  // };
-
-  return (
-    <div>
-      <MenuContainer>
-        <MenuTriggerButton onClick={handleDropDownSearchBox}>
-          <FaSearchIcon className="fas fa-search" />
-          <nav
-            ref={dropdownRef}
-            className={`menu ${isActive ? 'active' : 'inactive'}`}
-          >
-            <input type="text" name="search" id="search" placeholder="검색" />
-          </nav>
-        </MenuTriggerButton>
-      </MenuContainer>
-    </div>
-  );
-}
-
 const MenuContainer = styled.div`
   position: relative;
   display: flex;
@@ -79,5 +54,30 @@ const FaSearchIcon = styled.i`
   vertical-align: middle;
   font-size: 14px;
 `;
+
+function Search() {
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useSearchButton(dropdownRef, false);
+  const handleDropDownSearchBox = () => setIsActive(!isActive);
+  // const initSearchInput = e => {
+  //   e.target.value = '';
+  // };
+
+  return (
+    <div>
+      <MenuContainer>
+        <MenuTriggerButton onClick={handleDropDownSearchBox}>
+          <FaSearchIcon className="fas fa-search" />
+          <nav
+            ref={dropdownRef}
+            className={`menu ${isActive ? 'active' : 'inactive'}`}
+          >
+            <input type="text" name="search" id="search" placeholder="검색" />
+          </nav>
+        </MenuTriggerButton>
+      </MenuContainer>
+    </div>
+  );
+}
 
 export default Search;

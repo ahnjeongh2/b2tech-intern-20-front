@@ -4,6 +4,36 @@ import styled from 'styled-components';
 import LeftAsideMyPage from './LeftAsideMyPage';
 import RequestButton from '../../components/RequestButton';
 
+const Main = styled.div`
+  display: flex;
+`;
+
+const Article = styled.article`
+  width: 100%;
+`;
+
+const UpperSection = styled.section`
+  border-bottom: 1px solid ${({ theme }) => theme.borderLine};
+`;
+
+const UserInfo = styled.p`
+  height: 50px;
+  padding-top: 20px;
+  font-size: 12px;
+`;
+
+const EmployeeNumber = styled(UserInfo.withComponent('span'))`
+  margin-left: 20px;
+`;
+
+const EmployeeName = styled(UserInfo.withComponent('span'))`
+  margin-left: 25px;
+`;
+
+const ButtonSection = styled.section`
+  padding: 10px 0px 10px 15px;
+`;
+
 function MyPage() {
   // useEffect(() => {
   //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
@@ -63,35 +93,5 @@ function MyPage() {
     </Main>
   );
 }
-
-const Main = styled.div`
-  display: flex;
-`;
-
-const Article = styled.article`
-  width: 100%;
-`;
-
-const UpperSection = styled.section`
-  border-bottom: 1px solid ${({ theme }) => theme.borderLine};
-`;
-
-const UserInfo = styled.p`
-  height: 50px;
-  padding-top: 20px;
-  font-size: 12px;
-`;
-
-const EmployeeNumber = styled(UserInfo.withComponent('span'))`
-  margin-left: 20px;
-`;
-
-const EmployeeName = styled(UserInfo.withComponent('span'))`
-  margin-left: 25px;
-`;
-
-const ButtonSection = styled.section`
-  padding: 10px 0px 10px 15px;
-`;
 
 export default MyPage;

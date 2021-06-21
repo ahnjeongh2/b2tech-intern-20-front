@@ -1,30 +1,21 @@
 import { useMemo, useState, useEffect } from 'react';
-import TableForm from '../components/TableForm';
+import TableForm from '../../../components/TableForm';
 
 function TableContentsCommute() {
-  const [employeeData, setEmployeeData] = useState('');
-  let scheduleData = [];
+  const [employeeData, setEmployeeData] = useState([]);
 
   useEffect(() => {
     fetchData();
-    console.log(employeeData);
   }, []);
 
-  useEffect(() => {
-    console.log(employeeData);
-  }, [employeeData]);
+  useEffect(() => {}, [employeeData]);
 
   async function fetchData() {
     let response = await fetch(`http://13.125.76.153:8000/schedules`);
     if (response.ok) {
       let data = await response.json();
 
-      console.log(data);
-      console.log(employeeData);
-
-      // scheduleData = data.schedules;
       setEmployeeData(data.schedules);
-      console.log(scheduleData);
     } else {
       alert(`HTTP-Error: ${response.status}`);
     }
@@ -36,6 +27,10 @@ function TableContentsCommute() {
         Header: '기본 정보',
         columns: [
           {
+            Header: '일자',
+            accessor: 'date',
+          },
+          {
             Header: '사번',
             accessor: 'employee_number',
           },
@@ -45,11 +40,11 @@ function TableContentsCommute() {
           },
           {
             Header: '부서명',
-            accessor: 'role[1].부서',
+            accessor: 'roles.부서',
           },
           {
             Header: '직급',
-            accessor: 'position',
+            accessor: 'roles.직책',
           },
         ],
       },
@@ -90,8 +85,7 @@ function TableContentsCommute() {
     []
   );
 
-  const commuteData = useMemo(() => employeeData, []);
-  console.log(employeeData);
+  const commuteData = useMemo(() => employeeData, [employeeData]);
 
   return <TableForm columns={columns} data={commuteData} />;
 }

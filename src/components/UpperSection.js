@@ -1,17 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function UpperSection() {
-  return (
-    <UpperSectionWrapper>
-      <UserInfo>
-        <EmployeeNumber>사번: 12345678</EmployeeNumber>
-        <EmployeeName>홍길동 님</EmployeeName>
-      </UserInfo>
-    </UpperSectionWrapper>
-  );
-}
-
 const UpperSectionWrapper = styled.section`
   border-bottom: 1px solid ${({ theme }) => theme.borderLine};
 `;
@@ -29,5 +18,16 @@ const EmployeeNumber = styled(UserInfo.withComponent('span'))`
 const EmployeeName = styled(UserInfo.withComponent('span'))`
   margin-left: 25px;
 `;
+
+function UpperSection() {
+  return (
+    <UpperSectionWrapper>
+      <UserInfo>
+        <EmployeeNumber>사번: 12345678</EmployeeNumber>
+        <EmployeeName>홍길동 님</EmployeeName>
+      </UserInfo>
+    </UpperSectionWrapper>
+  );
+}
 
 export default UpperSection;
