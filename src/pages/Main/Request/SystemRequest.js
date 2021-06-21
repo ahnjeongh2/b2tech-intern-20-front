@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MonthRangePicker from '../../../components/MonthPicker/MonthRangePicker';
+// import MonthRangePicker from '../../../components/MonthPicker/MonthRangePicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 import RequestButton from '../../../components/RequestButton';
@@ -25,9 +25,7 @@ export default function SystemRequest() {
   return (
     <>
       <ButtonInfo>
-        <InfoPicker>
-          <MonthPicker />
-        </InfoPicker>
+        <InfoPicker>{/* <MonthPicker /> */}</InfoPicker>
         <RequestButton value="My page" />
         <RequestButton value="등록" />
       </ButtonInfo>
