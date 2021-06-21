@@ -147,7 +147,6 @@ const Buttons = styled.div`
 
 export default function Attendance() {
   const [employeeData, setEmployeeData] = useState('');
-  const [password, setPassword] = useState('');
   const [popup, setPopup] = useState(false);
   const history = useHistory();
   const noticeBtn = useRef();
@@ -162,28 +161,28 @@ export default function Attendance() {
   const goToPage = e => {
     e.stopPropagation();
     // alert('준비중입니다.');
-    const employeeNumber = input.current.value;
-    const resultNumber = prompt('사번을 입력해주세요.');
-    const resultPassword = prompt(
+    const employee_number = prompt('사번을 입력해주세요.');
+    const password = prompt(
       '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
     );
-    setPassword(resultPassword);
-    // fetch('', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     employee_number: employeeNumber,
-    //     registration_number: password,
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(result => {
-    //   result.access_token &&
-    //     localStorage.setItem('access_token', result.access_token);
-    // if (!result.message === 'SUCCESS') {
-    //     alert('사번 또는 비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
-    //   }
-    // });
-    // history.push(`/mypage`);
+    fetch('http://13.125.76.153:8000/users/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify({
+        employee_number: employee_number,
+        password: password,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        result.token && localStorage.setItem('access_token', result.token);
+        if (result.message) {
+          alert(result.message);
+        } else {
+          history.push(`/mypage`);
+        }
+      });
   };
 
   const fetchData = () => {};
@@ -251,16 +250,13 @@ export default function Attendance() {
           <Record>
             <NoticeText>출근:</NoticeText>
             <span>
-              {/* {Date.parse('2021-06-15T16:33:11')} */}
-              {employeeData.created_at &&
-                employeeData.created_at.replace('T', ' ')}
+              {employeeData && employeeData.date + employeeData.created_at}
             </span>
           </Record>
           <Record>
             <NoticeText>퇴근:</NoticeText>
             <span>
-              {employeeData.updated_at &&
-                employeeData.updated_at.replace('T', ' ')}
+              {employeeData && employeeData.date + employeeData.updated_at}
             </span>
           </Record>
           {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}

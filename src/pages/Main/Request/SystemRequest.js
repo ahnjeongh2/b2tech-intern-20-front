@@ -1,24 +1,8 @@
 import React, { useState } from 'react';
-import DatePickerComponent from '../../../components/DatePicker/Datepicker';
+import MonthRangePicker from '../../../components/MonthPicker/MonthRangePicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 import RequestButton from '../../../components/RequestButton';
-
-const GlassBg = styled.div`
-  width: 90%;
-  margin: 10px auto;
-  background: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 90%;
-    margin: 0 auto;
-  }
-`;
 
 const ButtonInfo = styled.div`
   text-align: center;
@@ -26,12 +10,6 @@ const ButtonInfo = styled.div`
 
   @media ${({ theme }) => theme.mobile} {
   }
-`;
-
-const Info = styled.div`
-  ${flexSet('flex-end', 'center')}
-  width: 94%;
-  margin: 10px;
 `;
 
 const InfoPicker = styled.div`
@@ -43,26 +21,13 @@ const InfoPicker = styled.div`
   }
 `;
 
-const FilterBar = styled.ul`
-  ${flexSet('space-around', 'center')}
-  width: 345px;
-  padding: 5px 0;
-
-  li {
-    input {
-      margin: 8px;
-    }
-  }
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 90%;
-  }
-`;
-
-export default function SystemRequest({ SYSTEM_ARR }) {
+export default function SystemRequest() {
   return (
     <>
       <ButtonInfo>
+        <InfoPicker>
+          <MonthPicker />
+        </InfoPicker>
         <RequestButton value="My page" />
         <RequestButton value="등록" />
       </ButtonInfo>
