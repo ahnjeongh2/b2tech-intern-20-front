@@ -76,8 +76,8 @@ function LeftAsideAdmin() {
           <MainMenuNav>
             <IconAndMenuListsWrapper>
               <GoToMenuLists
-                to="/mypage"
-                isselected={location.pathname === '/mypage'}
+                to="/admin/mypage"
+                isselected={location.pathname === '/admin/mypage'}
               >
                 <MenuIcons className="fas fa-home" />
                 <MenuLists>마이페이지</MenuLists>
