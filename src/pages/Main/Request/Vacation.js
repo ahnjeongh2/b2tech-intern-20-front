@@ -64,26 +64,6 @@ const FilterBar = styled.ul`
   }
 `;
 
-const VacationName = styled.li`
-  margin: 10px 4px;
-  padding: 4px 10px;
-  border-radius: 20px;
-
-  &:hover {
-    background: rgba(222, 239, 255, 0.6);
-  }
-`;
-
-const DropBar = styled.ul`
-  position: absolute;
-  top: 52px;
-  width: 150px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 1em 0.1px lightgray;
-  z-index: 1;
-`;
-
 const VacationInfo = styled(GlassBg.withComponent('p'))`
   width: 145px;
   height: 40px;
@@ -99,18 +79,6 @@ const VacationInfo = styled(GlassBg.withComponent('p'))`
   }
 `;
 
-const Input = styled(GlassBg.withComponent('input'))`
-  width: 345px;
-  height: 40px;
-  font-size: 0.8rem;
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 180px;
-    height: 30px;
-    font-size: 0.7rem;
-  }
-`;
-
 const Bottom = styled.div`
   height: 80px;
 `;
@@ -118,7 +86,6 @@ const Bottom = styled.div`
 const VACATION_ARR = ['연차', '반차', '공가', '경조'];
 
 export default function Vacation({ userInfo }) {
-  const [over, setOver] = useState(false);
   const [periodData, setPeriodData] = useState({});
   const [vacationType, setVacationType] = useState('');
   const history = useHistory();
@@ -171,16 +138,13 @@ export default function Vacation({ userInfo }) {
           <RequestButton value="등록" onClick={vacationRequest} />
         </ButtonInfo>
         <VacationInfo>
-          {/* 발생:&nbsp;<span>20.0</span> */}
           발생:&nbsp;<span>{userInfo.leave}</span>
         </VacationInfo>
         <VacationInfo>
-          {/* 사용:&nbsp;<span>9.5</span> */}
           사용:&nbsp;
           <span>{Number(userInfo.leave) - Number(userInfo.rest_vacation)}</span>
         </VacationInfo>
         <VacationInfo>
-          {/* 잔여:&nbsp;<span>10.5</span> */}
           잔여:&nbsp;<span>{userInfo.rest_vacation}</span>
         </VacationInfo>
       </Info>
@@ -189,35 +153,6 @@ export default function Vacation({ userInfo }) {
           <VacationInfo>휴가 구분</VacationInfo>
           <InfoPicker>
             <FilterBar>
-              {/* <li onMouseLeave={() => setOver(false)}>
-                  <input
-                    type="radio"
-                    name="vacation"
-                    value="연차"
-                    onClick={() => setOver(true)}
-                  />
-                  연차
-                  {over && (
-                    <DropBar onMouseLeave={() => setOver(false)}>
-                      <VacationName>
-                        <input
-                          type="radio"
-                          name="vacation"
-                          onChange={() => setVacationValue('연차')}
-                        />
-                        연차(8H)
-                      </VacationName>
-                      <VacationName>
-                        <input
-                          type="radio"
-                          name="vacation"
-                          onChange={() => setVacationValue('반차')}
-                        />
-                        반차(4H)
-                      </VacationName>
-                    </DropBar>
-                  )}
-                </li> */}
               {VACATION_ARR.map((el, idx) => {
                 return (
                   <li key={idx}>

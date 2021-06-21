@@ -45,7 +45,7 @@ const SystemInfoWrap = styled.ul`
 const SystemInfo = styled(GlassBg.withComponent('li'))`
   width: 140px;
   height: 140px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 
   input {
     margin: 5px 5px 5px 10px;
