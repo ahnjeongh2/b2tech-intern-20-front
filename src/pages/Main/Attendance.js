@@ -165,7 +165,7 @@ export default function Attendance() {
     const password = prompt(
       '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
     );
-    fetch('http://13.125.76.153:8000/users/login', {
+    fetch('http://192.168.0.53:8000/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       body: JSON.stringify({
@@ -179,7 +179,7 @@ export default function Attendance() {
         result.token && localStorage.setItem('access_token', result.token);
         if (result.message) {
           alert(result.message);
-        } else {
+        } else if (result.token) {
           history.push(`/mypage`);
         }
       });
@@ -250,13 +250,15 @@ export default function Attendance() {
           <Record>
             <NoticeText>출근:</NoticeText>
             <span>
-              {employeeData && employeeData.date + employeeData.created_at}
+              {employeeData &&
+                employeeData.created_at.replace('T', ' ').substr(0, 19)}
             </span>
           </Record>
           <Record>
             <NoticeText>퇴근:</NoticeText>
             <span>
-              {employeeData && employeeData.date + employeeData.updated_at}
+              {employeeData &&
+                employeeData.updated_at.replace('T', ' ').substr(0, 19)}
             </span>
           </Record>
           {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
