@@ -2,33 +2,6 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-function LeftAsideMyPage() {
-  const location = useLocation();
-
-  return (
-    <>
-      <LeftAsideMenu>
-        <Link to="/">
-          <CompanyLogo alt="B2Tech Logo" src="/images/logo.png" />
-        </Link>
-        <NavContainer>
-          <MainMenuNav>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/mypage"
-                isselected={location.pathname === '/mypage'}
-              >
-                <MenuIcons className="fas fa-home" />
-                <MenuLists>마이페이지</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-          </MainMenuNav>
-        </NavContainer>
-      </LeftAsideMenu>
-    </>
-  );
-}
-
 const LeftAsideMenu = styled.aside`
   position: relative;
   width: 160px;
@@ -81,5 +54,32 @@ const MenuIcons = styled.i`
 const MenuLists = styled.li`
   display: inline;
 `;
+
+function LeftAsideMyPage() {
+  const location = useLocation();
+
+  return (
+    <>
+      <LeftAsideMenu>
+        <Link to="/">
+          <CompanyLogo alt="B2Tech Logo" src="/images/logo.png" />
+        </Link>
+        <NavContainer>
+          <MainMenuNav>
+            <IconAndMenuListsWrapper>
+              <GoToMenuLists
+                to="/mypage"
+                isselected={location.pathname === '/mypage'}
+              >
+                <MenuIcons className="fas fa-home" />
+                <MenuLists>마이페이지</MenuLists>
+              </GoToMenuLists>
+            </IconAndMenuListsWrapper>
+          </MainMenuNav>
+        </NavContainer>
+      </LeftAsideMenu>
+    </>
+  );
+}
 
 export default LeftAsideMyPage;
