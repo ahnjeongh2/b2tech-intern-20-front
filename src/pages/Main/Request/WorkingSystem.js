@@ -3,6 +3,90 @@ import styled from 'styled-components';
 import SystemRequest from './SystemRequest';
 import { flexSet } from '../../../styles/Variable';
 
+const GlassBg = styled.div`
+  margin: 10px auto;
+  padding: 20px 0;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 90%;
+    margin: 0 auto;
+  }
+`;
+
+const SubTitle = styled.h2`
+  padding: 15px 40px;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: left;
+
+  @media ${({ theme }) => theme.mobile} {
+    padding: 5px 10px 5px 20px;
+    font-size: 1rem;
+  }
+`;
+
+const SystemInfoWrap = styled.ul`
+  ${flexSet('space-around', 'flex-start')}
+  width: 90%;
+  margin: auto;
+
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: column;
+    font-size: 0.6rem;
+  }
+`;
+
+const SystemInfo = styled(GlassBg.withComponent('li'))`
+  width: 140px;
+  height: 140px;
+  margin-bottom: 40px;
+
+  input {
+    margin: 5px 5px 5px 10px;
+  }
+
+  strong {
+    padding: 5px;
+    font-size: 1.1rem;
+
+    @media ${({ theme }) => theme.mobile} {
+      font-size: 0.9rem;
+    }
+  }
+
+  p {
+    padding: 12px;
+    font-size: 0.9rem;
+
+    @media ${({ theme }) => theme.mobile} {
+      display: none;
+    }
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 97%;
+    margin: 5px;
+    padding: 0;
+    height: 30px;
+  }
+`;
+
+const SelectedSystem = styled(GlassBg.withComponent('div'))`
+  ${flexSet('center', 'center')}
+  width: 89.5%;
+
+  @media ${({ theme }) => theme.mobile} {
+    margin: 20px auto;
+    font-size: 0.9rem;
+  }
+`;
+
 const SYSTEM_ARR = [
   {
     id: 1,
@@ -28,7 +112,6 @@ const SYSTEM_ARR = [
 
 export default function WorkingSystem() {
   const [currentId, setCurrentId] = useState('');
-
   const clickHandler = id => {
     setCurrentId(id);
   };
@@ -43,7 +126,7 @@ export default function WorkingSystem() {
   return (
     <>
       <section>
-        <SubTitle> > 유연 근무제</SubTitle>
+        <SubTitle>{'> 유연 근무제'}</SubTitle>
         <SystemInfoWrap>
           {SYSTEM_ARR.map((el, idx) => {
             return (
@@ -62,74 +145,3 @@ export default function WorkingSystem() {
     </>
   );
 }
-
-const GlassBg = styled.div`
-  margin: 10px auto;
-  padding: 20px 0;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 90%;
-    margin: 0 auto;
-  }
-`;
-
-const SubTitle = styled.h2`
-  padding: 15px 40px;
-  color: #fff;
-  font-size: 1.2rem;
-  text-align: left;
-
-  @media ${({ theme }) => theme.mobile} {
-    padding: 50px 0 20px;
-    font-size: 1rem;
-  }
-`;
-
-const SystemInfoWrap = styled.ul`
-  ${flexSet('space-around', 'flex-start')}
-  width: 90%;
-  margin: auto;
-
-  @media ${({ theme }) => theme.mobile} {
-    ${flexSet('space-around', 'flex-start')}
-    flex-direction: column;
-    font-size: 0.6rem;
-  }
-`;
-
-const SystemInfo = styled(GlassBg.withComponent('li'))`
-  width: 140px;
-  height: 140px;
-  margin-bottom: 40px;
-
-  input {
-    margin: 5px 5px 5px 10px;
-  }
-
-  strong {
-    padding: 5px;
-    font-size: 1.1rem;
-  }
-
-  p {
-    padding: 12px;
-    font-size: 0.9rem;
-  }
-
-  @media ${({ theme }) => theme.mobile} {
-    width: 100%;
-    height: 25px;
-    font-size: 0.8rem;
-  }
-`;
-
-const SelectedSystem = styled(GlassBg.withComponent('div'))`
-  ${flexSet('center', 'center')}
-  width: 89.5%;
-`;
