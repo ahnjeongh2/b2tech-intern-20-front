@@ -47,8 +47,8 @@ const SystemInfo = styled(GlassBg.withComponent('li'))`
   height: 140px;
   margin-bottom: 10px;
 
-  input {
-    margin: 5px 5px 5px 10px;
+  span {
+    margin: 5px 0 5px 12px;
   }
 
   strong {
@@ -57,6 +57,11 @@ const SystemInfo = styled(GlassBg.withComponent('li'))`
 
     @media ${({ theme }) => theme.mobile} {
       font-size: 0.9rem;
+      line-height: 2.1;
+
+      span {
+        margin: 0 0 0 12px;
+      }
     }
   }
 
@@ -112,8 +117,19 @@ const SYSTEM_ARR = [
 
 export default function WorkingSystem() {
   const [currentId, setCurrentId] = useState('');
-  const clickHandler = id => {
+
+  const clickHandler = (e, id) => {
+    e.stopPropagation();
     setCurrentId(id);
+    // const list = e.target.parentNode.parentNode.childNodes;
+    // list.forEach(el => {
+    //   if (ErrorEvent) {
+    //     console.log(ErrorEvent);
+    //     // return;
+    //   }
+    //   el.style.border = '';
+    // });
+    // e.target.parentNode.style.border = '3px solid blue';
   };
 
   const SYSTEM_OBJ = {
@@ -130,13 +146,11 @@ export default function WorkingSystem() {
         <SystemInfoWrap>
           {SYSTEM_ARR.map((el, idx) => {
             return (
-              <>
-                <SystemInfo key={el.id} onClick={() => clickHandler(idx + 1)}>
-                  <input type="radio" name="system" vlaue={el.name} />
-                  <strong>{el.name}</strong>
-                  <p>{el.desc}</p>
-                </SystemInfo>
-              </>
+              <SystemInfo key={el.id} onClick={e => clickHandler(e, idx + 1)}>
+                <span>{`>`}</span>
+                <strong>{el.name}</strong>
+                <p>{el.desc}</p>
+              </SystemInfo>
             );
           })}
         </SystemInfoWrap>
