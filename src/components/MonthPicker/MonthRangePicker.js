@@ -103,7 +103,7 @@ export default function MonthRangePicker({ getWorkPeriod }) {
     }
   };
 
-  const mouseLeaveHandler = idx => {
+  const mouseLeaveHandler = () => {
     const monthList = monthNode.current.childNodes;
     for (let i = 0; i < monthList.length; i++) {
       monthList[i].style = '';
@@ -126,6 +126,11 @@ export default function MonthRangePicker({ getWorkPeriod }) {
     if (startMonth < idx < endMonth) {
       monthList[endMonth].className = '';
       SetEndMonth(idx);
+      monthList[idx].className = 'activeMonth';
+    }
+    if (idx < startMonth) {
+      monthList[startMonth].className = '';
+      SetStartMonth(idx);
       monthList[idx].className = 'activeMonth';
     }
     if (idx === startMonth || idx === endMonth) {
@@ -155,7 +160,7 @@ export default function MonthRangePicker({ getWorkPeriod }) {
             <span
               key={idx}
               onMouseOver={() => mouseOverHandler(idx)}
-              onMouseLeave={() => mouseLeaveHandler(idx)}
+              onMouseLeave={mouseLeaveHandler}
               onClick={() => getMonth(idx)}
             >{`${month}월`}</span>
           );

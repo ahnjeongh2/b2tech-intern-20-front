@@ -160,12 +160,11 @@ export default function Attendance() {
 
   const goToPage = e => {
     e.stopPropagation();
-    // alert('준비중입니다.');
     const employee_number = prompt('사번을 입력해주세요.');
     const password = prompt(
       '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
     );
-    fetch('http://192.168.0.53:8000/users/login', {
+    fetch('http://10.58.7.4:8000/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       body: JSON.stringify({
@@ -173,11 +172,14 @@ export default function Attendance() {
         password: password,
       }),
     })
-      .then(response => response.json())
+      .then(response => {
+        response.json();
+        console.log(response.headers);
+      })
       .then(result => {
         console.log(result);
         result.token && localStorage.setItem('access_token', result.token);
-        if (result.message) {
+        if (!result.message === 'SUCCESS') {
           alert(result.message);
         } else if (result.token) {
           history.push(`/mypage`);
@@ -250,15 +252,15 @@ export default function Attendance() {
           <Record>
             <NoticeText>출근:</NoticeText>
             <span>
-              {employeeData &&
-                employeeData.created_at.replace('T', ' ').substr(0, 19)}
+              {employeeData.created_at &&
+                employeeData.created_at.replace('T', '  ').substr(0, 19)}
             </span>
           </Record>
           <Record>
             <NoticeText>퇴근:</NoticeText>
             <span>
-              {employeeData &&
-                employeeData.updated_at.replace('T', ' ').substr(0, 19)}
+              {employeeData.updated_at &&
+                employeeData.updated_at.replace('T', '  ').substr(0, 19)}
             </span>
           </Record>
           {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
