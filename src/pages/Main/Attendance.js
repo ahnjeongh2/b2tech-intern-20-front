@@ -252,15 +252,15 @@ export default function Attendance() {
           <Record>
             <NoticeText>출근:</NoticeText>
             <span>
-              {employeeData.created_at &&
-                employeeData.created_at.replace('T', '  ').substr(0, 19)}
+              {employeeData.work_in &&
+                employeeData.work_in.replace('T', '  ').substr(0, 19)}
             </span>
           </Record>
           <Record>
             <NoticeText>퇴근:</NoticeText>
             <span>
-              {employeeData.updated_at &&
-                employeeData.updated_at.replace('T', '  ').substr(0, 19)}
+              {employeeData.work_out &&
+                employeeData.work_out.replace('T', '  ').substr(0, 19)}
             </span>
           </Record>
           {popup && <Notice>관리자에게 문의주세요. aaa@b2tech.com</Notice>}
