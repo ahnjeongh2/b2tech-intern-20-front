@@ -172,21 +172,17 @@ export default function Attendance() {
         password: password,
       }),
     })
-      .then(response => {
-        response.json();
-        console.log(response.headers);
-      })
+      .then(response => response.json())
       .then(result => {
-        result.token && localStorage.setItem('access_token', result.token);
+        result.access_token &&
+          localStorage.setItem('access_token', result.token);
         if (!result.message === 'SUCCESS') {
-          alert(result.message);
-        } else if (result.token) {
+          alert('사번 또는 비밀번호가 일치하지 않습니다.');
+        } else if (result.access_token) {
           history.push(`/mypage`);
         }
       });
   };
-
-  const fetchData = () => {};
 
   const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;

@@ -63,8 +63,8 @@ export default function Request() {
   };
 
   const initializeUserInfo = () => {
-    const accessToken = localStorage.getItem('access_token');
-    // fetch('', {
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    // http://192.168.0.53:8000', {
     //   headers: JSON.stringify({
     //     access_token: accessToken,
     //   },
