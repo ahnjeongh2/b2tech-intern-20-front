@@ -63,10 +63,10 @@ export default function Request() {
   };
 
   const initializeUserInfo = () => {
-    const accessToken = localStorage.getItem('AUTHORIZATION');
+    const accessToken = localStorage.getItem('access_token');
     // fetch('', {
     //   headers: JSON.stringify({
-    //     AUTHORIZATION: accessToken,
+    //     access_token: accessToken,
     //   },
     // })
     //   .then(response => response.json())

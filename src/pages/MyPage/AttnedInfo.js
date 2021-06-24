@@ -9,7 +9,6 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 const Section = styled.section`
   ${flexSet('flex-start', 'flex-start')}
   flex-direction: row;
-  flex-wrap: wrap;
 
   @media ${({ theme }) => theme.mobile} {
     flex-direction: column;

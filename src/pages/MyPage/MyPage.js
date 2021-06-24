@@ -117,10 +117,10 @@ export default function MyPage() {
   const menuIcon = useRef();
 
   const initializeUserInfo = () => {
-    const accessToken = localStorage.getItem('AUTHORIZATION');
-    // fetch('', {
+    const accessToken = localStorage.getItem('access_token');
+    // fetch('http://192.168.0.53:8000', {
     //   headers: JSON.stringify({
-    //     AUTHORIZATION: accessToken,
+    //     access_token: accessToken,
     //   },
     // })
     //   .then(response => response.json())
@@ -148,7 +148,7 @@ export default function MyPage() {
   };
 
   useEffect(() => {
-    // const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
+    // const loggedInfo = localStorage.getItem(‘access_token’);
     // fetch(
     //   `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&name=${name}`
     // )
@@ -164,11 +164,11 @@ export default function MyPage() {
   }, []);
 
   // initializeUserInfo = () => {
-  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
-  //   fetch(GET_AUTHORIZATION_API, {
+  //   const loggedInfo = localStorage.getItem(‘access_token’);
+  //   fetch(GET_access_token_API, {
   //     method: ‘GET’,
   //     headers: {
-  //       AUTHORIZATION: loggedInfo,
+  //       access_token: loggedInfo,
   //     },
   //   })
   //     .then(response => response.json())
