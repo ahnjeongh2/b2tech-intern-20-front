@@ -189,6 +189,7 @@ export default function Attendance() {
 
   const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;
+<<<<<<< HEAD
     fetch(`${GET_API}/schedules/today?employee_number=${employeeNumber}`).then(
       response => {
         if (response.status === 200) {
@@ -199,6 +200,18 @@ export default function Attendance() {
         if (response.status === 404) {
           alert('사번을 다시 확인해주세요');
         }
+=======
+    fetch(
+      `http://3.35.47.207:8000/schedules/today?employee_number=${employeeNumber}`
+    ).then(response => {
+      if (response.status === 200) {
+        return response.json().then(data => {
+          setEmployeeData(data);
+        });
+      }
+      if (response.status === 404) {
+        alert('사번을 다시 확인해주세요');
+>>>>>>> 4fef677... Add: 관리자 권한 여부에 따라 mypage aside nav bar 메뉴 숨김 처리
       }
     );
   }, 800);
