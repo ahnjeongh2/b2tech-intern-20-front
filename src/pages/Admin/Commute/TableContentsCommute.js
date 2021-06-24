@@ -11,7 +11,7 @@ function TableContentsCommute() {
   useEffect(() => {}, [employeeData]);
 
   async function fetchData() {
-    let response = await fetch(`http://13.125.76.153:8000/schedules`);
+    let response = await fetch(`http://192.168.0.53:8000/schedules`);
     if (response.ok) {
       let data = await response.json();
 
