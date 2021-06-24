@@ -23,9 +23,6 @@ const CloseIcon = styled.i`
 
   @media ${({ theme }) => theme.mobile} {
     display: block;
-    /* position: absolute;
-    top: 2px;
-    left: 2px; */
     color: #fff;
     font-size: 1.1rem;
   }
@@ -107,7 +104,6 @@ function LeftAsideMyPage({ leftBar, handleCloseIcon }) {
               >
                 <MenuIcons className="fas fa-home" />
                 <MenuLists>마이페이지</MenuLists>
-                {?? <MenuLists>페이지</MenuLists>:}
               </GoToMenuLists>
             </IconAndMenuListsWrapper>
           </MainMenuNav>

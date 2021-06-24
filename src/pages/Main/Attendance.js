@@ -166,7 +166,10 @@ export default function Attendance() {
     );
     fetch('http://192.168.0.53:8000/users/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        // 'X-Requested-With': 'XMLHttpRequest',
+      },
       body: JSON.stringify({
         employee_number: employee_number,
         password: password,
@@ -175,12 +178,11 @@ export default function Attendance() {
       .then(response => response.json())
       .then(result => {
         result.access_token &&
-          localStorage.setItem('access_token', result.token);
+          localStorage.setItem('access_token', result.access_token);
         if (!result.message === 'SUCCESS') {
           alert('사번 또는 비밀번호가 일치하지 않습니다.');
-        } else if (result.access_token) {
-          history.push(`/mypage`);
         }
+        history.push(`/mypage`);
       });
   };
 

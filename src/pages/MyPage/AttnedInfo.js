@@ -3,6 +3,7 @@ import Graph from './Graph';
 import CurrentTime from './CurrentTime';
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Variable';
+import DatePicker, { registerLocale } from 'react-datepicker';
 
 const Section = styled.section`
   ${flexSet('flex-start', 'flex-start')}
@@ -140,7 +141,43 @@ const BarBg = styled(BarGraph.withComponent('div'))`
 `;
 
 export default function AttnedInfo({ userInfo }) {
-  const [today, setToday] = useState(new Date());
+  const [firstDay, setFirstDay] = useState('');
+  const [lastDay, setLastDay] = useState('');
+  const today = new Date();
+
+  const getDay = () => {
+    const fday = `${today.getFullYear()} - ${today.getMonth() + 1} - ${
+      today.getDate() - today.getDay() + 1
+    }`;
+    setFirstDay(fday);
+    const lday = `${today.getFullYear()} - ${today.getMonth() + 1} - ${
+      today.getDate() + (7 - today.getDay())
+    }`;
+    setLastDay(lday);
+    if (
+      today.getDate() === 28 ||
+      today.getDate() === 29 ||
+      today.getDate() === 30
+    ) {
+      setLastDay(
+        `${today.getFullYear()} - ${today.getMonth() + 2} - ${
+          today.getDate() + (7 - today.getDay()) - 30
+        }`
+      );
+    }
+    if (
+      today.getDate() === 1 ||
+      today.getDate() === 2 ||
+      today.getDate() === 3 ||
+      today.getDate() === 4
+    ) {
+      setFirstDay(`${today.getFullYear()} - ${today.getMonth()} - 28`);
+    }
+  };
+
+  useEffect(() => {
+    getDay();
+  }, []);
 
   return (
     <Section>
@@ -153,9 +190,17 @@ export default function AttnedInfo({ userInfo }) {
           <Table>
             <tr>
               <td>출근</td>
-              <td>{userInfo.work_in ? userInfo.work_in : '출근 전'}</td>
+              <td>
+                {/* {userInfo.work_in
+                  ? userInfo.work_in.replace('T', '  ').substr(0, 19)
+                  : '출근 전'} */}
+              </td>
               <td>퇴근</td>
-              <td>{userInfo.work_out ? userInfo.work_out : '퇴근 전'}</td>
+              <td>
+                {/* {userInfo.work_out
+                  ? userInfo.work_out.replace('T', '  ').substr(0, 19)
+                  : '퇴근 전'} */}
+              </td>
             </tr>
           </Table>
         </div>
@@ -166,23 +211,25 @@ export default function AttnedInfo({ userInfo }) {
           <TimeTable>
             <div>{`${today.getFullYear()} - ${today.getMonth() + 1}`}</div>
             <div>
-              <span>{`${today.getFullYear()} - ${today.getMonth() + 1} - ${
-                today.getDate() - today.getDay() + 1
-              }`}</span>{' '}
-              ~{' '}
-              <span>{`${today.getFullYear()} - ${today.getMonth() + 1} - ${
-                today.getDate() + (7 - today.getDay())
-              }`}</span>
+              <span>{firstDay}</span> &nbsp;~&nbsp; <span>{lastDay}</span>
             </div>
           </TimeTable>
           <Workinghours>
             <p>
               • 소정 근로시간: 주 (
-              <span>{userInfo && userInfo.working_hours}</span> 시간
-              <span>{userInfo && userInfo.working_hours}</span> 분 ) / 52시간
+              <span>
+                {/* {userInfo.total_work_in_week &&
+                  userInfo.total_work_in_week.substr(0, 2)} */}
+              </span>{' '}
+              시간
+              <span>
+                {/* {userInfo.total_work_in_week &&
+                  userInfo.total_work_in_week.substr(3, 5)} */}
+              </span>{' '}
+              분 ) / 52시간
             </p>
             <div>
-              <BarGraph></BarGraph>
+              {/* <BarGraph value={userInfo.work_time_list}></BarGraph> */}
               <BarBg></BarBg>
             </div>
           </Workinghours>
