@@ -36,7 +36,7 @@ const ButtonSection = styled.section`
 
 function AdminMyPage() {
   // useEffect(() => {
-  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
+  //   const loggedInfo = localStorage.getItem(‘access_token’);
   //   fetch(
   //     `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&name=${name}`
   //   )
@@ -53,11 +53,11 @@ function AdminMyPage() {
   // }, []);
 
   // initializeUserInfo = () => {
-  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
-  //   fetch(GET_AUTHORIZATION_API, {
+  //   const loggedInfo = localStorage.getItem(‘access_token’);
+  //   fetch(GET_access_token_API, {
   //     method: ‘GET’,
   //     headers: {
-  //       AUTHORIZATION: loggedInfo,
+  //       access_token: loggedInfo,
   //     },
   //   })
   //     .then(response => response.json())

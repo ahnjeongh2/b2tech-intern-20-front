@@ -174,8 +174,8 @@ export default function Attendance() {
     })
       .then(response => response.json())
       .then(result => {
-        console.log(result);
-        result && localStorage.setItem('access_token', result.access_token);
+        result.access_token &&
+          localStorage.setItem('access_token', result.token);
         if (!result.message === 'SUCCESS') {
           alert('사번 또는 비밀번호가 일치하지 않습니다.');
         } else if (result.access_token) {

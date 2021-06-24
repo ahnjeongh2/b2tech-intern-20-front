@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { flexSet } from '../../styles/Variable';
 
 const Current = styled.div`
-  ${flexSet('flex-start', 'center')}
+  ${flexSet('center', 'center')}
   width: 300px;
   margin: 20px 50px 40px;
   border: 1px solid ${({ theme }) => theme.placeholderGrey};
