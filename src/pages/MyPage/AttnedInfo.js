@@ -140,7 +140,7 @@ const BarBg = styled(BarGraph.withComponent('div'))`
   }
 `;
 
-export default function AttnedInfo({ userInfo }) {
+export default function AttnedInfo({ userInfo, initializeUserInfo }) {
   const [firstDay, setFirstDay] = useState('');
   const [lastDay, setLastDay] = useState('');
   const today = new Date();
@@ -177,6 +177,7 @@ export default function AttnedInfo({ userInfo }) {
 
   useEffect(() => {
     getDay();
+    initializeUserInfo(firstDay, lastDay);
   }, []);
 
   return (
@@ -191,15 +192,15 @@ export default function AttnedInfo({ userInfo }) {
             <tr>
               <td>출근</td>
               <td>
-                {/* {userInfo.work_in
+                {userInfo.work_in
                   ? userInfo.work_in.replace('T', '  ').substr(0, 19)
-                  : '출근 전'} */}
+                  : '출근 전'}
               </td>
               <td>퇴근</td>
               <td>
-                {/* {userInfo.work_out
+                {userInfo.work_out
                   ? userInfo.work_out.replace('T', '  ').substr(0, 19)
-                  : '퇴근 전'} */}
+                  : '퇴근 전'}
               </td>
             </tr>
           </Table>
@@ -218,18 +219,18 @@ export default function AttnedInfo({ userInfo }) {
             <p>
               • 소정 근로시간: 주 (
               <span>
-                {/* {userInfo.total_work_in_week &&
-                  userInfo.total_work_in_week.substr(0, 2)} */}
+                {userInfo.total_work_in_week &&
+                  userInfo.total_work_in_week.substr(0, 2)}
               </span>{' '}
               시간
               <span>
-                {/* {userInfo.total_work_in_week &&
-                  userInfo.total_work_in_week.substr(3, 5)} */}
+                {userInfo.total_work_in_week &&
+                  userInfo.total_work_in_week.substr(3, 5)}
               </span>{' '}
               분 ) / 52시간
             </p>
             <div>
-              {/* <BarGraph value={userInfo.work_time_list}></BarGraph> */}
+              <BarGraph value={userInfo.work_time_list}></BarGraph>
               <BarBg></BarBg>
             </div>
           </Workinghours>

@@ -119,13 +119,14 @@ export default function MyPage() {
   const history = useHistory();
 
   const checkUserInfo = () => {
+  const initializeUserInfo = (firstDay, LastDay) => {
     const accessToken = localStorage.getItem('access_token');
     console.log(accessToken);
     fetch('http://192.168.0.53:8000/users/mypage', {
       headers: {
         AUTHORIZATION: accessToken,
-        // firstDay:,
-        // LastDay:
+        firstDay: firstDay,
+        LastDay: LastDay,
       },
     })
       .then(response => {
@@ -143,6 +144,9 @@ export default function MyPage() {
   useEffect(() => {
     checkUserInfo();
   }, []);
+  // useEffect(() => {
+  //   initializeUserInfo();
+  // }, []);
 
   const clickHandler = id => {
     setCurrentId(id);
@@ -159,7 +163,9 @@ export default function MyPage() {
   };
 
   const MAPPING_OBJ = {
-    1: <AttnedInfo userInfo={userInfo} />,
+    1: (
+      <AttnedInfo userInfo={userInfo} initializeUserInfo={initializeUserInfo} />
+    ),
     // 2: <WorkingSystemInfo />,
   };
 
