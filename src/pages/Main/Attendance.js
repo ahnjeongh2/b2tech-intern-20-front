@@ -203,7 +203,7 @@ export default function Attendance() {
         alert('사번을 다시 확인해주세요');
       }
     });
-  }, 1000);
+  }, 800);
 
   const IsRegistered = () => {
     const employeeNumber = input.current.value;

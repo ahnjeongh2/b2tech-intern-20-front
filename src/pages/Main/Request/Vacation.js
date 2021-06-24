@@ -105,6 +105,8 @@ export default function Vacation({ userInfo }) {
   // };
 
   const vacationRequest = () => {
+    if (!userInfo.remaining_annual_leave)
+      alert('연차 휴가를 모두 소진하였습니다.');
     if (vacationType) {
       handlePeriod();
       alert(
@@ -115,7 +117,7 @@ export default function Vacation({ userInfo }) {
     }
 
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    // fetch('', {
+    // fetch(':8000/users/userInfo.employee_number/drafts', {
     //   method: 'POST',
     //   body: JSON.stringify({
     //     AUTHORIZATION: accessToken;
@@ -142,10 +144,10 @@ export default function Vacation({ userInfo }) {
         </VacationInfo>
         <VacationInfo>
           사용:&nbsp;
-          <span>{Number(userInfo.leave) - Number(userInfo.rest_vacation)}</span>
+          <span>{userInfo.leave - userInfo.remaining_annual_leave}</span>
         </VacationInfo>
         <VacationInfo>
-          잔여:&nbsp;<span>{userInfo.rest_vacation}</span>
+          잔여:&nbsp;<span>{userInfo.remaining_annual_leave}</span>
         </VacationInfo>
       </Info>
       <GlassBg>

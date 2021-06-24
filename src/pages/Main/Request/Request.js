@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, Tabs, TabList } from 'react-tabs';
+import './react-tabs.css';
 import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
 import styled from 'styled-components';
-import './react-tabs.css';
 import { flexSet } from '../../../styles/Variable';
 
 const CATEGORY_ARR = ['휴가', '근무제'];
@@ -65,8 +65,7 @@ export default function Request() {
   const initializeUserInfo = () => {
     const accessToken = localStorage.getItem('AUTHORIZATION');
     // fetch('', {
-    //   method: 'POST',
-    //   body: JSON.stringify({
+    //   headers: JSON.stringify({
     //     AUTHORIZATION: accessToken,
     //   },
     // })
