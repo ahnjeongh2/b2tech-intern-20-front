@@ -107,6 +107,7 @@ function LeftAsideMyPage({ leftBar, handleCloseIcon }) {
               >
                 <MenuIcons className="fas fa-home" />
                 <MenuLists>마이페이지</MenuLists>
+                {?? <MenuLists>페이지</MenuLists>:}
               </GoToMenuLists>
             </IconAndMenuListsWrapper>
           </MainMenuNav>

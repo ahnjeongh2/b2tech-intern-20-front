@@ -164,7 +164,7 @@ export default function Attendance() {
     const password = prompt(
       '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
     );
-    fetch('http://10.58.7.4:8000/users/login', {
+    fetch('http://192.168.0.53:8000/users/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       body: JSON.stringify({
@@ -172,27 +172,22 @@ export default function Attendance() {
         password: password,
       }),
     })
-      .then(response => {
-        response.json();
-        console.log(response.headers);
-      })
+      .then(response => response.json())
       .then(result => {
         console.log(result);
-        result.token && localStorage.setItem('access_token', result.token);
+        result && localStorage.setItem('access_token', result.access_token);
         if (!result.message === 'SUCCESS') {
-          alert(result.message);
-        } else if (result.token) {
+          alert('사번 또는 비밀번호가 일치하지 않습니다.');
+        } else if (result.access_token) {
           history.push(`/mypage`);
         }
       });
   };
 
-  const fetchData = () => {};
-
   const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;
     fetch(
-      `http://13.125.76.153:8000/schedules/today?employee_number=${employeeNumber}`
+      `http://192.168.0.53:8000/schedules/today?employee_number=${employeeNumber}`
     ).then(response => {
       if (response.status === 200) {
         return response.json().then(data => {
@@ -207,7 +202,7 @@ export default function Attendance() {
 
   const IsRegistered = () => {
     const employeeNumber = input.current.value;
-    fetch(`http://13.125.76.153:8000/users/${employeeNumber}/schedules`, {
+    fetch(`http://192.168.0.53:8000/users/${employeeNumber}/schedules`, {
       method: 'POST',
     });
     getEmployeeData();
