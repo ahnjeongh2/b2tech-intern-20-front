@@ -9,7 +9,7 @@ const Main = styled.div`
 `;
 
 const Article = styled.article`
-  width: 99%;
+  width: 100%;
 `;
 
 const TableWrapper = styled.section`
