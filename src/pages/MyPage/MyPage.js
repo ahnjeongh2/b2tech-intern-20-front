@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import LeftAsideMyPage from './LeftAsideMyPage';
+import LeftAside from '../../components/LeftAside';
 import RequestButton from '../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
 import { flexSet } from '../../styles/Variable';
@@ -115,22 +115,26 @@ export default function MyPage() {
   const [currentId, setCurrentId] = useState(1);
   const leftBar = useRef();
   const menuIcon = useRef();
+  const [admin, setAdmin] = useState(false);
+  const history = useHistory();
 
-  const initializeUserInfo = () => {
+  const checkUserInfo = () => {
     const accessToken = localStorage.getItem('access_token');
-    // fetch('http://192.168.0.53:8000', {
-    //   headers: JSON.stringify({
-    //     AUTHORIZATION: accessToken,
-    //   },
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setUserInfo(data);
-    //   });
+    fetch(`http://192.168.0.53:8000/users/mypage`, {
+      header: JSON.stringify({
+        access_token: accessToken,
+      }),
+    }).then(response => {
+      if (response.status == 401) {
+        history.push(`/`);
+      } else {
+        setAdmin(true);
+      }
+    });
   };
 
   useEffect(() => {
-    initializeUserInfo();
+    checkUserInfo();
   }, []);
 
   const clickHandler = id => {
@@ -147,44 +151,6 @@ export default function MyPage() {
     menuIcon.current.style.display = 'block';
   };
 
-  useEffect(() => {
-    // const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
-    // fetch(
-    //   `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&name=${name}`
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log('결과: ', data));
-    // // .then(result => {
-    // //   if (result.MESSAGE === 'SUCCESS') {
-    // //     localStorage.getItem('token', result.token);
-    // //   } else {
-    // //     alert('아이디나 비밀번호를 확인해주세요');
-    // //   }
-    // // });
-  }, []);
-
-  // initializeUserInfo = () => {
-  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
-  //   fetch(GET_AUTHORIZATION_API, {
-  //     method: ‘GET’,
-  //     headers: {
-  //       AUTHORIZATION: loggedInfo,
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.message === ‘SUCCESS’) {
-  //         this.setState({
-  //           userName: data.user_info.user_name,
-  //         });
-  //       } else {
-  //         this.setState({
-  //           userName: ‘고객’,
-  //         });
-  //       }
-  //     });
-  // };
-
   const MAPPING_OBJ = {
     1: <AttnedInfo userInfo={userInfo} />,
     // 2: <WorkingSystemInfo />,
@@ -192,7 +158,8 @@ export default function MyPage() {
 
   return (
     <Main>
-      <LeftAsideMyPage
+      <LeftAside
+        admin={admin}
         leftBar={leftBar}
         handleCloseIcon={() => handleCloseIcon()}
       />

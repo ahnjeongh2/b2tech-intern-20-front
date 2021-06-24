@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import LeftAsideAddAdmin from '../components/LeftAsideAddAdmin';
 
 const LeftAsideMenu = styled.aside`
   position: relative;
@@ -8,34 +9,52 @@ const LeftAsideMenu = styled.aside`
   height: 100vh;
   color: ${({ theme }) => theme.fontLightBlue};
   background-color: ${({ theme }) => theme.backgroundNavy};
-  font-size: 12px;
+  font-size: 0.9rem;
+
+  @media ${({ theme }) => theme.mobile} {
+    display: none;
+    font-size: 0.7rem;
+  }
+`;
+
+const CloseIcon = styled.i`
+  display: none;
+  margin: 20px;
+  color: #fff;
+
+  @media ${({ theme }) => theme.mobile} {
+    display: block;
+    /* position: absolute;
+    top: 2px;
+    left: 2px; */
+    color: #fff;
+    font-size: 1.1rem;
+  }
 `;
 
 const CompanyLogo = styled.img`
-  position: absolute;
-  top: 20px;
-  left: 33px;
-  width: 60px;
-  height: 20px;
+  display: block;
+  margin: 40px auto 20px;
+  width: 110px;
+
+  @media ${({ theme }) => theme.mobile} {
+    margin: 10px auto;
+    width: 80px;
+  }
 `;
 
 const NavContainer = styled.div`
-  padding-top: 80px;
-  padding-left: 15px;
-`;
+  margin-top: 60px;
+  font-size: 0.9rem;
 
-const MainMenuNav = styled.nav`
-  margin-bottom: 40px;
-`;
-
-const GoToMenuLists = styled(Link)`
-  color: ${({ theme, isselected }) =>
-    isselected ? theme.fontWhite : theme.fontLightBlue};
-
-  &:hover {
-    cursor: pointer;
-    color: #ffffff;
+  @media ${({ theme }) => theme.mobile} {
+    margin-top: 40px;
+    font-size: 0.6rem;
   }
+`;
+
+const MyPageMenuNav = styled.nav`
+  margin-bottom: 40px;
 `;
 
 const IconAndMenuListsWrapper = styled.div`
@@ -47,6 +66,21 @@ const IconAndMenuListsWrapper = styled.div`
   }
 `;
 
+const GoToMenuLists = styled(Link)`
+  margin: 20px;
+  color: ${({ theme, isselected }) =>
+    isselected ? theme.fontWhite : theme.fontLightBlue};
+
+  &:hover {
+    cursor: pointer;
+    color: #ffffff;
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    margin: 5px;
+  }
+`;
+
 const MenuIcons = styled.i`
   margin-right: 5px;
 `;
@@ -55,98 +89,33 @@ const MenuLists = styled.li`
   display: inline;
 `;
 
-const ManagingMenuNav = styled.nav`
-  margin-bottom: 40px;
-`;
-
-const ManagingMenuTitle = styled.div`
-  margin-bottom: 15px;
-`;
-
-function LeftAsideAdmin() {
+function LeftAside({ leftBar, handleCloseIcon, admin }) {
   const location = useLocation();
 
   return (
     <>
-      <LeftAsideMenu>
+      <LeftAsideMenu ref={leftBar}>
+        <CloseIcon className="far fa-times-circle" onClick={handleCloseIcon} />
         <Link to="/">
           <CompanyLogo alt="B2Tech Logo" src="/images/logo.png" />
         </Link>
         <NavContainer>
-          <MainMenuNav>
+          <MyPageMenuNav>
             <IconAndMenuListsWrapper>
               <GoToMenuLists
-                to="/admin/mypage"
-                isselected={location.pathname === '/admin/mypage'}
+                to="/mypage"
+                isselected={location.pathname === '/mypage'}
               >
                 <MenuIcons className="fas fa-home" />
                 <MenuLists>마이페이지</MenuLists>
               </GoToMenuLists>
             </IconAndMenuListsWrapper>
-          </MainMenuNav>
-          <ManagingMenuNav>
-            <ManagingMenuTitle>
-              <h1>관리</h1>
-            </ManagingMenuTitle>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/admin"
-                isselected={location.pathname === '/admin'}
-              >
-                <MenuIcons className="fas fa-users" />
-                <MenuLists>기본정보</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/admin/commute"
-                isselected={location.pathname === '/admin/commute'}
-              >
-                <MenuIcons className="fas fa-clock" />
-                <MenuLists>출퇴근기록</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/admin/vacation"
-                isselected={location.pathname === '/admin/vacation'}
-              >
-                <MenuIcons className="fas fa-plane" />
-                <MenuLists>연차관리</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/admin/salary"
-                isselected={location.pathname === '/admin/salary'}
-              >
-                <MenuIcons className="fas fa-file-invoice-dollar" />
-                <MenuLists>급여관리</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/admin/benefit"
-                isselected={location.pathname === '/admin/benefit'}
-              >
-                <MenuIcons className="fas fa-coins" />
-                <MenuLists>수당관리</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-            <IconAndMenuListsWrapper>
-              <GoToMenuLists
-                to="/admin/commutedailyreport"
-                isselected={location.pathname === '/admin/commutedailyreport'}
-              >
-                <MenuIcons className="fas fa-chart-line" />
-                <MenuLists>근무 일일현황</MenuLists>
-              </GoToMenuLists>
-            </IconAndMenuListsWrapper>
-          </ManagingMenuNav>
+          </MyPageMenuNav>
+          {admin && <LeftAsideAddAdmin />}
         </NavContainer>
       </LeftAsideMenu>
     </>
   );
 }
 
-export default LeftAsideAdmin;
+export default LeftAside;
