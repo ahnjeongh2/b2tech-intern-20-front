@@ -5,6 +5,7 @@ import LeftAsideMyPage from './LeftAsideMyPage';
 import RequestButton from '../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
 import { flexSet } from '../../styles/Variable';
+import { useHistory } from 'react-router-dom';
 
 const Main = styled.div`
   display: flex;
@@ -115,18 +116,28 @@ export default function MyPage() {
   const [currentId, setCurrentId] = useState(1);
   const leftBar = useRef();
   const menuIcon = useRef();
+  const history = useHistory();
 
   const initializeUserInfo = () => {
     const accessToken = localStorage.getItem('access_token');
-    // fetch('http://192.168.0.53:8000', {
-    //   headers: JSON.stringify({
-    //     access_token: accessToken,
-    //   },
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setUserInfo(data);
-    //   });
+    console.log(accessToken);
+    fetch('http://192.168.0.53:8000/users/mypage', {
+      headers: {
+        AUTHORIZATION: accessToken,
+        // firstDay:,
+        // LastDay:
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          response.json();
+        } else if (response.status == 401) {
+          history.push(`/`);
+        }
+      })
+      .then(data => {
+        setUserInfo(data);
+      });
   };
 
   useEffect(() => {
@@ -146,44 +157,6 @@ export default function MyPage() {
     leftBar.current.style.display = 'none';
     menuIcon.current.style.display = 'block';
   };
-
-  useEffect(() => {
-    // const loggedInfo = localStorage.getItem(‘access_token’);
-    // fetch(
-    //   `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&name=${name}`
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log('결과: ', data));
-    // // .then(result => {
-    // //   if (result.MESSAGE === 'SUCCESS') {
-    // //     localStorage.getItem('token', result.token);
-    // //   } else {
-    // //     alert('아이디나 비밀번호를 확인해주세요');
-    // //   }
-    // // });
-  }, []);
-
-  // initializeUserInfo = () => {
-  //   const loggedInfo = localStorage.getItem(‘access_token’);
-  //   fetch(GET_access_token_API, {
-  //     method: ‘GET’,
-  //     headers: {
-  //       access_token: loggedInfo,
-  //     },
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.message === ‘SUCCESS’) {
-  //         this.setState({
-  //           userName: data.user_info.user_name,
-  //         });
-  //       } else {
-  //         this.setState({
-  //           userName: ‘고객’,
-  //         });
-  //       }
-  //     });
-  // };
 
   const MAPPING_OBJ = {
     1: <AttnedInfo userInfo={userInfo} />,
