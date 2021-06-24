@@ -5,7 +5,6 @@ import LeftAside from '../../components/LeftAside';
 import RequestButton from '../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
 import { flexSet } from '../../styles/Variable';
-import { useHistory } from 'react-router-dom';
 
 const Main = styled.div`
   display: flex;
@@ -116,15 +115,11 @@ export default function MyPage() {
   const [currentId, setCurrentId] = useState(1);
   const leftBar = useRef();
   const menuIcon = useRef();
-<<<<<<< HEAD
-=======
   const [admin, setAdmin] = useState(false);
->>>>>>> 8a85f743d22ae4bae0162c9da40226811db36732
   const history = useHistory();
 
   const checkUserInfo = () => {
     const accessToken = localStorage.getItem('access_token');
-<<<<<<< HEAD
     console.log(accessToken);
     fetch('http://192.168.0.53:8000/users/mypage', {
       headers: {
@@ -143,19 +138,6 @@ export default function MyPage() {
       .then(data => {
         setUserInfo(data);
       });
-=======
-    fetch(`http://192.168.0.53:8000/users/mypage`, {
-      header: JSON.stringify({
-        access_token: accessToken,
-      }),
-    }).then(response => {
-      if (response.status == 401) {
-        history.push(`/`);
-      } else {
-        setAdmin(true);
-      }
-    });
->>>>>>> 8a85f743d22ae4bae0162c9da40226811db36732
   };
 
   useEffect(() => {
