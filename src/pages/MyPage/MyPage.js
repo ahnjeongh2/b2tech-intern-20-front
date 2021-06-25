@@ -129,15 +129,15 @@ export default function MyPage() {
       },
     })
       .then(response => {
-        if (response.ok) {
-          response.json();
-        } else if (response.status == 401) {
+        if (response.status == 401) {
           history.push(`/`);
         } else {
           setAdmin(true);
         }
+        response.json();
       })
       .then(data => {
+        console.log(data);
         setUserInfo(data);
       });
   };
