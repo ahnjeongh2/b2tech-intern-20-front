@@ -98,7 +98,7 @@ export default function Vacation({ userInfo }) {
   };
 
   const goToMyPage = () => {
-    history.push(`/mypage`);
+    history.push(`/page`);
   };
 
   // const handleVacationInput = e => {

@@ -103,8 +103,8 @@ function LeftAside({ leftBar, handleCloseIcon, admin }) {
           <MyPageMenuNav>
             <IconAndMenuListsWrapper>
               <GoToMenuLists
-                to="/mypage"
-                isselected={location.pathname === '/mypage'}
+                to="/page"
+                isselected={location.pathname === '/page'}
               >
                 <MenuIcons className="fas fa-home" />
                 <MenuLists>마이페이지</MenuLists>
