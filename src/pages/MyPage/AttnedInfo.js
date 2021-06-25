@@ -140,46 +140,7 @@ const BarBg = styled(BarGraph.withComponent('div'))`
   }
 `;
 
-export default function AttnedInfo({ userInfo, initializeUserInfo }) {
-  const [firstDay, setFirstDay] = useState('');
-  const [lastDay, setLastDay] = useState('');
-  const today = new Date();
-
-  const getDay = () => {
-    const fday = `${today.getFullYear()} - ${today.getMonth() + 1} - ${
-      today.getDate() - today.getDay() + 1
-    }`;
-    setFirstDay(fday);
-    const lday = `${today.getFullYear()} - ${today.getMonth() + 1} - ${
-      today.getDate() + (7 - today.getDay())
-    }`;
-    setLastDay(lday);
-    if (
-      today.getDate() === 28 ||
-      today.getDate() === 29 ||
-      today.getDate() === 30
-    ) {
-      setLastDay(
-        `${today.getFullYear()} - ${today.getMonth() + 2} - ${
-          today.getDate() + (7 - today.getDay()) - 30
-        }`
-      );
-    }
-    if (
-      today.getDate() === 1 ||
-      today.getDate() === 2 ||
-      today.getDate() === 3 ||
-      today.getDate() === 4
-    ) {
-      setFirstDay(`${today.getFullYear()} - ${today.getMonth()} - 28`);
-    }
-  };
-
-  useEffect(() => {
-    getDay();
-    initializeUserInfo(firstDay, lastDay);
-  }, []);
-
+export default function AttnedInfo({ userInfo, today, firstDay, lastDay }) {
   return (
     <Section>
       <section>
@@ -193,13 +154,13 @@ export default function AttnedInfo({ userInfo, initializeUserInfo }) {
               <td>출근</td>
               <td>
                 {userInfo.work_in
-                  ? userInfo.work_in.replace('T', '  ').substr(0, 19)
+                  ? userInfo.work_in.replace('T', '  ').substr(11, 9)
                   : '출근 전'}
               </td>
               <td>퇴근</td>
               <td>
                 {userInfo.work_out
-                  ? userInfo.work_out.replace('T', '  ').substr(0, 19)
+                  ? userInfo.work_out.replace('T', '  ').substr(11, 9)
                   : '퇴근 전'}
               </td>
             </tr>
@@ -230,13 +191,13 @@ export default function AttnedInfo({ userInfo, initializeUserInfo }) {
               분 ) / 52시간
             </p>
             <div>
-              <BarGraph value={userInfo.work_time_list}></BarGraph>
+              <BarGraph></BarGraph>
               <BarBg></BarBg>
             </div>
           </Workinghours>
         </div>
       </section>
-      <Graph />
+      {userInfo.work_time_list && <Graph value={userInfo.work_time_list} />}
     </Section>
   );
 }

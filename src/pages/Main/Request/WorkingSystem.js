@@ -47,6 +47,10 @@ const SystemInfo = styled(GlassBg.withComponent('li'))`
   height: 140px;
   margin-bottom: 10px;
 
+  input {
+    margin: 2px 2px 2px 10px;
+  }
+
   span {
     margin: 5px 0 5px 12px;
   }
@@ -146,8 +150,12 @@ export default function WorkingSystem() {
         <SystemInfoWrap>
           {SYSTEM_ARR.map((el, idx) => {
             return (
-              <SystemInfo key={el.id} onClick={e => clickHandler(e, idx + 1)}>
-                <span>{`>`}</span>
+              <SystemInfo key={el.id}>
+                <input
+                  type="radio"
+                  name="worksystem"
+                  onClick={e => clickHandler(e, idx + 1)}
+                />
                 <strong>{el.name}</strong>
                 <p>{el.desc}</p>
               </SystemInfo>

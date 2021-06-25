@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import LeftAside from '../../../components/LeftAside';
-import UpperSection from '../../../components/UpperSection';
 import TableContentsDefault from '../Default/TableContentsDefault';
 
 const Main = styled.div`
@@ -21,7 +20,6 @@ function Default() {
     <Main>
       <LeftAside />
       <Article>
-        <UpperSection />
         <TableWrapper>
           <TableContentsDefault />
         </TableWrapper>

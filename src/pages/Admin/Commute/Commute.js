@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LeftAside from '../../../components/LeftAside';
-import UpperSection from '../../../components/UpperSection';
 import TableContentsCommute from '../Commute/TableContentsCommute';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import Search from '../../../components/Search';
@@ -38,7 +37,6 @@ function Commute() {
     <Main>
       <LeftAside />
       <Article>
-        <UpperSection />
         <Search />
         <InfoPicker>
           <DatePickerComponent handlePeriod={handlePeriod} />
