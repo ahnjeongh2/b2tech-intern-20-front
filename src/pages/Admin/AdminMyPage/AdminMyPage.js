@@ -37,7 +37,7 @@ const ButtonSection = styled.section`
 
 function AdminMyPage() {
   // useEffect(() => {
-  //   const loggedInfo = localStorage.getItem(‘access_token’);
+  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
   //   fetch(
   //     `${GET_API}/schedules?employee_number=${employeeNumber}&name=${name}`
   //   )
@@ -54,11 +54,11 @@ function AdminMyPage() {
   // }, []);
 
   // initializeUserInfo = () => {
-  //   const loggedInfo = localStorage.getItem(‘access_token’);
+  //   const loggedInfo = localStorage.getItem(‘AUTHORIZATION’);
   //   fetch(GET_API, {
   //     method: ‘GET’,
   //     headers: {
-  //       access_token: loggedInfo,
+  //       AUTHORIZATION: loggedInfo,
   //     },
   //   })
   //     .then(response => response.json())

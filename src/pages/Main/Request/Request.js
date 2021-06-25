@@ -64,10 +64,10 @@ export default function Request() {
   };
 
   const initializeUserInfo = () => {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('AUTHORIZATION');
     // fetch(`${GET_API}`, {
     //   headers: JSON.stringify({
-    //     access_token: accessToken,
+    //     AUTHORIZATION: accessToken,
     //   },
     // })
     //   .then(response => response.json())

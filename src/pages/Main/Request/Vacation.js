@@ -117,11 +117,11 @@ export default function Vacation({ userInfo }) {
       alert('휴가 종류를 선택해주세요.');
     }
 
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = localStorage.getItem('AUTHORIZATION');
     // fetch(`${GET_API}/users/userInfo.employee_number/drafts`, {
     //   method: 'POST',
     //   body: JSON.stringify({
-    //     access_token: accessToken;
+    //     AUTHORIZATION: accessToken;
     //     type: vacationType,
     //     start_at: periodData.startDate,
     //     end_at: periodData.endDate,
