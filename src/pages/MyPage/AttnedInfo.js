@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Graph from './Graph';
 import CurrentTime from './CurrentTime';
 import styled from 'styled-components';
@@ -140,7 +140,19 @@ const BarBg = styled(BarGraph.withComponent('div'))`
   }
 `;
 
-export default function AttnedInfo({ userInfo, today, firstDay, lastDay }) {
+export default function AttnedInfo({
+  userInfo,
+  today,
+  firstDay,
+  lastDay,
+  workTime,
+  totalworkTime,
+  myGraph,
+}) {
+  useEffect(() => {
+    myGraph.current.style.width = `${totalworkTime}px`;
+  }, []);
+
   return (
     <Section>
       <section>
@@ -191,13 +203,16 @@ export default function AttnedInfo({ userInfo, today, firstDay, lastDay }) {
               분 ) / 52시간
             </p>
             <div>
-              <BarGraph></BarGraph>
+              <BarGraph
+                ref={myGraph}
+                value={userInfo.total_work_in_week}
+              ></BarGraph>
               <BarBg></BarBg>
             </div>
           </Workinghours>
         </div>
       </section>
-      {userInfo.work_time_list && <Graph value={userInfo.work_time_list} />}
+      <Graph workTime={workTime} />
     </Section>
   );
 }
