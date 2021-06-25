@@ -205,8 +205,11 @@ export default function Attendance() {
 
   const IsRegistered = () => {
     const employeeNumber = input.current.value;
-    fetch(`${GET_API}/users/${employeeNumber}/schedules`, {
+    fetch(`${GET_API}/employee/schedules`, {
       method: 'POST',
+      body: JSON.stringify({
+        employee_number: employeeNumber,
+      }),
     });
     getEmployeeData();
   };

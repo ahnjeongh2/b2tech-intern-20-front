@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { flexSet } from '../../styles/Variable';
+import { flexSet } from '../../../styles/Variable';
 
 const Current = styled.div`
   ${flexSet('center', 'center')}

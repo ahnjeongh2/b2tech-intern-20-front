@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import LeftAside from '../../components/LeftAside';
-import RequestButton from '../../components/RequestButton';
+import LeftAside from '../../../components/LeftAside';
+import RequestButton from '../../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
-import { flexSet } from '../../styles/Variable';
-import { GET_API } from '../../config';
+import { flexSet } from '../../../styles/Variable';
+import { GET_API } from '../../../config';
 
 const Main = styled.div`
   display: flex;

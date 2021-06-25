@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Graph from './Graph';
 import CurrentTime from './CurrentTime';
 import styled from 'styled-components';
-import { flexSet } from '../../styles/Variable';
+import { flexSet } from '../../../styles/Variable';
 import DatePicker, { registerLocale } from 'react-datepicker';
 
 const Section = styled.section`
