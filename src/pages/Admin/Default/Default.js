@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LeftAside from '../../../components/LeftAside';
-import TableContentsDefault from '../Default/TableContentsDefault';
+import TableContentsDefault from './TableContentsDefault';
 
 const Main = styled.div`
   display: flex;
