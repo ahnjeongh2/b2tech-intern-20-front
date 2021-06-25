@@ -14,10 +14,6 @@ const Main = styled.div`
 
 const Article = styled.article`
   width: 100%;
-
-  @media ${({ theme }) => theme.mobile} {
-    transform: translateX(-65px);
-  }
 `;
 
 const UpperSection = styled.section`
@@ -80,6 +76,7 @@ export default function MyPage() {
   const [admin, setAdmin] = useState(false);
   const history = useHistory();
   const leftBar = useRef();
+  const menuIcon = useRef();
 
   async function fetchData() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
@@ -103,13 +100,13 @@ export default function MyPage() {
   };
 
   const handleMenu = () => {
-    leftBar.current.style.opacity = 1;
-    leftBar.current.style.transform = 'translateX(0px)';
+    leftBar.current.style.display = 'block';
+    menuIcon.current.style.display = 'none';
   };
 
   const handleCloseIcon = () => {
-    leftBar.current.style.opacity = 0;
-    leftBar.current.style.transform = 'translateX(-160px)';
+    leftBar.current.style.display = 'none';
+    menuIcon.current.style.display = 'block';
   };
 
   const MAPPING_OBJ = {
@@ -127,7 +124,7 @@ export default function MyPage() {
       />
       <Article>
         <UpperSection>
-          <Manu className="fas fa-bars" onClick={handleMenu} />
+          <Manu className="fas fa-bars" onClick={handleMenu} ref={menuIcon} />
           <UserInfo>
             <EmployeeNumber>
               {`사번: ${userInfo && userInfo.employeeNumber}`}{' '}

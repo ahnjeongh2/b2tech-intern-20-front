@@ -12,11 +12,8 @@ const LeftAsideMenu = styled.aside`
   font-size: 0.9rem;
 
   @media ${({ theme }) => theme.mobile} {
-    transform: translateX(-160px);
-    opacity: 0;
-    transition: all 900ms cubic-bezier(0.9, 0, 0.33, 1);
+    display: none;
     font-size: 0.7rem;
-    z-index: 100;
   }
 `;
 
