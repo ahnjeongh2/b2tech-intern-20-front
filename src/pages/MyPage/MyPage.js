@@ -118,33 +118,64 @@ export default function MyPage() {
   const menuIcon = useRef();
   const [admin, setAdmin] = useState(false);
   const history = useHistory();
+  const [firstDay, setFirstDay] = useState('');
+  const [lastDay, setLastDay] = useState('');
+  const today = new Date();
 
-  const initializeUserInfo = (firstDay, LastDay) => {
-    const accessToken = localStorage.getItem('AUTHORIZATION');
-    fetch(`${GET_API}/users/mypage`, {
-      headers: {
-        AUTHORIZATION: accessToken,
-        firstDay: firstDay,
-        LastDay: LastDay,
-      },
-    })
-      .then(response => {
-        if (response.status == 401) {
-          history.push(`/`);
-        } else {
-          setAdmin(true);
-        }
-        response.json();
-      })
-      .then(data => {
-        console.log(data);
-        setUserInfo(data);
-      });
+  const getDay = () => {
+    const fday = `${today.getFullYear()}-${today.getMonth() + 1}-${
+      today.getDate() - today.getDay() + 1
+    }`;
+    setFirstDay(fday);
+    const lday = `${today.getFullYear()}-${today.getMonth() + 1}-${
+      today.getDate() + (7 - today.getDay())
+    }`;
+    setLastDay(lday);
+    if (
+      today.getDate() === 28 ||
+      today.getDate() === 29 ||
+      today.getDate() === 30
+    ) {
+      setLastDay(
+        `${today.getFullYear()}-${today.getMonth() + 2}-${
+          today.getDate() + (7 - today.getDay()) - 30
+        }`
+      );
+    }
+    if (
+      today.getDate() === 1 ||
+      today.getDate() === 2 ||
+      today.getDate() === 3 ||
+      today.getDate() === 4
+    ) {
+      setFirstDay(`${today.getFullYear()}-${today.getMonth()}-28`);
+    }
   };
 
   useEffect(() => {
-    initializeUserInfo();
-  }, []);
+    getDay();
+    fetchData(firstDay, lastDay);
+  }, [lastDay]);
+
+  async function fetchData(firstDay, lastDay) {
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    let response = await fetch(
+      `${GET_API}/users/mypage?monday=${firstDay}&sunday=${lastDay}`,
+      {
+        headers: {
+          Authorization: accessToken,
+        },
+      }
+    );
+    if (response.ok) {
+      let data = await response.json();
+      setUserInfo(data);
+
+      if (data.roles.관리자) setAdmin(true);
+    } else if (response.status == 401) {
+      history.push(`/`);
+    }
+  }
 
   const clickHandler = id => {
     setCurrentId(id);
@@ -162,7 +193,12 @@ export default function MyPage() {
 
   const MAPPING_OBJ = {
     1: (
-      <AttnedInfo userInfo={userInfo} initializeUserInfo={initializeUserInfo} />
+      <AttnedInfo
+        userInfo={userInfo}
+        today={today}
+        firstDay={firstDay}
+        lastDay={lastDay}
+      />
     ),
     // 2: <WorkingSystemInfo />,
   };

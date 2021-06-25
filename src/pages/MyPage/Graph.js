@@ -25,14 +25,14 @@ export default function Graph({ value }) {
     if (!value) {
       return;
     }
-    value.map(el => {
+    const result = value.map(el => {
       return Number(el.replace(':', '.'));
     });
+    setWorkTime(result);
   };
 
   useEffect(() => {
-    const data = workTimeList();
-    setWorkTime(data);
+    workTimeList(value);
   }, []);
 
   const data = {
@@ -41,7 +41,6 @@ export default function Graph({ value }) {
       {
         label: '일별 근로시간',
         data: workTime,
-        // data: [9, 9.5, 10, 9, 9, 0, 2],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(255, 159, 64, 0.2)',
@@ -71,8 +70,8 @@ export default function Graph({ value }) {
         width={500}
         data={data}
         // legend={legend}
-        options={options}
-      />{' '}
+        // options={options}
+      />
     </GraphDiv>
   );
 }

@@ -181,7 +181,7 @@ export default function Attendance() {
         result.access_token &&
           localStorage.setItem('AUTHORIZATION', result.access_token);
         if (!result.message === 'SUCCESS') {
-          alert('사번 또는 비밀번호가 일치하지 않습니다.');
+          alert(result.message);
         }
         history.push(`/mypage`);
       });
@@ -191,12 +191,12 @@ export default function Attendance() {
     const employeeNumber = input.current.value;
     fetch(`${GET_API}/schedules/today?employee_number=${employeeNumber}`).then(
       response => {
-        if (response.status === 200) {
+        if (response.ok) {
           return response.json().then(data => {
             setEmployeeData(data);
           });
-        }
-        if (response.status === 404) {
+        } else {
+          setEmployeeData('');
           alert('사번을 다시 확인해주세요');
         }
       }
@@ -205,7 +205,7 @@ export default function Attendance() {
 
   const IsRegistered = () => {
     const employeeNumber = input.current.value;
-    fetch(`http://3.35.47.207:8000/users/${employeeNumber}/schedules`, {
+    fetch(`${GET_API}/users/${employeeNumber}/schedules`, {
       method: 'POST',
     });
     getEmployeeData();

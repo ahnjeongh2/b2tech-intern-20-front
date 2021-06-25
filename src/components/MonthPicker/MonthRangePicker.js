@@ -51,31 +51,24 @@ const Month = styled(GlassBg.withComponent('div'))`
   padding: 5px;
 
   span {
-    width: 50px;
+    width: 55px;
     padding: 5px;
-
-    :hover {
-      color: #fff !important;
-      font-weight: bold;
-      background: #216ba5;
-      border-radius: 10px;
-    }
 
     @media ${({ theme }) => theme.mobile} {
       width: 40px;
     }
   }
 
-  .activeMonth {
-    color: #fff !important;
-    font-weight: bold;
-    background: #216ba5;
-    border-radius: 10px;
-  }
-
   @media ${({ theme }) => theme.mobile} {
     width: 140px;
   }
+`;
+
+const ActiveMonth = styled.span`
+  color: #fff !important;
+  font-weight: bold;
+  background: #216ba5;
+  border-radius: 10px;
 `;
 
 const MONTH = new Array(12).fill(1).map((el, idx) => idx + 1);
@@ -91,7 +84,7 @@ export default function MonthRangePicker({ getWorkPeriod }) {
   // const handleNextBtn = () => {};
 
   useEffect(() => {
-    getWorkPeriod(startMonth, endMonth);
+    getWorkPeriod(startMonth - 1, endMonth - 1);
   }, [startMonth, endMonth]);
 
   const mouseOverHandler = idx => {
@@ -111,32 +104,26 @@ export default function MonthRangePicker({ getWorkPeriod }) {
   };
 
   const getMonth = idx => {
-    if (today.getMonth() >= idx) {
+    if (today.getMonth() >= idx - 1) {
       alert('당월 이후로 선택해주세요');
       return;
     }
-    const monthList = monthNode.current.childNodes;
     if (!startMonth) {
       SetStartMonth(idx);
-      monthList[idx].className = 'activeMonth';
     } else if (startMonth < idx) {
       SetEndMonth(idx);
-      monthList[idx].className = 'activeMonth';
     }
     if (startMonth < idx < endMonth) {
-      monthList[endMonth].className = '';
       SetEndMonth(idx);
-      monthList[idx].className = 'activeMonth';
     }
     if (idx < startMonth) {
-      monthList[startMonth].className = '';
       SetStartMonth(idx);
-      monthList[idx].className = 'activeMonth';
     }
-    if (idx === startMonth || idx === endMonth) {
-      monthList[startMonth].className = '';
+
+    if (idx === startMonth) {
       SetStartMonth('');
-      monthList[endMonth].className = '';
+    }
+    if (idx === endMonth) {
       SetEndMonth('');
     }
   };
@@ -161,8 +148,14 @@ export default function MonthRangePicker({ getWorkPeriod }) {
               key={idx}
               onMouseOver={() => mouseOverHandler(idx)}
               onMouseLeave={mouseLeaveHandler}
-              onClick={() => getMonth(idx)}
-            >{`${month}월`}</span>
+              onClick={() => getMonth(idx + 1)}
+            >
+              {month === startMonth || month === endMonth ? (
+                <ActiveMonth>{`${month}월`}</ActiveMonth>
+              ) : (
+                `${month}월`
+              )}
+            </span>
           );
         })}
       </Month>

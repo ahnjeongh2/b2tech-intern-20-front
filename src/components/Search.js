@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import useSearchButton from '../components/useSearchButton';
 
 const MenuContainer = styled.div`
   position: relative;
@@ -56,16 +55,16 @@ const FaSearchIcon = styled.i`
 `;
 
 function Search() {
-  const dropdownRef = useRef(null);
-  const [isActive, setIsActive] = useSearchButton(dropdownRef, false);
-  const handleDropDownSearchBox = () => setIsActive(!isActive);
+  // const dropdownRef = useRef(null);
+  // const [isActive, setIsActive] = useSearchButton(dropdownRef, false);
+  // const handleDropDownSearchBox = () => setIsActive(!isActive);
   // const initSearchInput = e => {
   //   e.target.value = '';
   // };
 
   return (
     <div>
-      <MenuContainer>
+      {/* <MenuContainer>
         <MenuTriggerButton onClick={handleDropDownSearchBox}>
           <FaSearchIcon className="fas fa-search" />
           <nav
@@ -75,7 +74,7 @@ function Search() {
             <input type="text" name="search" id="search" placeholder="검색" />
           </nav>
         </MenuTriggerButton>
-      </MenuContainer>
+      </MenuContainer> */}
     </div>
   );
 }
