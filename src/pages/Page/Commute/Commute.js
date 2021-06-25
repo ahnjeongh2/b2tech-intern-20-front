@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LeftAside from '../../../components/LeftAside';
-import TableContentsCommute from '../Commute/TableContentsCommute';
+import TableContentsCommute from './TableContentsCommute';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import Search from '../../../components/Search';
 import { flexSet } from '../../../styles/Variable';
