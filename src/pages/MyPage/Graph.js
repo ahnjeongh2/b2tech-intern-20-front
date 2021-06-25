@@ -4,37 +4,30 @@ import styled from 'styled-components';
 
 const GraphDiv = styled.div`
   margin-left: 50px;
+
+  canvas {
+    @media ${({ theme }) => theme.mobile} {
+      width: 300px !important;
+      height: 100px !important;
+    }
+  }
+
+  @media ${({ theme }) => theme.mobile} {
+    margin-left: 20px;
+  }
 `;
 
 const options = {
+  responsive: false,
   scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
+    y: {
+      beginAtZero: true,
+      max: 12,
+    },
   },
 };
 
-export default function Graph({ value }) {
-  const [workTime, setWorkTime] = useState([]);
-
-  const workTimeList = value => {
-    if (!value) {
-      return;
-    }
-    const result = value.map(el => {
-      return Number(el.replace(':', '.'));
-    });
-    setWorkTime(result);
-  };
-
-  useEffect(() => {
-    workTimeList(value);
-  }, []);
-
+export default function Graph({ workTime }) {
   const data = {
     labels: ['월', '화', '수', '목', '금', '토', '일'],
     datasets: [
@@ -66,12 +59,14 @@ export default function Graph({ value }) {
 
   return (
     <GraphDiv>
-      <Bar
-        width={500}
-        data={data}
-        // legend={legend}
-        // options={options}
-      />
+      {workTime && (
+        <Bar
+          width={500}
+          data={data}
+          // legend={legend}
+          options={options}
+        />
+      )}
     </GraphDiv>
   );
 }

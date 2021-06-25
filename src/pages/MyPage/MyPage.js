@@ -46,10 +46,18 @@ const UserInfo = styled.p`
 
 const EmployeeNumber = styled(UserInfo.withComponent('span'))`
   margin-left: 20px;
+
+  @media ${({ theme }) => theme.mobile} {
+    margin-left: 10px;
+  }
 `;
 
 const EmployeeName = styled(UserInfo.withComponent('span'))`
   margin-left: 25px;
+
+  @media ${({ theme }) => theme.mobile} {
+    margin-left: 10px;
+  }
 `;
 
 const ButtonSection = styled.section`
@@ -114,13 +122,42 @@ const TAPMENU_ARR = ['근태정보', '휴가정보'];
 export default function MyPage() {
   const [userInfo, setUserInfo] = useState('');
   const [currentId, setCurrentId] = useState(1);
-  const leftBar = useRef();
-  const menuIcon = useRef();
   const [admin, setAdmin] = useState(false);
-  const history = useHistory();
   const [firstDay, setFirstDay] = useState('');
   const [lastDay, setLastDay] = useState('');
+  const [workTime, setWorkTime] = useState([]);
+  const [totalworkTime, setTotalWorkTime] = useState(0);
+  const history = useHistory();
+  const leftBar = useRef();
+  const menuIcon = useRef();
+  const myGraph = useRef();
   const today = new Date();
+
+  const GetWorkTimeList = value => {
+    if (!value) {
+      return;
+    }
+    const result = value.map(el => {
+      if (el) {
+        return Number(el.replace(':', '.'));
+      } else return 0;
+    });
+    setWorkTime(result);
+  };
+
+  const GetTotalworkTime = value => {
+    if (!value) {
+      return;
+    }
+    const result = (Number(value.replace(':', '.')) / 52) * 450;
+    setTotalWorkTime(result);
+    myGraph.current.style.width = `${result}px`;
+  };
+
+  useEffect(() => {
+    GetWorkTimeList(userInfo.work_time_list);
+    GetTotalworkTime(userInfo.total_work_in_week);
+  }, [userInfo]);
 
   const getDay = () => {
     const fday = `${today.getFullYear()}-${today.getMonth() + 1}-${
@@ -198,6 +235,9 @@ export default function MyPage() {
         today={today}
         firstDay={firstDay}
         lastDay={lastDay}
+        workTime={workTime}
+        totalworkTime={totalworkTime}
+        myGraph={myGraph}
       />
     ),
     // 2: <WorkingSystemInfo />,

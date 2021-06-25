@@ -3,6 +3,7 @@ import MonthRangePicker from '../../../components/MonthPicker/MonthRangePicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 import RequestButton from '../../../components/RequestButton';
+import { useHistory } from 'react-router-dom';
 
 const ButtonInfo = styled.div`
   text-align: center;
@@ -56,6 +57,12 @@ export default function SystemRequest() {
   const [workPeriod, setWorkPeriod] = useState({});
   const [systemType, setSystemType] = useState('');
   const monthNode = useRef('');
+  const history = useHistory();
+
+  const goToMyPage = e => {
+    e.stopPropagation();
+    history.push(`/mypage`);
+  };
 
   useEffect(() => {
     document.addEventListener('click', clickOutside);
@@ -66,6 +73,11 @@ export default function SystemRequest() {
     if (!monthNode.current.contains(e.target)) {
       setOver(false);
     }
+  };
+
+  const clickOver = e => {
+    e.stopPropagation();
+    setOver(true);
   };
 
   const getWorkPeriod = (startMonth, endMonth) => {
@@ -91,13 +103,17 @@ export default function SystemRequest() {
         <InfoPicker>
           <Title
             ref={monthNode}
-            onMouseOver={() => setOver(true)}
+            // onMouseOver={() => setOver(true)}
             onClick={e => clickOutside(e)}
+            onClick={clickOver}
           >
-            {workPeriod.startMonth
+            {workPeriod.endMonth
               ? `${workPeriod.startMonth + 1}월 ~ ${workPeriod.endMonth + 1}월`
               : '기간을 선택하세요'}
+            &nbsp;&nbsp;
+            <i className="far fa-calendar-check" />
           </Title>
+
           <div ref={monthNode}>
             {over && <MonthRangePicker getWorkPeriod={getWorkPeriod} />}
           </div>
@@ -116,7 +132,7 @@ export default function SystemRequest() {
             })}
           </SystemWrap>
         </InfoPicker>
-        <RequestButton value="My page" />
+        <RequestButton value="My page" onClick={goToMyPage} />
         <RequestButton value="등록" onClick={workSystemRequest} />
       </ButtonInfo>
     </>
