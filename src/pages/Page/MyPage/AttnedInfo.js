@@ -190,16 +190,17 @@ export default function AttnedInfo({
           </TimeTable>
           <Workinghours>
             <p>
-              • 소정 근로시간: 주 (
+              • 소정 근로시간: 주 ({' '}
               <span>
                 {userInfo.total_work_in_week &&
                   userInfo.total_work_in_week.substr(0, 2)}
-              </span>{' '}
+              </span>
               시간
               <span>
+                {' '}
                 {userInfo.total_work_in_week &&
                   userInfo.total_work_in_week.substr(3, 5)}
-              </span>{' '}
+              </span>
               분 ) / 52시간
             </p>
             <div>
