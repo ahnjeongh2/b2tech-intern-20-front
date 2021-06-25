@@ -245,13 +245,13 @@ export default function MyPage() {
 
   return (
     <Main>
-      <LeftAside
+      {/* <LeftAside
         admin={admin}
         leftBar={leftBar}
         handleCloseIcon={() => handleCloseIcon()}
-      />
+      /> */}
       <Article>
-        <UpperSection>
+        {/* <UpperSection>
           <Manu className="fas fa-bars" onClick={handleMenu} ref={menuIcon} />
           <UserInfo>
             <EmployeeNumber>
@@ -264,7 +264,7 @@ export default function MyPage() {
           <Link to="/request">
             <RequestButton value="휴가•근무제 신청" />
           </Link>
-        </ButtonSection>
+        </ButtonSection> */}
         <Tabs>
           <TabList>
             {TAPMENU_ARR.map((name, idx) => {

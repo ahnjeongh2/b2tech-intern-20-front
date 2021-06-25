@@ -61,7 +61,7 @@ export default function SystemRequest() {
 
   const goToMyPage = e => {
     e.stopPropagation();
-    history.push(`/mypage`);
+    history.push(`/page`);
   };
 
   useEffect(() => {

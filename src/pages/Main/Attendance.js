@@ -183,7 +183,7 @@ export default function Attendance() {
         if (!result.message === 'SUCCESS') {
           alert(result.message);
         }
-        history.push(`/mypage`);
+        history.push(`/page`);
       });
   };
 
