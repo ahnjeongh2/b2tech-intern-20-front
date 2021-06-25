@@ -142,9 +142,9 @@ export default function MyPage() {
       });
   };
 
-  // useEffect(() => {
-  //   initializeUserInfo();
-  // }, []);
+  useEffect(() => {
+    initializeUserInfo();
+  }, []);
 
   const clickHandler = id => {
     setCurrentId(id);
