@@ -179,7 +179,7 @@ export default function Attendance() {
       .then(response => response.json())
       .then(result => {
         result.access_token &&
-          localStorage.setItem('access_token', result.access_token);
+          localStorage.setItem('AUTHORIZATION', result.access_token);
         if (!result.message === 'SUCCESS') {
           alert('사번 또는 비밀번호가 일치하지 않습니다.');
         }
@@ -189,18 +189,18 @@ export default function Attendance() {
 
   const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;
-    fetch(
-      `http://3.35.47.207:8000/schedules/today?employee_number=${employeeNumber}`
-    ).then(response => {
-      if (response.status === 200) {
-        return response.json().then(data => {
-          setEmployeeData(data);
-        });
+    fetch(`${GET_API}/schedules/today?employee_number=${employeeNumber}`).then(
+      response => {
+        if (response.status === 200) {
+          return response.json().then(data => {
+            setEmployeeData(data);
+          });
+        }
+        if (response.status === 404) {
+          alert('사번을 다시 확인해주세요');
+        }
       }
-      if (response.status === 404) {
-        alert('사번을 다시 확인해주세요');
-      }
-    });
+    );
   }, 800);
 
   const IsRegistered = () => {

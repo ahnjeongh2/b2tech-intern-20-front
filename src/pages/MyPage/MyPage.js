@@ -119,96 +119,89 @@ export default function MyPage() {
   const [admin, setAdmin] = useState(false);
   const history = useHistory();
 
-  const checkUserInfo = () => {
-    const initializeUserInfo = (firstDay, LastDay) => {
-      const accessToken = localStorage.getItem('access_token');
-      console.log(accessToken);
-      fetch(`${GET_API}/users/mypage`, {
-        headers: {
-          AUTHORIZATION: accessToken,
-          firstDay: firstDay,
-          LastDay: LastDay,
-        },
+  const initializeUserInfo = (firstDay, LastDay) => {
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    fetch(`${GET_API}/users/mypage`, {
+      headers: {
+        AUTHORIZATION: accessToken,
+        firstDay: firstDay,
+        LastDay: LastDay,
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          response.json();
+        } else if (response.status == 401) {
+          history.push(`/`);
+        } else {
+          setAdmin(true);
+        }
       })
-        .then(response => {
-          if (response.ok) {
-            response.json();
-          } else if (response.status == 401) {
-            history.push(`/`);
-          }
-        })
-        .then(data => {
-          setUserInfo(data);
-        });
-    };
-
-    useEffect(() => {
-      checkUserInfo();
-    }, []);
-    // useEffect(() => {
-    //   initializeUserInfo();
-    // }, []);
-
-    const clickHandler = id => {
-      setCurrentId(id);
-    };
-
-    const handleMenu = () => {
-      leftBar.current.style.display = 'block';
-      menuIcon.current.style.display = 'none';
-    };
-
-    const handleCloseIcon = () => {
-      leftBar.current.style.display = 'none';
-      menuIcon.current.style.display = 'block';
-    };
-
-    const MAPPING_OBJ = {
-      1: (
-        <AttnedInfo
-          userInfo={userInfo}
-          initializeUserInfo={initializeUserInfo}
-        />
-      ),
-      // 2: <WorkingSystemInfo />,
-    };
-
-    return (
-      <Main>
-        <LeftAside
-          admin={admin}
-          leftBar={leftBar}
-          handleCloseIcon={() => handleCloseIcon()}
-        />
-        <Article>
-          <UpperSection>
-            <Manu className="fas fa-bars" onClick={handleMenu} ref={menuIcon} />
-            <UserInfo>
-              <EmployeeNumber>
-                {`사번: ${userInfo && userInfo.employeeNumber}`}{' '}
-              </EmployeeNumber>
-              <EmployeeName>{`${userInfo && userInfo.name} 님`}</EmployeeName>
-            </UserInfo>
-          </UpperSection>
-          <ButtonSection>
-            <Link to="/request">
-              <RequestButton value="휴가•근무제 신청" />
-            </Link>
-          </ButtonSection>
-          <Tabs>
-            <TabList>
-              {TAPMENU_ARR.map((name, idx) => {
-                return (
-                  <Tab key={idx} onClick={() => clickHandler(idx + 1)}>
-                    {idx + 1 === currentId ? <Selected>{name}</Selected> : name}
-                  </Tab>
-                );
-              })}
-            </TabList>
-            {MAPPING_OBJ[currentId]}
-          </Tabs>
-        </Article>
-      </Main>
-    );
+      .then(data => {
+        setUserInfo(data);
+      });
   };
+
+  // useEffect(() => {
+  //   initializeUserInfo();
+  // }, []);
+
+  const clickHandler = id => {
+    setCurrentId(id);
+  };
+
+  const handleMenu = () => {
+    leftBar.current.style.display = 'block';
+    menuIcon.current.style.display = 'none';
+  };
+
+  const handleCloseIcon = () => {
+    leftBar.current.style.display = 'none';
+    menuIcon.current.style.display = 'block';
+  };
+
+  const MAPPING_OBJ = {
+    1: (
+      <AttnedInfo userInfo={userInfo} initializeUserInfo={initializeUserInfo} />
+    ),
+    // 2: <WorkingSystemInfo />,
+  };
+
+  return (
+    <Main>
+      <LeftAside
+        admin={admin}
+        leftBar={leftBar}
+        handleCloseIcon={() => handleCloseIcon()}
+      />
+      <Article>
+        <UpperSection>
+          <Manu className="fas fa-bars" onClick={handleMenu} ref={menuIcon} />
+          <UserInfo>
+            <EmployeeNumber>
+              {`사번: ${userInfo && userInfo.employeeNumber}`}{' '}
+            </EmployeeNumber>
+            <EmployeeName>{`${userInfo && userInfo.name} 님`}</EmployeeName>
+          </UserInfo>
+        </UpperSection>
+        <ButtonSection>
+          <Link to="/request">
+            <RequestButton value="휴가•근무제 신청" />
+          </Link>
+        </ButtonSection>
+        <Tabs>
+          <TabList>
+            {TAPMENU_ARR.map((name, idx) => {
+              return (
+                <Tab key={idx} onClick={() => clickHandler(idx + 1)}>
+                  {idx + 1 === currentId ? <Selected>{name}</Selected> : name}
+                </Tab>
+              );
+            })}
+          </TabList>
+          {MAPPING_OBJ[currentId]}
+        </Tabs>
+      </Article>
+    </Main>
+  );
 }
