@@ -5,6 +5,7 @@ import Vacation from './Vacation';
 import WorkingSystem from './WorkingSystem';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
+import { GET_API } from '../../../config';
 
 const CATEGORY_ARR = ['휴가', '근무제'];
 
@@ -64,7 +65,7 @@ export default function Request() {
 
   const initializeUserInfo = () => {
     const accessToken = localStorage.getItem('access_token');
-    // fetch('http://192.168.0.53:8000', {
+    // fetch(`${GET_API}`, {
     //   headers: JSON.stringify({
     //     access_token: accessToken,
     //   },

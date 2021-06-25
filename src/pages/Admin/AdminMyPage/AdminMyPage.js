@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import LeftAside from '../../../components/LeftAside';
 import RequestButton from '../../../components/RequestButton';
+import { GET_API } from '../../../config';
 
 const Main = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ function AdminMyPage() {
   // useEffect(() => {
   //   const loggedInfo = localStorage.getItem(‘access_token’);
   //   fetch(
-  //     `http://10.58.3.59:8000/schedules?employee_number=${employeeNumber}&name=${name}`
+  //     `${GET_API}/schedules?employee_number=${employeeNumber}&name=${name}`
   //   )
   //     .then(response => response.json())
   //     .then(data => console.log('결과: ', data));
@@ -54,7 +55,7 @@ function AdminMyPage() {
 
   // initializeUserInfo = () => {
   //   const loggedInfo = localStorage.getItem(‘access_token’);
-  //   fetch(GET_access_token_API, {
+  //   fetch(GET_API, {
   //     method: ‘GET’,
   //     headers: {
   //       access_token: loggedInfo,

@@ -4,6 +4,7 @@ import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 import RequestButton from '../../../components/RequestButton';
+import { GET_API } from '../../../config';
 
 const GlassBg = styled.div`
   width: 90%;
@@ -117,7 +118,7 @@ export default function Vacation({ userInfo }) {
     }
 
     const accessToken = localStorage.getItem('access_token');
-    // fetch('http://192.168.0.53:8000/users/userInfo.employee_number/drafts', {
+    // fetch(`${GET_API}/users/userInfo.employee_number/drafts`, {
     //   method: 'POST',
     //   body: JSON.stringify({
     //     access_token: accessToken;

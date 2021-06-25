@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexSet } from '../../styles/Variable';
 import RequestButton from '../../components/RequestButton';
+import { GET_API } from '../../config';
 
 const Main = styled.div`
   height: 100vh;
@@ -164,7 +165,7 @@ export default function Attendance() {
     const password = prompt(
       '비밀번호를 입력해주세요. 초기 비밀번호는 주민번호 뒤 7자리입니다.'
     );
-    fetch('http://192.168.0.53:8000/users/login', {
+    fetch(`${GET_API}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -189,7 +190,7 @@ export default function Attendance() {
   const getEmployeeData = debounce(() => {
     const employeeNumber = input.current.value;
     fetch(
-      `http://192.168.0.53:8000/schedules/today?employee_number=${employeeNumber}`
+      `http://3.35.47.207:8000/schedules/today?employee_number=${employeeNumber}`
     ).then(response => {
       if (response.status === 200) {
         return response.json().then(data => {
@@ -204,7 +205,7 @@ export default function Attendance() {
 
   const IsRegistered = () => {
     const employeeNumber = input.current.value;
-    fetch(`http://192.168.0.53:8000/users/${employeeNumber}/schedules`, {
+    fetch(`http://3.35.47.207:8000/users/${employeeNumber}/schedules`, {
       method: 'POST',
     });
     getEmployeeData();

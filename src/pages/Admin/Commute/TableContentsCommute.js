@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import TableForm from '../../../components/TableForm';
+import { GET_API } from '../../../config';
 
 function TableContentsCommute() {
   const [employeeData, setEmployeeData] = useState([]);
@@ -11,10 +12,9 @@ function TableContentsCommute() {
   useEffect(() => {}, [employeeData]);
 
   async function fetchData() {
-    let response = await fetch(`http://192.168.0.53:8000/schedules`);
+    let response = await fetch(`${GET_API}/schedules`);
     if (response.ok) {
       let data = await response.json();
-
       setEmployeeData(data.schedules);
     } else {
       alert(`HTTP-Error: ${response.status}`);

@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import TableForm from '../../../components/TableForm';
 import { useHistory } from 'react-router-dom';
+import { GET_API } from '../../../config';
 
 function TableContentsDefault() {
   const [employeeData, setEmployeeData] = useState([]);
@@ -13,7 +14,7 @@ function TableContentsDefault() {
   useEffect(() => {}, [employeeData]);
 
   async function fetchData() {
-    let response = await fetch(`http://192.168.0.53:8000/schedules`);
+    let response = await fetch(`${GET_API}/schedules`);
     if (response.ok) {
       let data = await response.json();
       setEmployeeData(data.schedules);

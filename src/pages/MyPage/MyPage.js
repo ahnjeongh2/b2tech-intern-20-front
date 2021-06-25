@@ -6,6 +6,7 @@ import RequestButton from '../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
 import { flexSet } from '../../styles/Variable';
 import { useHistory } from 'react-router-dom';
+import { GET_API } from '../../config';
 
 const Main = styled.div`
   display: flex;
@@ -121,7 +122,7 @@ export default function MyPage() {
   const initializeUserInfo = (firstDay, LastDay) => {
     const accessToken = localStorage.getItem('access_token');
     console.log(accessToken);
-    fetch('http://192.168.0.53:8000/users/mypage', {
+    fetch(`${GET_API}/users/mypage`, {
       headers: {
         AUTHORIZATION: accessToken,
         firstDay: firstDay,
