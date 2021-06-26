@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import LeftAside from '../../../../components/LeftAside';
+import LeftAside from '../../../components/LeftAside';
 import RequestButton from '../../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
 import { flexSet } from '../../../styles/Variable';
