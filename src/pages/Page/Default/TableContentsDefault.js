@@ -26,7 +26,7 @@ function TableContentsDefault({ userInfo }) {
     );
     if (response.ok) {
       let data = await response.json();
-      setEmployeeData(data.schedules);
+      setEmployeeData(data.results);
     } else if (response.status == 401) {
       history.push(`/`);
     } else if (!response.status == 401) setAdmin(true);
@@ -55,19 +55,15 @@ function TableContentsDefault({ userInfo }) {
           },
           {
             Header: '주민번호',
-            accessor: 'resident_registration_number',
+            accessor: 'registration_number',
           },
           {
             Header: '연락처',
-            accessor: 'mobile_phone_number',
-          },
-          {
-            Header: '주소',
-            accessor: 'address',
+            accessor: 'phone_number',
           },
           {
             Header: '입사일',
-            accessor: 'entering_date',
+            accessor: 'date_of_join',
           },
         ],
       },
