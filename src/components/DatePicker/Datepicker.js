@@ -34,7 +34,7 @@ export default function DatePickerComponent({ handlePeriod }) {
       <DatePicker
         selected={endDate}
         onChange={date => {
-          if (startDate.getDate() <= date.getDate()) {
+          if (startDate <= date) {
             setEndDate(date);
           } else {
             alert('시작일보다 뒤의 날짜를 선택해주세요!');

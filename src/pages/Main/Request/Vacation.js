@@ -86,7 +86,7 @@ const Bottom = styled.div`
 
 const VACATION_ARR = ['연차', '반차', '공가', '경조'];
 
-export default function Vacation({ userInfo }) {
+export default function Vacation({ myInfo }) {
   const [periodData, setPeriodData] = useState({});
   const [vacationType, setVacationType] = useState('');
   const history = useHistory();
@@ -106,8 +106,10 @@ export default function Vacation({ userInfo }) {
   // };
 
   const vacationRequest = () => {
-    if (!userInfo.remaining_annual_leave)
+    if (!myInfo.remaining_annual_leave) {
       alert('연차 휴가를 모두 소진하였습니다.');
+      return;
+    }
     if (vacationType) {
       handlePeriod();
       alert(
@@ -141,14 +143,14 @@ export default function Vacation({ userInfo }) {
           <RequestButton value="등록" onClick={vacationRequest} />
         </ButtonInfo>
         <VacationInfo>
-          발생:&nbsp;<span>{userInfo.leave}</span>
+          발생:&nbsp;<span>{myInfo.leave}</span>
         </VacationInfo>
         <VacationInfo>
           사용:&nbsp;
-          <span>{userInfo.leave - userInfo.remaining_annual_leave}</span>
+          <span>{myInfo.leave - myInfo.remaining_annual_leave}</span>
         </VacationInfo>
         <VacationInfo>
-          잔여:&nbsp;<span>{userInfo.remaining_annual_leave}</span>
+          잔여:&nbsp;<span>{myInfo.remaining_annual_leave}</span>
         </VacationInfo>
       </Info>
       <GlassBg>

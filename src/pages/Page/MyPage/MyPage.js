@@ -135,14 +135,15 @@ export default function MyPage({ userInfo }) {
   };
 
   useEffect(() => {
-    fetchData(firstDay, lastDay);
-  }, [lastDay]);
+    fetchData();
+    // fetchData(firstDay, lastDay);
+  }, []);
 
-  async function fetchData(firstDay, lastDay) {
+  async function fetchData() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    console.log(userInfo.employee_number, firstDay, lastDay);
     let response = await fetch(
-      `${GET_API}/users/${userInfo.employee_number}/mypage?monday=${firstDay}&sunday=${lastDay}`,
+      `${GET_API}/users/${userInfo.employee_number}/mypage`,
+      // `${GET_API}/users/${userInfo.employee_number}/mypage?monday=${firstDay}&sunday=${lastDay}`,
       {
         headers: {
           Authorization: accessToken,

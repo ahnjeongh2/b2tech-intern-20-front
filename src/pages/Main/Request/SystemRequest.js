@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { flexSet } from '../../../styles/Variable';
 import RequestButton from '../../../components/RequestButton';
 import { useHistory } from 'react-router-dom';
+import { GET_API } from '../../../config';
 
 const ButtonInfo = styled.div`
   text-align: center;
@@ -52,6 +53,8 @@ const SystemWrap = styled.ul`
 
 const SYSTEM_ARR = ['8시', '9시', '10시'];
 
+const today = new Date();
+
 export default function SystemRequest() {
   const [over, setOver] = useState(false);
   const [workPeriod, setWorkPeriod] = useState({});
@@ -95,6 +98,19 @@ export default function SystemRequest() {
     } else {
       alert('시차근무제의 기간과 종류를 선택해주세요.');
     }
+
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    fetch(`${GET_API}/users/userInfo.employee_number/drafts`, {
+      method: 'POST',
+      body: JSON.stringify({
+        Authorization: accessToken,
+        type: systemType,
+        start_at: `${today.getFullYear()}-${workPeriod.startMonth + 1}`,
+        end_at: `${today.getFullYear()}-${workPeriod.endMonth + 1}`,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {});
   };
 
   return (
