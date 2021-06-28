@@ -56,7 +56,7 @@ const UserInfo = styled(GlassBg.withComponent('p'))`
 `;
 
 export default function Request() {
-  const [userInfo, setUserInfo] = useState('');
+  const [myInfo, setMyInfo] = useState('');
   const [currentId, setCurrentId] = useState('1');
 
   const clickHandler = id => {
@@ -64,15 +64,15 @@ export default function Request() {
   };
 
   const initializeUserInfo = () => {
-    const accessToken = localStorage.getItem('AUTHORIZATION');
-    // fetch(`${GET_API}`, {
+    // const accessToken = localStorage.getItem('AUTHORIZATION');
+    // fetch(`${GET_API}/users/me`, {
     //   headers: JSON.stringify({
-    //     AUTHORIZATION: accessToken,
-    //   },
+    //     Authorization: accessToken,
+    //   }),
     // })
     //   .then(response => response.json())
     //   .then(data => {
-    //     setUserInfo(data);
+    //     setMyInfo(data);
     //   });
   };
 
@@ -81,7 +81,7 @@ export default function Request() {
   }, []);
 
   const MAPPING_OBJ = {
-    1: <Vacation userInfo={userInfo} />,
+    1: <Vacation myInfo={myInfo} />,
     2: <WorkingSystem />,
   };
 
@@ -90,8 +90,8 @@ export default function Request() {
       <Title>휴가 • 근무제 신청</Title>
       <GlassBg>
         <UserInfo>
-          <span>{`사번: ${userInfo && userInfo.employeeNumber}`}</span>
-          <span>{`${userInfo && userInfo.name} 님`}</span>
+          <span>{`사번: ${myInfo && myInfo.employee_number}`}</span>
+          <span>{`${myInfo && myInfo.name} 님`}</span>
         </UserInfo>
         <Tabs>
           <TabList>
