@@ -58,7 +58,13 @@ const ADMINMENU_ARR = [
   { menuIcon: <i className="fas fa-chart-line" />, menuName: '근무 일일현황' },
 ];
 
-function LeftAsideAddAdmin({ clickHandler, currentId }) {
+function LeftAsideAddAdmin() {
+  const [currentId, setCurrentId] = useState(1);
+
+  const clickHandler = id => {
+    setCurrentId(id);
+  };
+
   return (
     <>
       <ManagingMenuNav>

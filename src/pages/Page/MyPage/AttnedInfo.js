@@ -141,7 +141,7 @@ const BarBg = styled(BarGraph.withComponent('div'))`
 `;
 
 export default function AttnedInfo({
-  userInfo,
+  myInfo,
   today,
   firstDay,
   lastDay,
@@ -165,14 +165,14 @@ export default function AttnedInfo({
             <tr>
               <td>출근</td>
               <td>
-                {userInfo.work_in
-                  ? userInfo.work_in.replace('T', '  ').substr(11, 9)
+                {myInfo.work_in
+                  ? myInfo.work_in.replace('T', '  ').substr(11, 9)
                   : '출근 전'}
               </td>
               <td>퇴근</td>
               <td>
-                {userInfo.work_out
-                  ? userInfo.work_out.replace('T', '  ').substr(11, 9)
+                {myInfo.work_out
+                  ? myInfo.work_out.replace('T', '  ').substr(11, 9)
                   : '퇴근 전'}
               </td>
             </tr>
@@ -192,21 +192,21 @@ export default function AttnedInfo({
             <p>
               • 소정 근로시간: 주 ({' '}
               <span>
-                {userInfo.total_work_in_week &&
-                  userInfo.total_work_in_week.substr(0, 2)}
+                {myInfo.total_work_in_week &&
+                  myInfo.total_work_in_week.substr(0, 2)}
               </span>
               시간
               <span>
                 {' '}
-                {userInfo.total_work_in_week &&
-                  userInfo.total_work_in_week.substr(3, 5)}
+                {myInfo.total_work_in_week &&
+                  myInfo.total_work_in_week.substr(3, 5)}
               </span>
               분 ) / 52시간
             </p>
             <div>
               <BarGraph
                 ref={myGraph}
-                value={userInfo.total_work_in_week}
+                value={myInfo.total_work_in_week}
               ></BarGraph>
               <BarBg></BarBg>
             </div>

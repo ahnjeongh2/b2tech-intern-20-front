@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import AttnedInfo from './AttnedInfo';
+import WorkingSystemInfo from './WorkingSystemInfo';
 import { GET_API } from '../../../config';
 
 const Main = styled.div`
@@ -62,8 +63,8 @@ const Selected = styled.span`
 
 const TAPMENU_ARR = ['근태정보', '휴가정보'];
 
-export default function MyPage() {
-  const [userInfo, setUserInfo] = useState('');
+export default function MyPage({ userInfo }) {
+  const [myInfo, setMyInfo] = useState('');
   const [currentId, setCurrentId] = useState(1);
   const [admin, setAdmin] = useState(false);
   const [firstDay, setFirstDay] = useState('');
@@ -98,9 +99,10 @@ export default function MyPage() {
   };
 
   useEffect(() => {
-    GetWorkTimeList(userInfo.work_time_list);
-    GetTotalworkTime(userInfo.total_work_in_week);
-  }, [userInfo]);
+    GetWorkTimeList(myInfo.work_time_list);
+    GetTotalworkTime(myInfo.total_work_in_week);
+    getDay();
+  }, [myInfo]);
 
   const getDay = () => {
     const fday = `${today.getFullYear()}-${today.getMonth() + 1}-${
@@ -133,12 +135,12 @@ export default function MyPage() {
   };
 
   useEffect(() => {
-    getDay();
     fetchData(firstDay, lastDay);
   }, [lastDay]);
 
   async function fetchData(firstDay, lastDay) {
     const accessToken = localStorage.getItem('AUTHORIZATION');
+    console.log(userInfo.employee_number, firstDay, lastDay);
     let response = await fetch(
       `${GET_API}/users/${userInfo.employee_number}/mypage?monday=${firstDay}&sunday=${lastDay}`,
       {
@@ -149,11 +151,10 @@ export default function MyPage() {
     );
     if (response.ok) {
       let data = await response.json();
-      setUserInfo(data);
-
-      if (data.roles.관리자) setAdmin(true);
-    } else if (response.status == 401) {
-      history.push(`/`);
+      setMyInfo(data);
+      //   if (data.roles.관리자) setAdmin(true);
+      // } else if (response.status == 401) {
+      //   history.push(`/`);
     }
   }
 
@@ -164,7 +165,7 @@ export default function MyPage() {
   const MAPPING_OBJ = {
     1: (
       <AttnedInfo
-        userInfo={userInfo}
+        myInfo={myInfo}
         today={today}
         firstDay={firstDay}
         lastDay={lastDay}
@@ -173,7 +174,7 @@ export default function MyPage() {
         myGraph={myGraph}
       />
     ),
-    // 2: <WorkingSystemInfo />,
+    2: <WorkingSystemInfo />,
   };
 
   return (
