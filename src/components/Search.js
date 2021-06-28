@@ -1,19 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import Highlighter from 'react-highlight-words';
 import styled from 'styled-components';
+import SearchBox from '../components/SearchBox';
+import Default from '../pages/Page/Default/Default';
+import Commute from '../pages/Page/Commute/Commute';
+import { GET_API } from '../../src/config';
 
 const MenuContainer = styled.div`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   .menu {
+    width: 150px;
+    margin-top: 5px;
     background: #ffffff;
-    border-radius: 8px;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 300px;
+    border-radius: 5px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
@@ -29,18 +29,9 @@ const MenuContainer = styled.div`
 `;
 
 const MenuTriggerButton = styled.button`
-  background: #ffffff;
+  padding: 4px 6px;
   border-radius: 90px;
   cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  border: none;
-  vertical-align: middle;
-  transition: box-shadow 0.4s ease;
-  margin-left: auto; /* Strictly for positioning */
 
   &:hover {
     opacity: 0.7;
@@ -49,32 +40,73 @@ const MenuTriggerButton = styled.button`
 `;
 
 const FaSearchIcon = styled.i`
-  font-weight: 700;
-  vertical-align: middle;
-  font-size: 14px;
+  font-size: 0.6rem;
 `;
 
+const useSearchButton = (searchModal, initialState) => {
+  const [isActive, setIsActive] = useState(initialState);
+
+  useEffect(() => {
+    const handleSearchModal = e => {
+      if (
+        searchModal.current !== null &&
+        !searchModal.current.contains(e.target)
+      ) {
+        setIsActive(!isActive);
+      }
+    };
+
+    if (isActive) {
+      window.addEventListener('click', handleSearchModal);
+    }
+
+    return () => {
+      window.removeEventListener('click', handleSearchModal);
+    };
+  }, [isActive, searchModal]);
+
+  return [isActive, setIsActive];
+};
+
 function Search() {
-  // const dropdownRef = useRef(null);
-  // const [isActive, setIsActive] = useSearchButton(dropdownRef, false);
-  // const handleDropDownSearchBox = () => setIsActive(!isActive);
-  // const initSearchInput = e => {
-  //   e.target.value = '';
-  // };
+  const dropdownRef = useRef(null);
+  const [isActive, setIsActive] = useSearchButton(dropdownRef, false);
+  const handleDropDownSearchBox = () => setIsActive(!isActive);
+
+  const [searchDatas, setSearchDatas] = useState('');
+  const [userInput, setUserInput] = useState('');
+
+  useEffect(() => {
+    getSearchDatas();
+  }, []);
+
+  const getSearchDatas = () => {
+    fetch(`${GET_API}/schedules`)
+      .then(response => response.json())
+      .then(result => setSearchDatas(result));
+  };
+
+  const inputHandler = e => {
+    setUserInput(e.target.value);
+  };
+
+  const filteredSearchDatas = searchDatas.filter(searchData => {
+    return searchData.name.toLowerCase().includes(userInput.toLowerCase());
+  });
 
   return (
     <div>
-      {/* <MenuContainer>
+      <MenuContainer>
         <MenuTriggerButton onClick={handleDropDownSearchBox}>
           <FaSearchIcon className="fas fa-search" />
-          <nav
-            ref={dropdownRef}
-            className={`menu ${isActive ? 'active' : 'inactive'}`}
-          >
-            <input type="text" name="search" id="search" placeholder="검색" />
-          </nav>
         </MenuTriggerButton>
-      </MenuContainer> */}
+        <form
+          ref={dropdownRef}
+          className={`menu ${isActive ? 'active' : 'inactive'}`}
+        >
+          <SearchBox handleChange={inputHandler} />
+        </form>
+      </MenuContainer>
     </div>
   );
 }

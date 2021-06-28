@@ -69,8 +69,8 @@ function LeftAsideAddAdmin({ clickHandler, currentId }) {
           <ManagingMenuLists>
             {ADMINMENU_ARR.map((managingMenus, idx) => {
               return (
-                <MenuLists key={idx} onClick={() => clickHandler(idx + 1)}>
-                  {idx + 1 === currentId ? (
+                <MenuLists key={idx} onClick={() => clickHandler(idx + 2)}>
+                  {idx + 2 === currentId + 1 ? (
                     <Selected>
                       {managingMenus.menuIcon} {managingMenus.menuName}
                     </Selected>

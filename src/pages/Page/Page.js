@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import LeftAside from '../../components/LeftAside';
 import RequestButton from '../../components/RequestButton';
 import MyPage from './MyPage/MyPage';
+import Default from './Default/Default';
+import Commute from './Commute/Commute';
 import { flexSet } from '../../../src/styles/Variable';
 import { GET_API } from '../../../src/config';
 
@@ -117,7 +119,8 @@ export default function Page() {
 
   const MAPPING_OBJ = {
     1: <MyPage userInfo={userInfo} currentId={currentId} />,
-    // 2: <WorkingSystemInfo />,
+    2: <Default userInfo={userInfo} currentId={currentId} />,
+    3: <Commute userInfo={userInfo} currentId={currentId} />,
   };
 
   return (
