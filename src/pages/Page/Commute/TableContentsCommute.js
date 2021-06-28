@@ -1,9 +1,12 @@
 import { useMemo, useState, useEffect } from 'react';
 import TableForm from '../../../components/TableForm';
+import { useHistory } from 'react-router-dom';
 import { GET_API } from '../../../config';
 
-function TableContentsCommute() {
+function TableContentsCommute({ userInfo }) {
   const [employeeData, setEmployeeData] = useState([]);
+  const [admin, setAdmin] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     fetchData();
@@ -12,13 +15,19 @@ function TableContentsCommute() {
   useEffect(() => {}, [employeeData]);
 
   async function fetchData() {
-    let response = await fetch(`${GET_API}/schedules`);
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    let response = await fetch(`${GET_API}/schedules`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
     if (response.ok) {
       let data = await response.json();
       setEmployeeData(data.schedules);
-    } else {
-      alert(`HTTP-Error: ${response.status}`);
     }
+    // else if (response.status == 401) {
+    //   history.push(`/`);
+    // } else if (!response.status == 401) setAdmin(true);
   }
 
   const columns = useMemo(
