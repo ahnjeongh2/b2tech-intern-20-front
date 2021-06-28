@@ -92,7 +92,13 @@ const MenuLists = styled.li`
   display: inline;
 `;
 
-function LeftAside({ leftBar, handleCloseIcon, admin }) {
+function LeftAside({
+  clickHandler,
+  currentId,
+  leftBar,
+  handleCloseIcon,
+  admin,
+}) {
   const location = useLocation();
 
   return (
@@ -114,7 +120,12 @@ function LeftAside({ leftBar, handleCloseIcon, admin }) {
               </GoToMenuLists>
             </IconAndMenuListsWrapper>
           </MyPageMenuNav>
-          {admin && <LeftAsideAddAdmin />}
+          {admin && (
+            <LeftAsideAddAdmin
+              clickHandler={clickHandler}
+              currentId={currentId}
+            />
+          )}
         </NavContainer>
       </LeftAsideMenu>
     </>

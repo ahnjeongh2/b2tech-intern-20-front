@@ -83,7 +83,7 @@ export default function Page() {
 
   async function fetchData() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    let response = await fetch(`${GET_API}/users/mypage`, {
+    let response = await fetch(`${GET_API}/users/me`, {
       headers: {
         Authorization: accessToken,
       },
@@ -116,7 +116,7 @@ export default function Page() {
   };
 
   const MAPPING_OBJ = {
-    1: <MyPage userInfo={userInfo} />,
+    1: <MyPage userInfo={userInfo} currentId={currentId} />,
     // 2: <WorkingSystemInfo />,
   };
 
@@ -133,7 +133,7 @@ export default function Page() {
           <Manu className="fas fa-bars" onClick={handleMenu} />
           <UserInfo>
             <EmployeeNumber>
-              {`사번: ${userInfo && userInfo.employeeNumber}`}{' '}
+              {`사번: ${userInfo && userInfo.employee_number}`}{' '}
             </EmployeeNumber>
             <EmployeeName>{`${userInfo && userInfo.name} 님`}</EmployeeName>
           </UserInfo>
@@ -143,7 +143,7 @@ export default function Page() {
             <RequestButton value="휴가•근무제 신청" />
           </Link>
         </ButtonSection>
-        {MAPPING_OBJ[currentId]}
+        {userInfo && MAPPING_OBJ[currentId]}
       </Article>
     </Main>
   );
