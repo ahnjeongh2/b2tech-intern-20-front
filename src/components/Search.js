@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SearchBox from '../components/SearchBox';
 import Default from '../pages/Page/Default/Default';
 import Commute from '../pages/Page/Commute/Commute';
+import { GET_API } from '../../src/config';
 
 const MenuContainer = styled.div`
   position: relative;
