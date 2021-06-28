@@ -41,7 +41,7 @@ function Default({ userInfo }) {
     );
     if (response.ok) {
       let data = await response.json();
-      setMyInfo(data);
+      setMyInfo(data.results);
     } else if (response.status == 401) {
       history.push(`/`);
     }
