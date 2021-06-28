@@ -91,12 +91,15 @@ export default function Page() {
     if (response.ok) {
       let data = await response.json();
       setUserInfo(data);
-
       if (data.roles.관리자) setAdmin(true);
-    } else if (response.status == 401) {
+    } else if (response.status === 401) {
       history.push(`/`);
     }
   }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const clickHandler = id => {
     setCurrentId(id);
