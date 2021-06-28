@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import LeftAside from '../../../components/LeftAside';
-import RequestButton from '../../../components/RequestButton';
 import AttnedInfo from './AttnedInfo';
-import { flexSet } from '../../../styles/Variable';
 import { GET_API } from '../../../config';
 
 const Main = styled.div`
@@ -14,60 +11,6 @@ const Main = styled.div`
 
 const Article = styled.article`
   width: 100%;
-`;
-
-const UpperSection = styled.section`
-  ${flexSet('flex-start', 'center')}
-  border-bottom: 1px solid ${({ theme }) => theme.borderLine};
-`;
-
-const Manu = styled.i`
-  display: none;
-  margin: 5px 5px 5px 20px;
-
-  @media ${({ theme }) => theme.mobile} {
-    display: block;
-    color: ${({ theme }) => theme.backgroundNavy};
-    font-size: 0.9rem;
-  }
-`;
-
-const UserInfo = styled.p`
-  height: 50px;
-  margin-left: 25px;
-  padding-top: 20px;
-  font-size: 1rem;
-
-  @media ${({ theme }) => theme.mobile} {
-    margin-left: 0px;
-    font-size: 0.7rem;
-  }
-`;
-
-const EmployeeNumber = styled(UserInfo.withComponent('span'))`
-  margin-left: 20px;
-
-  @media ${({ theme }) => theme.mobile} {
-    margin-left: 10px;
-  }
-`;
-
-const EmployeeName = styled(UserInfo.withComponent('span'))`
-  margin-left: 25px;
-
-  @media ${({ theme }) => theme.mobile} {
-    margin-left: 10px;
-  }
-`;
-
-const ButtonSection = styled.section`
-  position: absolute;
-  top: 10px;
-  right: 0;
-
-  @media ${({ theme }) => theme.mobile} {
-    top: 2px;
-  }
 `;
 
 const Tabs = styled.div`
@@ -197,7 +140,7 @@ export default function MyPage() {
   async function fetchData(firstDay, lastDay) {
     const accessToken = localStorage.getItem('AUTHORIZATION');
     let response = await fetch(
-      `${GET_API}/users/mypage?monday=${firstDay}&sunday=${lastDay}`,
+      `${GET_API}/users/${userInfo.employee_number}/mypage?monday=${firstDay}&sunday=${lastDay}`,
       {
         headers: {
           Authorization: accessToken,
@@ -218,16 +161,6 @@ export default function MyPage() {
     setCurrentId(id);
   };
 
-  const handleMenu = () => {
-    leftBar.current.style.display = 'block';
-    menuIcon.current.style.display = 'none';
-  };
-
-  const handleCloseIcon = () => {
-    leftBar.current.style.display = 'none';
-    menuIcon.current.style.display = 'block';
-  };
-
   const MAPPING_OBJ = {
     1: (
       <AttnedInfo
@@ -245,26 +178,7 @@ export default function MyPage() {
 
   return (
     <Main>
-      {/* <LeftAside
-        admin={admin}
-        leftBar={leftBar}
-        handleCloseIcon={() => handleCloseIcon()}
-      /> */}
       <Article>
-        {/* <UpperSection>
-          <Manu className="fas fa-bars" onClick={handleMenu} ref={menuIcon} />
-          <UserInfo>
-            <EmployeeNumber>
-              {`사번: ${userInfo && userInfo.employeeNumber}`}{' '}
-            </EmployeeNumber>
-            <EmployeeName>{`${userInfo && userInfo.name} 님`}</EmployeeName>
-          </UserInfo>
-        </UpperSection>
-        <ButtonSection>
-          <Link to="/request">
-            <RequestButton value="휴가•근무제 신청" />
-          </Link>
-        </ButtonSection> */}
         <Tabs>
           <TabList>
             {TAPMENU_ARR.map((name, idx) => {
