@@ -146,6 +146,7 @@ export default function MyPage({ userInfo }) {
       // `${GET_API}/users/${userInfo.employee_number}/mypage?monday=${firstDay}&sunday=${lastDay}`,
       {
         headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
           Authorization: accessToken,
         },
       }

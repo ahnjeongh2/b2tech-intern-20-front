@@ -67,6 +67,7 @@ export default function Request() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
     fetch(`${GET_API}/users/me`, {
       headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
         Authorization: accessToken,
       },
     })

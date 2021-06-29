@@ -20,6 +20,7 @@ function TableContentsDefault({ userInfo }) {
       `${GET_API}/users/${userInfo.employee_number}/employees`,
       {
         headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
           Authorization: accessToken,
         },
       }

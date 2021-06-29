@@ -169,7 +169,6 @@ export default function Attendance() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        // 'X-Requested-With': 'XMLHttpRequest',
       },
       body: JSON.stringify({
         employee_number: employee_number,
