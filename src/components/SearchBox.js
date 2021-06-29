@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Highlighter from 'react-highlight-words';
 import styled from 'styled-components';
+import RequestButton from './RequestButton';
 import { GET_API } from '../../src/config';
 
 const Input = styled.input`
@@ -16,10 +17,9 @@ function SearchBox({ onSubmit }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="filter" />
-      <button>Search</button>
+      <Input type="search" placeholder="Search..." onChange={inputHandler} />
+      <RequestButton />Search
     </form>
-    // <Input type="search" placeholder="Search..." onChange={inputHandler} />
   );
 }
 
