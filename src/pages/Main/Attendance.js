@@ -200,7 +200,7 @@ export default function Attendance() {
         }
       }
     );
-  }, 800);
+  }, 1000);
 
   const IsRegistered = () => {
     const employeeNumber = input.current.value;
