@@ -26,9 +26,6 @@ function TableContentsCommute({ userInfo }) {
       let data = await response.json();
       setEmployeeData(data.schedules);
     }
-    // else if (response.status == 401) {
-    //   history.push(`/`);
-    // } else if (!response.status == 401) setAdmin(true);
   }
 
   const columns = useMemo(
