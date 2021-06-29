@@ -4,14 +4,18 @@ import styled from 'styled-components';
 import LeftAsideAddAdmin from '../components/LeftAsideAddAdmin';
 
 const LeftAsideMenu = styled.aside`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 160px;
   height: 100vh;
   color: ${({ theme }) => theme.fontLightBlue};
   background-color: ${({ theme }) => theme.backgroundNavy};
   font-size: 0.9rem;
+  z-index: 2;
 
   @media ${({ theme }) => theme.mobile} {
+    width: 120px;
     transform: translateX(-160px);
     opacity: 0;
     transition: all 900ms cubic-bezier(0.9, 0, 0.33, 1);
@@ -27,9 +31,6 @@ const CloseIcon = styled.i`
 
   @media ${({ theme }) => theme.mobile} {
     display: block;
-    /* position: absolute;
-    top: 2px;
-    left: 2px; */
     color: #fff;
     font-size: 1.1rem;
   }
@@ -80,7 +81,7 @@ const GoToMenuLists = styled(Link)`
   }
 
   @media ${({ theme }) => theme.mobile} {
-    margin: 5px;
+    margin: 20px;
   }
 `;
 
@@ -128,10 +129,6 @@ function LeftAside({
               currentId={currentId}
             />
           )}
-          {/* <LeftAsideAddAdmin
-            clickHandler={clickHandler}
-            currentId={currentId}
-          /> */}
         </NavContainer>
       </LeftAsideMenu>
     </>

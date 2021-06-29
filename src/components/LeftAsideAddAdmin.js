@@ -9,6 +9,18 @@ const ManagingMenuTitle = styled.div`
   margin-left: 10px;
   margin-bottom: 15px;
 
+  h1 {
+    margin: 10px 10px 30px;
+    color: #fff;
+    font-size: 1rem;
+
+    @media ${({ theme }) => theme.mobile} {
+      margin: 10px;
+      color: #fff;
+      font-size: 0.8rem;
+    }
+  }
+
   @media ${({ theme }) => theme.mobile} {
     margin-left: 3px;
     margin-bottom: 15px;
@@ -25,11 +37,11 @@ const IconAndMenuListsWrapper = styled.div`
 `;
 
 const ManagingMenuLists = styled.ul`
-  margin: 20px;
+  margin-left: 20px;
   color: ${({ theme }) => theme.fontLightBlue};
 
   @media ${({ theme }) => theme.mobile} {
-    margin: 5px;
+    margin: 20px;
   }
 `;
 
@@ -70,7 +82,7 @@ function LeftAsideAddAdmin({ clickHandler, currentId }) {
             {ADMINMENU_ARR.map((managingMenus, idx) => {
               return (
                 <MenuLists key={idx} onClick={() => clickHandler(idx + 2)}>
-                  {idx + 2 === currentId + 1 ? (
+                  {idx + 2 === currentId ? (
                     <Selected>
                       {managingMenus.menuIcon} {managingMenus.menuName}
                     </Selected>

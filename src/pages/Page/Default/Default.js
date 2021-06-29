@@ -10,7 +10,11 @@ const Main = styled.div`
 `;
 
 const Article = styled.article`
-  width: 100%;
+  width: 85%;
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 120%;
+  }
 `;
 
 const TableWrapper = styled.section`
@@ -30,7 +34,7 @@ function Default({ userInfo }) {
 
   async function fetchData() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    console.log(userInfo.employee_number);
+    // console.log(userInfo.employee_number);
     let response = await fetch(
       `${GET_API}/users/${userInfo.employee_number}/employees`,
       {
