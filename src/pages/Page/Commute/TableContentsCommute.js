@@ -1,36 +1,7 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import TableForm from '../../../components/TableForm';
-import { useHistory } from 'react-router-dom';
-import { GET_API } from '../../../config';
 
-function TableContentsCommute({ userInfo }) {
-  const [employeeData, setEmployeeData] = useState([]);
-  const [admin, setAdmin] = useState(false);
-  const history = useHistory();
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {}, [employeeData]);
-
-  async function fetchData() {
-    const accessToken = localStorage.getItem('AUTHORIZATION');
-    let response = await fetch(`${GET_API}/schedules`, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        Authorization: accessToken,
-      },
-    });
-    if (response.ok) {
-      let data = await response.json();
-      setEmployeeData(data.schedules);
-    }
-    // else if (response.status == 401) {
-    //   history.push(`/`);
-    // } else if (!response.status == 401) setAdmin(true);
-  }
-
+function TableContentsCommute({ userInput }) {
   const columns = useMemo(
     () => [
       {
@@ -71,19 +42,15 @@ function TableContentsCommute({ userInfo }) {
           },
           {
             Header: '출근구분',
-            accessor: 'attendanceType',
+            accessor: 'late_status',
           },
           {
             Header: '퇴근구분',
-            accessor: 'leavingWorkType',
+            accessor: 'leaving_status',
           },
           {
             Header: '연장근무시간',
             accessor: 'leaveing_time',
-          },
-          {
-            Header: '휴일근무시간',
-            accessor: 'holidayWorkTime',
           },
           {
             Header: '총 근무시간',
@@ -95,7 +62,7 @@ function TableContentsCommute({ userInfo }) {
     []
   );
 
-  const commuteData = useMemo(() => employeeData, [employeeData]);
+  const commuteData = useMemo(() => userInput, [userInput]);
 
   return <TableForm columns={columns} data={commuteData} />;
 }

@@ -21,19 +21,39 @@ const Article = styled.article`
   }
 `;
 
+const PickerAndSearchWrapper = styled.div`
+  ${flexSet('space-between', 'center')}
+
+  @media ${({ theme }) => theme.mobile} {
+    flex-direction: column;
+  }
+`;
+
 const InfoPicker = styled.div`
+  ${flexSet('space-around', 'center')}
+  width: 500px;
   padding-left: 20px;
+
+  @media ${({ theme }) => theme.mobile} {
+    justify-content: flex-start;
+    font-size: 0.6rem;
+  }
+`;
+
+const SearchBoxWrapper = styled.div`
+  @media ${({ theme }) => theme.mobile} {
+    font-size: 0.6rem;
+  }
 `;
 
 const TableWrapper = styled.section`
   margin: 20px;
 `;
 
-function Commute({ userInfo }) {
-  const [myInfo, setMyInfo] = useState('');
-  // // const leftBar = useRef();
-  // // const menuIcon = useRef();
+function Commute() {
+  const [userInput, setUserInput] = useState([]);
   const [admin, setAdmin] = useState(false);
+  const input = useRef();
   const history = useHistory();
   const [periodData, setPeriodData] = useState({});
 
@@ -51,49 +71,53 @@ function Commute({ userInfo }) {
     });
     if (response.ok) {
       let data = await response.json();
-      setMyInfo(data);
+      console.log(data);
+      setUserInput(data.schedules);
     } else if (response.status == 401) {
       history.push(`/`);
     }
   }
 
-  // const initializeUserInfo = (firstDay, LastDay) => {
-  //   const accessToken = localStorage.getItem('AUTHORIZATION');
-  //   fetch(`${GET_API}/users/${userInfo.employee_number}//mypage`, {
-  //     headers: {
-  // 'Content-Type': 'application/json; charset=UTF-8',
-  //       AUTHORIZATION: accessToken,
-  //       firstDay: firstDay,
-  //       LastDay: LastDay,
-  //     },
-  //   })
-  //     .then(response => {
-  //       if (response.status == 401) {
-  //         history.push(`/`);
-  //       } else {
-  //         setAdmin(true);
-  //       }
-  //       response.json();
-  //     })
-  //     .then(data => {
-  //       console.log(data);
-  //       setUserInfo(data);
-  //     });
-  // };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  // useEffect(() => {
-  //   initializeUserInfo();
-  // }, []);
+  useEffect(() => {}, [userInput]);
 
-  // const handleMenu = () => {
-  //   leftBar.current.style.display = 'block';
-  //   menuIcon.current.style.display = 'none';
-  // };
+  async function fetchData() {
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    let response = await fetch(`${GET_API}/schedules`, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: accessToken,
+      },
+    });
+    if (response.ok) {
+      let data = await response.json();
+      setUserInput(data.schedules);
+    } else if (response.status == 401) {
+      history.push(`/`);
+    } else if (!response.status == 401) setAdmin(true);
+  }
 
-  // const handleCloseIcon = () => {
-  //   leftBar.current.style.display = 'none';
-  //   menuIcon.current.style.display = 'block';
-  // };
+  async function searchFetchData() {
+    const searchDatas = input.current.value;
+    console.log(searchDatas, userInput);
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    let response = await fetch(`${GET_API}/schedules?search=${searchDatas}`, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: accessToken,
+      },
+    });
+    if (response.ok) {
+      console.log(response);
+      let data = await response.json();
+      console.log(data);
+
+      setUserInput(data.schedules);
+    }
+  }
 
   const handlePeriod = (startDate, endDate) => {
     if (startDate <= endDate) {
@@ -104,13 +128,17 @@ function Commute({ userInfo }) {
   return (
     <Main>
       <Article>
-        <InfoPicker>
-          <DatePickerComponent handlePeriod={handlePeriod} />
-          <RequestButton value="조회" />
-        </InfoPicker>
-        <SearchBox />
+        <PickerAndSearchWrapper>
+          <InfoPicker>
+            <DatePickerComponent handlePeriod={handlePeriod} />
+            <RequestButton value="조회" />
+          </InfoPicker>
+          <SearchBoxWrapper>
+            <SearchBox searchFetchData={searchFetchData} input={input} />
+          </SearchBoxWrapper>
+        </PickerAndSearchWrapper>
         <TableWrapper>
-          <TableContentsCommute userInfo={userInfo} />
+          {userInput && <TableContentsCommute userInput={userInput} />}
         </TableWrapper>
       </Article>
     </Main>

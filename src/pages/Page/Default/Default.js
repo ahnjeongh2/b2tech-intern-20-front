@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import TableContentsDefault from '../Default/TableContentsDefault';
@@ -23,9 +23,6 @@ const TableWrapper = styled.section`
 
 function Default({ userInfo }) {
   const [myInfo, setMyInfo] = useState('');
-  // // const leftBar = useRef();
-  // // const menuIcon = useRef();
-  const [admin, setAdmin] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -34,7 +31,6 @@ function Default({ userInfo }) {
 
   async function fetchData() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    // console.log(userInfo.employee_number);
     let response = await fetch(
       `${GET_API}/users/${userInfo.employee_number}/employees`,
       {
@@ -51,44 +47,6 @@ function Default({ userInfo }) {
       history.push(`/`);
     }
   }
-
-  // const initializeUserInfo = (firstDay, LastDay) => {
-  //   const accessToken = localStorage.getItem('AUTHORIZATION');
-  //   fetch(`${GET_API}/users/${userInfo.employee_number}/mypage`, {
-  //     headers: {
-  // 'Content-Type': 'application/json; charset=UTF-8',
-  //       AUTHORIZATION: accessToken,
-  //       firstDay: firstDay,
-  //       LastDay: LastDay,
-  //     },
-  //   })
-  //     .then(response => {
-  //       if (response.status == 401) {
-  //         history.push(`/`);
-  //       } else {
-  //         setAdmin(true);
-  //       }
-  //       response.json();
-  //     })
-  //     .then(data => {
-  //       console.log(data);
-  //       setUserInfo(data);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   initializeUserInfo();
-  // }, []);
-
-  // const handleMenu = () => {
-  //   leftBar.current.style.display = 'block';
-  //   menuIcon.current.style.display = 'none';
-  // };
-
-  // const handleCloseIcon = () => {
-  //   leftBar.current.style.display = 'none';
-  //   menuIcon.current.style.display = 'block';
-  // };
 
   return (
     <Main>
