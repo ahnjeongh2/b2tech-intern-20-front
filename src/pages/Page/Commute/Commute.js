@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import TableContentsCommute from '../Commute/TableContentsCommute';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
 import RequestButton from '../../../components/RequestButton';
+import SearchBox from '../../../components/SearchBox';
 import { flexSet } from '../../../styles/Variable';
 import { GET_API } from '../../../config';
 
@@ -107,6 +108,7 @@ function Commute({ userInfo }) {
           <DatePickerComponent handlePeriod={handlePeriod} />
           <RequestButton value="조회" />
         </InfoPicker>
+        <SearchBox />
         <TableWrapper>
           <TableContentsCommute userInfo={userInfo} />
         </TableWrapper>
