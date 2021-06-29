@@ -95,7 +95,7 @@ export default function Vacation({ myInfo }) {
     if (startDate <= endDate) {
       setPeriodData({ startDate: startDate, endDate: endDate });
     }
-    if (vacationType === '반차') {
+    if (vacationType.el === '반차') {
       setPeriodData({ startDate: endDate, endDate: endDate });
     }
   };
