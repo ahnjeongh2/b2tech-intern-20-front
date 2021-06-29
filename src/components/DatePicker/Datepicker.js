@@ -22,7 +22,7 @@ export default function DatePickerComponent({ handlePeriod }) {
       <DatePicker
         selected={startDate}
         onChange={date => {
-          if (endDate.getDate() < date.getDate()) {
+          if (endDate < date) {
             setEndDate(date);
           }
           setStartDate(date);
