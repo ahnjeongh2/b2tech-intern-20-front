@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import TableContentsCommute from '../Commute/TableContentsCommute';
 import DatePickerComponent from '../../../components/DatePicker/Datepicker';
+import RequestButton from '../../../components/RequestButton';
 import { flexSet } from '../../../styles/Variable';
 import { GET_API } from '../../../config';
 
@@ -20,15 +21,11 @@ const Article = styled.article`
 `;
 
 const InfoPicker = styled.div`
-  ${flexSet('space-between', 'center')}
-  position: absolute;
-  top: 70px;
-  left: 155px;
-  width: 375px;
+  padding-left: 20px;
 `;
 
 const TableWrapper = styled.section`
-  margin: 80px 30px 0px 20px;
+  margin: 20px;
 `;
 
 function Commute({ userInfo }) {
@@ -108,6 +105,7 @@ function Commute({ userInfo }) {
       <Article>
         <InfoPicker>
           <DatePickerComponent handlePeriod={handlePeriod} />
+          <RequestButton value="조회" />
         </InfoPicker>
         <TableWrapper>
           <TableContentsCommute userInfo={userInfo} />
