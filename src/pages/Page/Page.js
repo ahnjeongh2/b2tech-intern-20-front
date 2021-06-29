@@ -10,21 +10,27 @@ import { flexSet } from '../../../src/styles/Variable';
 import { GET_API } from '../../../src/config';
 
 const Main = styled.div`
-  display: flex;
+  margin: 0;
   overflow: hidden;
 `;
 
 const Article = styled.article`
-  width: 100%;
+  position: relative;
+  left: 160px;
 
   @media ${({ theme }) => theme.mobile} {
-    transform: translateX(-65px);
+    transform: translateX(-150px);
   }
 `;
 
 const UpperSection = styled.section`
   ${flexSet('flex-start', 'center')}
+  height: 70px;
   border-bottom: 1px solid ${({ theme }) => theme.borderLine};
+
+  @media ${({ theme }) => theme.mobile} {
+    height: 60px;
+  }
 `;
 
 const Manu = styled.i`
@@ -68,11 +74,12 @@ const EmployeeName = styled(UserInfo.withComponent('span'))`
 
 const ButtonSection = styled.section`
   position: absolute;
-  top: 10px;
-  right: 0;
+  top: -5px;
+  right: 180px;
 
   @media ${({ theme }) => theme.mobile} {
     top: 2px;
+    right: 0px;
   }
 `;
 
@@ -130,6 +137,7 @@ export default function Page() {
         admin={admin}
         leftBar={leftBar}
         handleCloseIcon={() => handleCloseIcon()}
+        currentId={currentId}
       />
       <Article>
         <UpperSection>

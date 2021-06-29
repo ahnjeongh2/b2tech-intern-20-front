@@ -12,7 +12,11 @@ const Main = styled.div`
 `;
 
 const Article = styled.article`
-  width: 100%;
+  width: 85%;
+
+  @media ${({ theme }) => theme.mobile} {
+    width: 120%;
+  }
 `;
 
 const InfoPicker = styled.div`
