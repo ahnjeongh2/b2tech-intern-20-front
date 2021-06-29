@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import Highlighter from 'react-highlight-words';
 import styled from 'styled-components';
+import { GET_API } from '../../src/config';
 
 const Input = styled.input`
   width: 150px;
@@ -7,13 +9,17 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-function SearchBox(props) {
+function SearchBox({ onSubmit }) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(event.target.elements.filter.value);
+
   return (
-    <Input
-      type="search"
-      placeholder="Search..."
-      onChange={props.inputHandler}
-    />
+    <form onSubmit={handleSubmit}>
+      <input name="filter" />
+      <button>Search</button>
+    </form>
+    // <Input type="search" placeholder="Search..." onChange={inputHandler} />
   );
 }
 
