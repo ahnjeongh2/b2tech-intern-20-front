@@ -94,6 +94,7 @@ export default function Page() {
     const accessToken = localStorage.getItem('AUTHORIZATION');
     let response = await fetch(`${GET_API}/users/me`, {
       headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
         Authorization: accessToken,
       },
     });

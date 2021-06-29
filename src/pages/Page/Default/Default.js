@@ -39,6 +39,7 @@ function Default({ userInfo }) {
       `${GET_API}/users/${userInfo.employee_number}/employees`,
       {
         headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
           Authorization: accessToken,
         },
       }
@@ -55,6 +56,7 @@ function Default({ userInfo }) {
   //   const accessToken = localStorage.getItem('AUTHORIZATION');
   //   fetch(`${GET_API}/users/${userInfo.employee_number}/mypage`, {
   //     headers: {
+  // 'Content-Type': 'application/json; charset=UTF-8',
   //       AUTHORIZATION: accessToken,
   //       firstDay: firstDay,
   //       LastDay: LastDay,

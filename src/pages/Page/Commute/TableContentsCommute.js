@@ -18,6 +18,7 @@ function TableContentsCommute({ userInfo }) {
     const accessToken = localStorage.getItem('AUTHORIZATION');
     let response = await fetch(`${GET_API}/schedules`, {
       headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
         Authorization: accessToken,
       },
     });
