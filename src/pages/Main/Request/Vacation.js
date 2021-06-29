@@ -101,10 +101,6 @@ export default function Vacation({ myInfo }) {
     history.push(`/page`);
   };
 
-  // const handleVacationInput = e => {
-  //   console.log(e.target.value);
-  // };
-
   const vacationRequest = () => {
     if (!myInfo.remaining_annual_leave) {
       alert('연차 휴가를 모두 소진하였습니다.');
@@ -120,19 +116,20 @@ export default function Vacation({ myInfo }) {
     }
 
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    // fetch(`${GET_API}/users/userInfo.employee_number/drafts`, {
-    //   method: 'POST',
-    //   body: JSON.stringify({
-    //     AUTHORIZATION: accessToken;
-    //     type: vacationType,
-    //     start_at: periodData.startDate,
-    //     end_at: periodData.endDate,
-    //   }),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //
-    // });
+    fetch(`${GET_API}/users/${myInfo.employee_number}/drafts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: accessToken,
+      },
+      body: JSON.stringify({
+        type: vacationType.el,
+        start_at: periodData.startDate,
+        end_at: periodData.endDate,
+      }),
+    })
+      .then(response => response.json())
+      .then(data => {});
   };
 
   return (

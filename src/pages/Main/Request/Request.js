@@ -64,16 +64,16 @@ export default function Request() {
   };
 
   const initializeUserInfo = () => {
-    // const accessToken = localStorage.getItem('AUTHORIZATION');
-    // fetch(`${GET_API}/users/me`, {
-    //   headers: JSON.stringify({
-    //     Authorization: accessToken,
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     setMyInfo(data);
-    //   });
+    const accessToken = localStorage.getItem('AUTHORIZATION');
+    fetch(`${GET_API}/users/me`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setMyInfo(data);
+      });
   };
 
   useEffect(() => {
@@ -82,7 +82,7 @@ export default function Request() {
 
   const MAPPING_OBJ = {
     1: <Vacation myInfo={myInfo} />,
-    2: <WorkingSystem />,
+    2: <WorkingSystem myInfo={myInfo} />,
   };
 
   return (

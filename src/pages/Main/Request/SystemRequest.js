@@ -51,11 +51,26 @@ const SystemWrap = styled.ul`
   }
 `;
 
+const MAPPING_OBJ = {
+  1: '31',
+  2: '28',
+  3: '31',
+  4: '30',
+  5: '31',
+  6: '30',
+  7: '31',
+  8: '31',
+  9: '30',
+  10: '30',
+  11: '30',
+  12: '31',
+};
+
 const SYSTEM_ARR = ['8시', '9시', '10시'];
 
 const today = new Date();
 
-export default function SystemRequest() {
+export default function SystemRequest({ myInfo }) {
   const [over, setOver] = useState(false);
   const [workPeriod, setWorkPeriod] = useState({});
   const [systemType, setSystemType] = useState('');
@@ -100,13 +115,20 @@ export default function SystemRequest() {
     }
 
     const accessToken = localStorage.getItem('AUTHORIZATION');
-    fetch(`${GET_API}/users/userInfo.employee_number/drafts`, {
+    fetch(`${GET_API}/users/${myInfo.employee_number}/drafts`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Authorization: accessToken,
+      },
       body: JSON.stringify({
         Authorization: accessToken,
-        type: systemType,
-        start_at: `${today.getFullYear()}-${workPeriod.startMonth + 1}`,
-        end_at: `${today.getFullYear()}-${workPeriod.endMonth + 1}`,
+        type: '시차출퇴근제',
+        start_at: `${today.getFullYear()}-${workPeriod.startMonth + 1}-1`,
+        end_at: `${today.getFullYear()}-${workPeriod.endMonth + 1}-${
+          MAPPING_OBJ[workPeriod.endMonth + 1]
+        }`,
+        description: systemType.el,
       }),
     })
       .then(response => response.json())
