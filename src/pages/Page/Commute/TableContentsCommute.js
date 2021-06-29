@@ -50,7 +50,7 @@ function TableContentsCommute({ userInput }) {
           },
           {
             Header: '연장근무시간',
-            accessor: 'leaveing_time',
+            accessor: 'leaving_time',
           },
           {
             Header: '총 근무시간',

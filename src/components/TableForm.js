@@ -34,6 +34,7 @@ function TableForm({ columns, data }) {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render('Header')}
+                  {<i className="fas fa-sort" />}
                 </TableHeaderCell>
               ))}
             </tr>
