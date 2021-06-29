@@ -119,7 +119,7 @@ const SYSTEM_ARR = [
   },
 ];
 
-export default function WorkingSystem() {
+export default function WorkingSystem({ myInfo }) {
   const [currentId, setCurrentId] = useState('');
 
   const clickHandler = (e, id) => {
@@ -137,7 +137,7 @@ export default function WorkingSystem() {
   };
 
   const SYSTEM_OBJ = {
-    1: <SystemRequest SYSTEM_ARR={SYSTEM_ARR} />,
+    1: <SystemRequest SYSTEM_ARR={SYSTEM_ARR} myInfo={myInfo} />,
     2: '팀장님과 상의하세요!🌱',
     3: '팀장님과 상의하세요!🌼',
     4: '팀장님과 상의하세요!🏠',
