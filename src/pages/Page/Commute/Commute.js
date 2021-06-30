@@ -102,7 +102,6 @@ function Commute() {
 
   async function searchFetchData() {
     const searchDatas = input.current.value;
-    console.log(searchDatas, userInput);
     const accessToken = localStorage.getItem('AUTHORIZATION');
     let response = await fetch(`${GET_API}/schedules?search=${searchDatas}`, {
       headers: {
@@ -111,10 +110,7 @@ function Commute() {
       },
     });
     if (response.ok) {
-      console.log(response);
       let data = await response.json();
-      console.log(data);
-
       setUserInput(data.schedules);
     }
   }
