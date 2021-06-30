@@ -10,7 +10,7 @@ const Main = styled.div`
   height: 100vh;
   background: no-repeat center / cover url('/images/attendance.jpg');
   font-size: 1.1rem;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 const Title = styled.h1`

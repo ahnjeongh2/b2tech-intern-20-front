@@ -13,7 +13,6 @@ const Main = styled.section`
   height: 100vh;
   background: no-repeat center / cover url('/images/request.jpeg');
   font-size: 1.1rem;
-  overflow: hidden;
 `;
 
 const Title = styled.h1`
