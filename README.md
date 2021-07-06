@@ -42,10 +42,11 @@
 : 기획 및 모델링, 레이아웃 및 스타일링
 
 - 구현해야하는 agenda 선정
+
   ![](https://images.velog.io/images/april_5/post/13dafcb8-c8d7-4867-84c2-7b3abc339e36/agenda.gif)
 
 - 업무정의서 작성
-  [업무정의서] (https://docs.google.com/presentation/d/1XT9IQHJaveUvmiiiiL3wBcmdgPHKUOj2ILt34UM_K7U/edit#slide=id.gdeef1f0040_0_83)
+  [업무정의서](https://docs.google.com/presentation/d/1XT9IQHJaveUvmiiiiL3wBcmdgPHKUOj2ILt34UM_K7U/edit#slide=id.gdeef1f0040_0_83)
 
 ### 🌈 2nd sprint
 
