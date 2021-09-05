@@ -75,7 +75,7 @@
 
 ### 🎁 3rd Sprint:
 
-: `API` 연결
+: 백엔드와 `API` 연결
 
 <img alt="마이페이지_모바일" src="https://images.velog.io/images/april_5/post/fd23a2b0-bea6-4bad-8db5-7012991ed59b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-07-01%2012.13.11.png" width="200px" />
 
