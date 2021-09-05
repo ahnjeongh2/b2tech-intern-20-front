@@ -13,19 +13,20 @@
   - 사원 전체 리스트의 기본 정보
   - 일별 출•퇴근 기록 조회 및 검색 기능
 
-### ::🌟기간
+### ::🌟프로젝트 기간
 
 - **2021.06.07. ~ 2021.07.01. (4주)**
 
-### ::🌈팀원
+### ::🌈프로젝트 팀원 (👩‍💻github)
 
-- **Front-end 2명**: 김유림, 안정현
-- **Back-end 1명**: 최우석
+- **Front-end 2명**: [김유림](https://github.com/yurim45), [안정현](https://github.com/ahnjeongh2)
+- **Back-end 1명**: [최우석](https://github.com/tonic523)
+- [Back-end github 링크](https://github.com/tonic523/schedule_management)
 
 ### ::🧱기술스택
 
 - **Front-end:** `React`, `React Hooks`, `Styled Component`, `JavaScript`
-- **Back-end:** Python, MySQL, Django
+- **Back-end:** Python, MySQL, Django, AWS(RDS, EC2)
 - **Common:** gitlab, git graph, slack, trello, google ppt, google sheets, EC2, RDS
 
 # 2. 기획부터 개발까지
