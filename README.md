@@ -24,9 +24,9 @@
 
 ### ::🧱기술스택
 
-- Front-end: `React`, `React Hooks`, `Styled Component`, `JavaScript`
-- Back-end: Python, MySQL, Django
-- Common: gitlab, git graph, slack, trello, google ppt, google sheets, EC2, RDS
+- **Front-end:** `React`, `React Hooks`, `Styled Component`, `JavaScript`
+- **Back-end:** Python, MySQL, Django
+- **Common:** gitlab, git graph, slack, trello, google ppt, google sheets, EC2, RDS
 
 # 2. 기획부터 개발까지
 
