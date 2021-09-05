@@ -21,7 +21,7 @@
 
 - **Front-end 2명**: [김유림](https://github.com/yurim45), [안정현](https://github.com/ahnjeongh2)
 - **Back-end 1명**: [최우석](https://github.com/tonic523)
-- [Back-end github 링크](https://github.com/tonic523/schedule_management)
+  - [Back-end github 링크](https://github.com/tonic523/schedule_management)
 
 ### ::🧱기술스택
 
