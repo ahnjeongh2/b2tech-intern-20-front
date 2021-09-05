@@ -35,9 +35,8 @@
 - 마일스톤 작성
 
 ![](https://images.velog.io/images/april_5/post/90a57d0e-4a62-4a29-a6cb-b5057f10b677/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-07-01%2012.16.47.png)
-[마일스톤](https://docs.google.com/spreadsheets/d/1OzO3EYk1YkdXKXxF5LBPHa49bzenTgqC-bJbDMWWf40/edit#gid=0)
 
-### ✨ 1st sprint:
+### ✨ 1st Sprint:
 
 : 기획 및 모델링, 레이아웃 및 스타일링
 
@@ -48,7 +47,7 @@
 - 업무정의서 작성
   [업무정의서](https://docs.google.com/presentation/d/1XT9IQHJaveUvmiiiiL3wBcmdgPHKUOj2ILt34UM_K7U/edit#slide=id.gdeef1f0040_0_83)
 
-### 🌈 2nd sprint
+### 🌈 2nd Sprint
 
 ![](https://images.velog.io/images/april_5/post/3498d076-be62-44eb-8084-894a7c9fcac1/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-07-01%2012.12.01.png)
 
@@ -67,7 +66,7 @@
 
 ![](https://images.velog.io/images/april_5/post/81760022-7945-478b-82ec-81bfd8a44fe3/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-07-01%2012.12.42.png)
 
-### 🎁 3rd sprint:
+### 🎁 3rd Sprint:
 
 : `API` 연결
 
